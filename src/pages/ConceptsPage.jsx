@@ -5,6 +5,7 @@ export default function ConceptsPage() {
   return (
     <PageShell
       label="CONCEPTS"
+      pageTitle="Concepts"
       title="Approval is not commitment."
       subtitle="VERITAS OS separates decision approval from real-world execution commitment."
       ctas={[
