@@ -45,11 +45,19 @@ Production URL:
 
 - https://veritas-website-navy.vercel.app/
 
+## Website Routes
+
+- `/` — Landing page
+- `/aml-kyc-poc` — AML/KYC 1-day PoC overview
+- `/concepts` — Core VERITAS concept: approval is not commitment
+- `/reviewers` — External reviewer entrypoint
+
 ## Current Status
 
-- Early public website scaffold.
-- Landing page implementation is active.
-- Deployment configuration will be handled in a separate PR.
+- Public Vercel deployment is active.
+- Landing page and static CTA pages are implemented.
+- Static pages currently cover AML/KYC PoC, Concepts, and Reviewers.
+- Public claims should remain aligned with the veritas_os repository evidence.
 
 ## Important Note
 
