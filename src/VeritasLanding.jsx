@@ -181,7 +181,12 @@ const STYLES = `
   .btn-primary {
     background: var(--ink);
     color: var(--paper);
+    -webkit-text-fill-color: var(--paper);
     box-shadow: 4px 4px 0 0 var(--teal);
+  }
+  .btn-primary span {
+    color: var(--paper);
+    -webkit-text-fill-color: var(--paper);
   }
   .btn-primary:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 0 var(--teal); }
   .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
