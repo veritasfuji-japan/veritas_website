@@ -52,6 +52,10 @@ Production URL:
 - `/concepts` — Core VERITAS concept: approval is not commitment
 - `/reviewers` — External reviewer entrypoint
 
+Social preview image:
+
+- `/og-image.svg`
+
 ## Current Status
 
 - Public Vercel deployment is active.

@@ -1,0 +1,47 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">VERITAS OS social preview image</title>
+  <desc id="desc">VERITAS OS branding with title and subtitle on a paper-textured background.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8F5EE" />
+      <stop offset="1" stop-color="#EEE8DB" />
+    </linearGradient>
+    <linearGradient id="accent" x1="160" y1="84" x2="930" y2="546" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2F80ED" />
+      <stop offset="1" stop-color="#0FA3B1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#paper)" />
+
+  <rect x="64" y="56" width="1072" height="518" rx="28" fill="#FDFBF6" stroke="#D8D1C4" stroke-width="2" />
+
+  <g opacity="0.14">
+    <path d="M168 170H1032" stroke="url(#accent)" stroke-width="2" />
+    <path d="M168 456H1032" stroke="url(#accent)" stroke-width="2" />
+  </g>
+
+  <g transform="translate(172 166)">
+    <path d="M72 0L132 30V104C132 142 106 177 72 194C38 177 12 142 12 104V30L72 0Z" fill="#0F172A" opacity="0.09" />
+    <path d="M72 18L116 40V103C116 135 96 163 72 177C48 163 28 135 28 103V40L72 18Z" fill="url(#accent)" opacity="0.9" />
+    <path d="M53 63L72 123L91 63" stroke="#F8FAFC" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <text x="326" y="248" fill="#0B1320" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="78" font-weight="750" letter-spacing="1.5">
+    VERITAS OS
+  </text>
+
+  <text x="326" y="306" fill="#1F2A3D" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="36" font-weight="500">
+    Auditable Decision Infrastructure for LLM Agents
+  </text>
+
+  <rect x="326" y="340" width="600" height="2" fill="url(#accent)" />
+
+  <text x="326" y="398" fill="#2B3445" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="28" font-weight="400">
+    Govern AI decisions before they touch the real world.
+  </text>
+
+  <text x="326" y="454" fill="#3E4B63" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="23" font-weight="500">
+    Decision Governance · Bind-Boundary Control Plane
+  </text>
+</svg>
