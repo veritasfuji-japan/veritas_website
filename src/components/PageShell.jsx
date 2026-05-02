@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const shellStyles = {
   minHeight: "100vh",
@@ -55,21 +55,66 @@ const linkButtonStyles = {
   textDecoration: "none",
 };
 
+const languageToggleStyles = {
+  border: "1px solid #BBB39D",
+  background: "#F7F2E6",
+  borderRadius: "999px",
+  padding: "0.2rem",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "0.2rem",
+};
+
+const languageButtonStyles = (active) => ({
+  border: "none",
+  borderRadius: "999px",
+  padding: "0.2rem 0.5rem",
+  fontSize: "0.78rem",
+  cursor: "pointer",
+  background: active ? "#15161A" : "transparent",
+  color: active ? "#FAF6EB" : "#15161A",
+});
+
+const resolveText = (value, lang) => {
+  if (typeof value === "string") {
+    return value;
+  }
+
+  if (!value) {
+    return "";
+  }
+
+  return lang === "ja" ? value.ja : value.en;
+};
+
 export default function PageShell({ label, title, pageTitle, subtitle, children, ctas }) {
+  const [lang, setLang] = useState("ja");
+  const t = (ja, en) => (lang === "ja" ? ja : en);
+
+  const resolvedLabel = resolveText(label, lang);
+  const resolvedTitle = resolveText(title, lang);
+  const resolvedPageTitle = resolveText(pageTitle, lang) || resolvedTitle;
+  const resolvedSubtitle = resolveText(subtitle, lang);
+
   useEffect(() => {
-    const resolvedTitle = pageTitle || title;
-    if (resolvedTitle) {
-      document.title = `${resolvedTitle} | VERITAS OS`;
+    if (resolvedPageTitle) {
+      document.title = `${resolvedPageTitle} | VERITAS OS`;
     }
-  }, [pageTitle, title]);
+  }, [resolvedPageTitle]);
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const navigationItems = [
-    { label: "Home", href: "/" },
+    { label: t("ホーム", "Home"), href: "/" },
     { label: "AML/KYC PoC", href: "/aml-kyc-poc" },
-    { label: "Concepts", href: "/concepts" },
-    { label: "Reviewers", href: "/reviewers" },
+    { label: t("中心概念", "Concepts"), href: "/concepts" },
+    { label: t("レビュアー", "Reviewers"), href: "/reviewers" },
     { label: "GitHub", href: "https://github.com/veritasfuji-japan/veritas_os", external: true },
   ];
+
+  const renderedChildren = typeof children === "function" ? children(t, lang) : children;
 
   return (
     <main style={shellStyles}>
@@ -91,26 +136,36 @@ export default function PageShell({ label, title, pageTitle, subtitle, children,
               </a>
             ))}
           </nav>
+          <div style={languageToggleStyles} aria-label="Language toggle">
+            <button type="button" style={languageButtonStyles(lang === "ja")} onClick={() => setLang("ja")}>JA</button>
+            <button type="button" style={languageButtonStyles(lang === "en")} onClick={() => setLang("en")}>EN</button>
+          </div>
         </header>
-        <p style={{ fontFamily: "'IBM Plex Mono', ui-monospace, monospace", letterSpacing: "0.08em", color: "#5A5C62" }}>{label}</p>
-        <h1 style={{ fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(2rem, 3vw, 3.5rem)", lineHeight: 1.12, marginTop: "0.35rem" }}>{title}</h1>
-        <p style={{ color: "#2A2D33", maxWidth: "50rem", marginTop: "0.8rem" }}>{subtitle}</p>
-        {children}
+        <p style={{ fontFamily: "'IBM Plex Mono', ui-monospace, monospace", letterSpacing: "0.08em", color: "#5A5C62" }}>{resolvedLabel}</p>
+        <h1 style={{ fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(2rem, 3vw, 3.5rem)", lineHeight: 1.12, marginTop: "0.35rem" }}>{resolvedTitle}</h1>
+        <p style={{ color: "#2A2D33", maxWidth: "50rem", marginTop: "0.8rem" }}>{resolvedSubtitle}</p>
+        {renderedChildren}
         <section style={cardStyles}>
-          <h2 style={{ fontFamily: "'Fraunces', 'Times New Roman', serif", marginBottom: "0.5rem" }}>Next</h2>
-          {ctas.map((cta) => (
-            <a
-              key={cta.href}
-              href={cta.href}
-              style={linkButtonStyles}
-              target={cta.href.startsWith("http") ? "_blank" : undefined}
-              rel={cta.href.startsWith("http") ? "noreferrer noopener" : undefined}
-            >
-              {cta.label}
-            </a>
-          ))}
+          <h2 style={{ fontFamily: "'Fraunces', 'Times New Roman', serif", marginBottom: "0.5rem" }}>{t("次へ", "Next")}</h2>
+          {ctas.map((cta) => {
+            const resolvedCtaLabel = resolveText(cta.label, lang);
+            return (
+              <a
+                key={cta.href}
+                href={cta.href}
+                style={linkButtonStyles}
+                target={cta.href.startsWith("http") ? "_blank" : undefined}
+                rel={cta.href.startsWith("http") ? "noreferrer noopener" : undefined}
+              >
+                {resolvedCtaLabel}
+              </a>
+            );
+          })}
           <p style={{ marginTop: "1rem", color: "#4A4D54", fontSize: "0.92rem" }}>
-            Public website claims should be validated against the veritas_os repository evidence.
+            {t(
+              "本サイト上の主張は、veritas_os リポジトリ上の証跡と照合して確認してください。",
+              "Public website claims should be validated against the veritas_os repository evidence.",
+            )}
           </p>
         </section>
       </div>
