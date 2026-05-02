@@ -91,6 +91,14 @@ const STYLES = `
     .only-desktop { display: revert; }
   }
 
+  /* Hero containers need explicit block visibility for stable first paint */
+  .hero .only-mobile,
+  .hero .only-desktop { display: block; }
+  @media (min-width: 1024px) {
+    .hero .only-mobile { display: none !important; }
+    .hero .only-desktop { display: block !important; }
+  }
+
   /* Brand gradient text — inline so it doesn't break across line wraps */
   .brand-gradient-text {
     background: linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 30%, var(--blue) 65%, var(--blue-deep) 100%);
