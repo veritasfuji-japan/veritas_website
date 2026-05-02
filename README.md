@@ -20,19 +20,15 @@ https://github.com/veritasfuji-japan/veritas_os
 
 Use these commands:
 
-```bash
-npm install
-npm run dev
-```
+    npm install
+    npm run dev
 
 ## Production Build
 
 Use these commands:
 
-```bash
-npm run build
-npm run preview
-```
+    npm run build
+    npm run preview
 
 ## Current Status
 
@@ -42,4 +38,4 @@ npm run preview
 
 ## Important Note
 
-Public metrics and claims shown on the website must stay aligned with the veritas_os repository evidence.
+Public metrics and claims shown on the website must stay aligned with the `veritas_os` repository evidence.
