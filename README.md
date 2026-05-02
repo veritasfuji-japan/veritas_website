@@ -43,7 +43,7 @@ Recommended Vercel settings:
 
 Production URL:
 
-- TBD after first Vercel deployment
+- https://veritas-website-navy.vercel.app/
 
 ## Current Status
 
