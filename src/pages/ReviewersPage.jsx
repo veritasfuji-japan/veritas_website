@@ -4,34 +4,41 @@ import PageShell from "../components/PageShell.jsx";
 export default function ReviewersPage() {
   return (
     <PageShell
-      label="REVIEWERS"
-      pageTitle="Reviewers"
-      title="External Reviewers"
-      subtitle="Review VERITAS OS as auditable decision infrastructure for LLM agents."
+      label={{ ja: "レビュアー", en: "REVIEWERS" }}
+      pageTitle={{ ja: "外部レビュアー", en: "Reviewers" }}
+      title={{ ja: "外部レビュアー", en: "External Reviewers" }}
+      subtitle={{
+        ja: "LLMエージェントのための監査可能な意思決定インフラとして、VERITAS OSをレビューするための入口です。",
+        en: "Review VERITAS OS as auditable decision infrastructure for LLM agents.",
+      }}
       ctas={[
-        { label: "Open core repository", href: "https://github.com/veritasfuji-japan/veritas_os" },
-        { label: "Back to Home", href: "/" },
+        { label: { ja: "コアリポジトリを開く", en: "Open core repository" }, href: "https://github.com/veritasfuji-japan/veritas_os" },
+        { label: { ja: "ホームへ戻る", en: "Back to Home" }, href: "/" },
       ]}
     >
-      <section>
-        <h2>What to review</h2>
-        <ul>
-          <li>Decision pipeline.</li>
-          <li>FUJI gate.</li>
-          <li>TrustLog evidence.</li>
-          <li>Bind-governed paths.</li>
-          <li>Build and documentation evidence.</li>
-          <li>Public claims alignment with repository evidence.</li>
-        </ul>
-      </section>
-      <section style={{ marginTop: "1rem" }}>
-        <h2>Review posture</h2>
-        <ul>
-          <li>Check implemented behavior, not roadmap promises.</li>
-          <li>Validate claims against veritas_os.</li>
-          <li>Treat website claims as public positioning, not proof by themselves.</li>
-        </ul>
-      </section>
+      {(t) => (
+        <>
+          <section>
+            <h2>{t("レビュー対象", "What to review")}</h2>
+            <ul>
+              <li>{t("Decision pipeline。", "Decision pipeline.")}</li>
+              <li>{t("FUJI gate。", "FUJI gate.")}</li>
+              <li>{t("TrustLog evidence。", "TrustLog evidence.")}</li>
+              <li>{t("Bind-governed paths。", "Bind-governed paths.")}</li>
+              <li>{t("Build と documentation evidence。", "Build and documentation evidence.")}</li>
+              <li>{t("公開主張とリポジトリ証跡の整合性。", "Public claims alignment with repository evidence.")}</li>
+            </ul>
+          </section>
+          <section style={{ marginTop: "1rem" }}>
+            <h2>{t("レビュー姿勢", "Review posture")}</h2>
+            <ul>
+              <li>{t("ロードマップではなく、実装済みの挙動を確認する。", "Check implemented behavior, not roadmap promises.")}</li>
+              <li>{t("主張を veritas_os と照合する。", "Validate claims against veritas_os.")}</li>
+              <li>{t("Webサイト上の主張は、証明そのものではなく public positioning として扱う。", "Treat website claims as public positioning, not proof by themselves.")}</li>
+            </ul>
+          </section>
+        </>
+      )}
     </PageShell>
   );
 }
