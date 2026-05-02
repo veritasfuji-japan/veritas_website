@@ -7,6 +7,7 @@ Official website for VERITAS OS — Auditable Decision Infrastructure for LLM Ag
 This repository contains the public website / landing page for VERITAS OS.
 
 The core VERITAS OS implementation lives in:
+
 https://github.com/veritasfuji-japan/veritas_os
 
 ## Tech Stack
@@ -17,17 +18,17 @@ https://github.com/veritasfuji-japan/veritas_os
 
 ## Local Development
 
-```bash
+Use these commands:
+
 npm install
 npm run dev
-```
 
 ## Production Build
 
-```bash
+Use these commands:
+
 npm run build
 npm run preview
-```
 
 ## Current Status
 
@@ -37,4 +38,4 @@ npm run preview
 
 ## Important Note
 
-Public metrics and claims shown on the website must stay aligned with the `veritas_os` repository evidence.
+Public metrics and claims shown on the website must stay aligned with the veritas_os repository evidence.
