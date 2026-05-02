@@ -5,6 +5,7 @@ export default function ReviewersPage() {
   return (
     <PageShell
       label="REVIEWERS"
+      pageTitle="Reviewers"
       title="External Reviewers"
       subtitle="Review VERITAS OS as auditable decision infrastructure for LLM agents."
       ctas={[
