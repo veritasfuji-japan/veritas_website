@@ -1765,6 +1765,10 @@ export default function VeritasLanding() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    document.documentElement.lang = lang === "ja" ? "ja" : "en";
+  }, [lang]);
+
+  useEffect(() => {
     const handler = () => {
       const id = window.location.hash.slice(1);
       if (id) {

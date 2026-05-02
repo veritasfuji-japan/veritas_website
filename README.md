@@ -30,6 +30,21 @@ Use these commands:
     npm run build
     npm run preview
 
+## Deployment
+
+This website is intended to be deployed with Vercel.
+
+Recommended Vercel settings:
+
+- Framework Preset: Vite
+- Build Command: npm run build
+- Output Directory: dist
+- Install Command: npm ci
+
+Production URL:
+
+- TBD after first Vercel deployment
+
 ## Current Status
 
 - Early public website scaffold.
