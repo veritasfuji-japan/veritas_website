@@ -1,16 +1,40 @@
-# React + Vite
+# VERITAS OS Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Official website for VERITAS OS — Auditable Decision Infrastructure for LLM Agents.
 
-Currently, two official plugins are available:
+## Repository Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This repository contains the public website / landing page for VERITAS OS.
 
-## React Compiler
+The core VERITAS OS implementation lives in:
+https://github.com/veritasfuji-japan/veritas_os
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- Vite
+- React
+- JavaScript
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Production Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Current Status
+
+- Early public website scaffold.
+- Landing page implementation is active.
+- Deployment configuration will be handled in a separate PR.
+
+## Important Note
+
+Public metrics and claims shown on the website must stay aligned with the `veritas_os` repository evidence.
