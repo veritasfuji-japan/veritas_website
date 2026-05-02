@@ -1149,7 +1149,7 @@ function TopBar({ lang, setLang, menuOpen, setMenuOpen }) {
   const links = [
     ["#idea", t("中心の発想", "The idea")],
     ["#numbers", t("実装の事実", "The facts")],
-    ["#financial", t("金融 (AML/KYC)", "Financial")],
+    ["/aml-kyc-poc", t("金融 (AML/KYC)", "Financial")],
     ["#reviewers", t("レビュアー", "Reviewers")],
   ];
   return (
@@ -1234,7 +1234,7 @@ function Hero({ lang }) {
         {t("中心の発想を読む", "Read the core idea")}
         <span aria-hidden>→</span>
       </a>
-      <a href="#financial" className="btn btn-secondary">
+      <a href="/aml-kyc-poc" className="btn btn-secondary">
         {t("AML/KYC 1日 PoC", "AML/KYC 1-day PoC")}
       </a>
     </>
@@ -1335,7 +1335,7 @@ function Audiences({ lang }) {
         "AML/KYC ビーチヘッドに 1日 PoC を当てて、fail-closed ガバナンスを fixture シナリオで実測。",
         "Run the AML/KYC beachhead 1-day PoC against fixture scenarios to verify fail-closed governance."
       ),
-      href: "#financial", cta: t("Customer view へ", "Customer view"),
+      href: "/aml-kyc-poc", cta: t("Customer view へ", "Customer view"),
     },
     {
       num: "II.", tag: t("運用", "OPERATING"),
@@ -1571,7 +1571,7 @@ default_failure_mode: fail_closed`;
           "A finance-specific governance layer that routes ambiguous or evidence-missing cases to hold, block, or human review — never silent auto-proceed. The anchor template is aml_kyc_high_risk_country_wire_manual_review. Verify behavior against 6 implemented fixture scenarios."
         )}
       </p>
-      <a href="/financial" className="btn btn-primary">
+      <a href="/aml-kyc-poc" className="btn btn-primary">
         {t("PoC を読む", "Read the PoC")}
         <span aria-hidden>→</span>
       </a>
@@ -1640,7 +1640,7 @@ function FooterArea({ lang }) {
     ] },
     { h: t("ドキュメント", "Docs"), links: [
       [t("中心の発想", "The idea"), "#idea"],
-      [t("AML/KYC", "AML/KYC"), "#financial"],
+      [t("AML/KYC", "AML/KYC"), "/aml-kyc-poc"],
       [t("実装の事実", "The facts"), "#numbers"],
     ] },
     { h: t("学術・連絡", "Academic & Contact"), links: [
@@ -1660,7 +1660,7 @@ function FooterArea({ lang }) {
     ] },
     { h: t("ドキュメント", "Docs"), links: [
       [t("中心の発想", "The idea"), "#idea"],
-      [t("AML/KYC", "AML/KYC"), "#financial"],
+      [t("AML/KYC", "AML/KYC"), "/aml-kyc-poc"],
       [t("実装の事実", "The facts"), "#numbers"],
     ] },
     { h: t("学術", "Academic"), links: [
