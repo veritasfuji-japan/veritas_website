@@ -32,7 +32,7 @@ Use these commands:
 
 ## Deployment
 
-This website is intended to be deployed with Vercel.
+This website is deployed on Vercel.
 
 Recommended Vercel settings:
 
