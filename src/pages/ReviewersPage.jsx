@@ -21,11 +21,11 @@ export default function ReviewersPage() {
           <section>
             <h2>{t("レビュー対象", "What to review")}</h2>
             <ul>
-              <li>{t("Decision pipeline。", "Decision pipeline.")}</li>
-              <li>{t("FUJI gate。", "FUJI gate.")}</li>
-              <li>{t("TrustLog evidence。", "TrustLog evidence.")}</li>
-              <li>{t("Bind-governed paths。", "Bind-governed paths.")}</li>
-              <li>{t("Build と documentation evidence。", "Build and documentation evidence.")}</li>
+              <li>{t("意思決定パイプライン。", "Decision pipeline.")}</li>
+              <li>{t("FUJIゲート。", "FUJI gate.")}</li>
+              <li>{t("TrustLog証跡。", "TrustLog evidence.")}</li>
+              <li>{t("Bind管理対象パス。", "Bind-governed paths.")}</li>
+              <li>{t("ビルド・ドキュメント証跡。", "Build and documentation evidence.")}</li>
               <li>{t("公開主張とリポジトリ証跡の整合性。", "Public claims alignment with repository evidence.")}</li>
             </ul>
           </section>
