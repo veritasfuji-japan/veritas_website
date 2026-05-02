@@ -20,15 +20,19 @@ https://github.com/veritasfuji-japan/veritas_os
 
 Use these commands:
 
+```bash
 npm install
 npm run dev
+```
 
 ## Production Build
 
 Use these commands:
 
+```bash
 npm run build
 npm run preview
+```
 
 ## Current Status
 
