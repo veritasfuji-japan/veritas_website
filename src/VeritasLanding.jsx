@@ -372,8 +372,8 @@ const STYLES = `
     overflow-wrap: normal;
   }
   .hero-mobile .hero-title-en {
-    font-size: clamp(2.55rem, 10vw, 3.45rem);
-    line-height: 1.1;
+    font-size: clamp(2.45rem, 9.4vw, 3.35rem);
+    line-height: 1.08;
     letter-spacing: -0.025em;
     word-break: normal;
     overflow-wrap: normal;
@@ -1260,10 +1260,9 @@ function Hero({ lang }) {
     <>
       <span>Govern AI decisions</span>
       <span>
-        <span className="brand-gradient-text hero-gradient-word">before</span>{" "}
-        they touch
+        <span className="brand-gradient-text hero-gradient-word">before</span>
       </span>
-      <span>the real world</span>
+      <span>they touch the real world</span>
     </>
   );
   const titleJaDesktop = (
