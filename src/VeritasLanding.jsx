@@ -1087,6 +1087,26 @@ const STYLES = `
     }
   }
 
+  .enterprise-start {
+    padding: clamp(2rem, 5vw, 3.6rem) 0 clamp(2.2rem, 5vw, 4rem);
+  }
+  .enterprise-start-wrap { background: var(--paper-2); border: 1px solid var(--rule); padding: clamp(1.1rem, 2.6vw, 2rem); }
+  .enterprise-start-headline { margin: 0.55rem 0 0.8rem; font-family: var(--serif); font-size: clamp(1.2rem, 1rem + 1vw, 1.9rem); line-height: 1.28; letter-spacing: -0.01em; }
+  .enterprise-start-body { color: var(--ink-2); margin-bottom: 1rem; }
+  .enterprise-start-grid { display: grid; gap: 0.85rem; grid-template-columns: 1fr; }
+  @media (min-width: 1024px) { .enterprise-start-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .enterprise-start-card { border: 1px solid var(--rule); background: var(--paper); padding: 1rem; display: grid; gap: 0.45rem; }
+  .enterprise-start-title { font-family: var(--serif); font-size: clamp(1.04rem, 1rem + 0.35vw, 1.2rem); line-height: 1.3; }
+  .enterprise-start-cta { margin-top: 0.3rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--blue); }
+
+  .route-guide { border-top: 1px solid var(--rule-soft); border-bottom: 1px solid var(--rule-soft); padding: 1rem 0; }
+  .route-guide-inner { display: grid; gap: 0.6rem; }
+  .route-guide-list { display: grid; grid-template-columns: 1fr; gap: 0.45rem; }
+  @media (min-width: 1024px) { .route-guide-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem 1rem; } }
+  .route-guide-item { border-bottom: 1px dashed var(--rule-soft); padding-bottom: 0.22rem; font-size: 0.92rem; color: var(--ink-2); }
+  .route-guide-item a { color: var(--blue-deep); }
+  .route-guide-item a:hover { color: var(--blue); }
+
   @keyframes fade-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   .reveal { animation: fade-rise 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
 
@@ -1193,11 +1213,10 @@ function BindFlow() {
 function TopBar({ lang, setLang, menuOpen, setMenuOpen }) {
   const t = makeT(lang);
   const links = [
-    ["#idea", t("中心の発想", "The idea")],
-    ["#numbers", t("実装の事実", "The facts")],
     ["/enterprise", t("企業課題", "Enterprise")],
-    ["/aml-kyc-poc", t("金融 (AML/KYC)", "Financial")],
-    ["#reviewers", t("レビュアー", "Reviewers")],
+    ["/aml-kyc-poc", t("PoC", "PoC")],
+    ["/concepts", t("中心概念", "Concepts")],
+    ["/reviewers", t("レビュアー", "Reviewers")],
     ["/contact", t("お問い合わせ", "Contact")],
   ];
   return (
@@ -1288,12 +1307,15 @@ function Hero({ lang }) {
 
   const cta = (
     <>
-      <a href="#idea" className="btn btn-primary">
-        {t("中心の発想を読む", "Read the core idea")}
+      <a href="/enterprise" className="btn btn-primary">
+        {t("企業課題を見る", "See enterprise pain points")}
         <span aria-hidden>→</span>
       </a>
       <a href="/aml-kyc-poc" className="btn btn-secondary">
-        {t("AML/KYC 1日 PoC", "AML/KYC 1-day PoC")}
+        {t("AML/KYC PoCを見る", "View AML/KYC PoC")}
+      </a>
+      <a href="/contact" className="btn btn-secondary">
+        {t("問い合わせる", "Contact")}
       </a>
     </>
   );
@@ -1374,6 +1396,79 @@ function Hero({ lang }) {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EnterpriseStart({ lang }) {
+  const t = makeT(lang);
+  const isJa = lang === "ja";
+  const cards = [
+    {
+      title: t("企業の痛み", "Enterprise pain"),
+      body: t("判断理由、証跡、承認境界がログやツールに散らばり、実行前に止める根拠が曖昧になる。", "Rationale, evidence, and approval boundaries scatter across logs and tools, making pre-execution control unclear."),
+      cta: t("痛みを見る", "Read enterprise pain"),
+      href: "/enterprise",
+    },
+    {
+      title: t("評価経路", "Evaluation path"),
+      body: t("AML/KYC PoCで、fail-closed挙動、証跡、failure reason、review / block の判断を確認する。", "Use the AML/KYC PoC to inspect fail-closed behavior, evidence, failure reasons, and review / block outcomes."),
+      cta: t("PoCを見る", "View PoC"),
+      href: "/aml-kyc-poc",
+    },
+    {
+      title: t("外部レビュー", "External review"),
+      body: t("実装済み挙動、公開主張、証跡、コアリポジトリとの整合性を確認する。", "Review implemented behavior, public claims, evidence, and alignment with the core repository."),
+      cta: t("レビュー観点を見る", "View review criteria"),
+      href: "/reviewers",
+    },
+  ];
+
+  return (
+    <section className="enterprise-start">
+      <div className="container">
+        <div className="enterprise-start-wrap">
+          <div className="marker">ENTERPRISE START</div>
+          <h2 className="enterprise-start-headline">{t("企業が止まる場所は、モデル性能ではなく「実行前の証明」です", "Enterprises stall not at model capability, but at proof before execution")}</h2>
+          <p className={`body enterprise-start-body ${isJa ? "lead-ja" : ""}`}>
+            {t("AIエージェントが判断から実行へ近づくほど、企業には「誰が、何を根拠に、どこまで許可したか」を実行前に確認できる境界が必要になります。VERITAS OS は、この境界を authority evidence、FUJI gate、TrustLog、bind boundary として扱います。", "As AI agents move from recommendations toward execution, enterprises need a boundary that can prove who authorized what, based on which evidence, before action. VERITAS OS treats that boundary through authority evidence, FUJI gate, TrustLog, and bind boundary.")}
+          </p>
+          <div className="enterprise-start-grid">
+            {cards.map((card) => (
+              <a key={card.title} href={card.href} className="enterprise-start-card">
+                <h3 className="enterprise-start-title">{card.title}</h3>
+                <p className={`body ${isJa ? "aud-body-ja" : ""}`}>{card.body}</p>
+                <span className="enterprise-start-cta">{card.cta} →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RouteGuide({ lang }) {
+  const t = makeT(lang);
+  const links = [
+    [t("企業担当者", "Enterprise evaluator"), "/enterprise", t("企業課題", "Enterprise")],
+    [t("技術評価者", "Technical evaluator"), "/aml-kyc-poc", "AML/KYC PoC"],
+    [t("外部レビュアー", "External reviewer"), "/reviewers", t("レビュアー", "Reviewers")],
+    [t("思想を知りたい人", "Conceptual overview"), "/concepts", t("中心概念", "Concepts")],
+    [t("具体的な相談", "Concrete inquiry"), "/contact", t("お問い合わせ", "Contact")],
+  ];
+  return (
+    <section className="route-guide">
+      <div className="container route-guide-inner">
+        <div className="marker">{t("どこから見るべきか", "Where to start")}</div>
+        <div className="route-guide-list">
+          {links.map(([role, href, target]) => (
+            <div key={role} className="route-guide-item">
+              {role} → <a href={href}>{target}</a>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -1846,6 +1941,8 @@ export default function VeritasLanding() {
         <TopBar lang={lang} setLang={setLang} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <main>
           <Hero lang={lang} />
+          <EnterpriseStart lang={lang} />
+          <RouteGuide lang={lang} />
           <Audiences lang={lang} />
           <Idea lang={lang} />
           <Numbers lang={lang} />
