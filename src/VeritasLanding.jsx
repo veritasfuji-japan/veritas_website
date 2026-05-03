@@ -1214,6 +1214,7 @@ function TopBar({ lang, setLang, menuOpen, setMenuOpen }) {
   const t = makeT(lang);
   const links = [
     ["/enterprise", t("企業課題", "Enterprise")],
+    ["/how-it-works", t("仕組み", "How it works")],
     ["/aml-kyc-poc", t("PoC", "PoC")],
     ["/concepts", t("中心概念", "Concepts")],
     ["/glossary", t("用語集", "Glossary")],
@@ -1455,6 +1456,7 @@ function RouteGuide({ lang }) {
   const t = makeT(lang);
   const links = [
     [t("企業担当者", "Enterprise evaluator"), "/enterprise", t("企業課題", "Enterprise")],
+    [t("仕組みを知りたい人", "Want the technical flow"), "/how-it-works", t("仕組み", "How it works")],
     [t("技術評価者", "Technical evaluator"), "/aml-kyc-poc", "AML/KYC PoC"],
     [t("外部レビュアー", "External reviewer"), "/reviewers", t("レビュアー", "Reviewers")],
     [t("思想を知りたい人", "Conceptual overview"), "/concepts", t("中心概念", "Concepts")],
