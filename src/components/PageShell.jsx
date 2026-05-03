@@ -111,6 +111,7 @@ export default function PageShell({ label, title, pageTitle, subtitle, children,
     { label: "AML/KYC PoC", href: "/aml-kyc-poc" },
     { label: t("中心概念", "Concepts"), href: "/concepts" },
     { label: t("レビュアー", "Reviewers"), href: "/reviewers" },
+    { label: t("お問い合わせ", "Contact"), href: "/contact" },
     { label: "GitHub", href: "https://github.com/veritasfuji-japan/veritas_os", external: true },
   ];
 
