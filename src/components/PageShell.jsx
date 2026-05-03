@@ -108,6 +108,7 @@ export default function PageShell({ label, title, pageTitle, subtitle, children,
 
   const navigationItems = [
     { label: t("ホーム", "Home"), href: "/" },
+    { label: t("企業課題", "Enterprise"), href: "/enterprise" },
     { label: "AML/KYC PoC", href: "/aml-kyc-poc" },
     { label: t("中心概念", "Concepts"), href: "/concepts" },
     { label: t("レビュアー", "Reviewers"), href: "/reviewers" },

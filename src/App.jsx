@@ -4,9 +4,11 @@ import AmlKycPocPage from "./pages/AmlKycPocPage.jsx";
 import ConceptsPage from "./pages/ConceptsPage.jsx";
 import ReviewersPage from "./pages/ReviewersPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
+import EnterprisePage from "./pages/EnterprisePage.jsx";
 
 const routes = {
   "/": VeritasLanding,
+  "/enterprise": EnterprisePage,
   "/aml-kyc-poc": AmlKycPocPage,
   "/concepts": ConceptsPage,
   "/reviewers": ReviewersPage,

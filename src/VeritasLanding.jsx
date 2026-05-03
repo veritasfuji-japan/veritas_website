@@ -1195,6 +1195,7 @@ function TopBar({ lang, setLang, menuOpen, setMenuOpen }) {
   const links = [
     ["#idea", t("中心の発想", "The idea")],
     ["#numbers", t("実装の事実", "The facts")],
+    ["/enterprise", t("企業課題", "Enterprise")],
     ["/aml-kyc-poc", t("金融 (AML/KYC)", "Financial")],
     ["#reviewers", t("レビュアー", "Reviewers")],
     ["/contact", t("お問い合わせ", "Contact")],
