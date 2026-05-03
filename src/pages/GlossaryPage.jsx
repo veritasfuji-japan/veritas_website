@@ -105,18 +105,72 @@ export default function GlossaryPage() {
   ];
 
   const decisionPipelineTerms = [
-    { name: { ja: "Decision pipeline", en: "Decision pipeline" }, definition: { ja: "AIエージェントの判断を、入力、ポリシー、証跡、ゲート、記録、実行境界へ順に通す流れ。VERITASでは、判断がそのまま実行に直結しないようにする。", en: "The flow that routes an AI-agent decision through input, policy, evidence, gates, records, and execution boundaries. In VERITAS, decisions should not directly become execution." } },
-    { name: { ja: "FUJI gate", en: "FUJI gate" }, definition: { ja: "不十分、不正、危険、または証跡不足の判断経路を fail-closed で止めるためのゲート。実行前に、進めてよいか、保留すべきか、レビューすべきか、ブロックすべきかを判断する。", en: "A gate for stopping insufficient, invalid, unsafe, or under-evidenced decision paths through fail-closed behavior. It helps determine whether to proceed, hold, review, or block before execution." } },
-    { name: { ja: "Allow / Proceed", en: "Allow / Proceed" }, definition: { ja: "必要な証跡と条件が満たされ、次の段階へ進める判断。ただし、allow は常に無制限の実行許可を意味するわけではなく、境界と条件の範囲内で扱う。", en: "An outcome where required evidence and conditions are satisfied enough to move forward. It does not always mean unlimited execution permission; it should be understood within defined boundaries and conditions." } },
-    { name: { ja: "Hold", en: "Hold" }, definition: { ja: "情報や証跡が不足しているため、一時的に進行を止める判断。追加確認や補足証跡が必要な状態。", en: "An outcome where the process pauses because information or evidence is incomplete. Additional review or supporting evidence is needed." } },
-    { name: { ja: "Review", en: "Review" }, definition: { ja: "自動で進めるには不確実性やリスクがあり、人間または外部レビュアーの確認が必要な判断。", en: "An outcome where uncertainty or risk is high enough that human or external review is required before moving forward." } },
-    { name: { ja: "Block", en: "Block" }, definition: { ja: "条件、証跡、ポリシー、権限などの観点から、実行へ進めるべきではないと判断して止めること。", en: "An outcome where the action should not proceed because conditions, evidence, policy, authority, or safety requirements are not satisfied." } },
+    {
+      name: { ja: "Decision pipeline", en: "Decision pipeline" },
+      definition: {
+        ja: "AIエージェントの判断を、入力、ポリシー、証跡、ゲート、記録、実行境界へ順に通す流れ。VERITASでは、判断がそのまま実行に直結しないようにする。",
+        en: "The flow that routes an AI-agent decision through input, policy, evidence, gates, records, and execution boundaries. In VERITAS, decisions should not directly become execution.",
+      },
+    },
+    {
+      name: { ja: "FUJI gate", en: "FUJI gate" },
+      definition: {
+        ja: "不十分、不正、危険、または証跡不足の判断経路を fail-closed で止めるためのゲート。実行前に、進めてよいか、保留すべきか、レビューすべきか、ブロックすべきかを判断する。",
+        en: "A gate for stopping insufficient, invalid, unsafe, or under-evidenced decision paths through fail-closed behavior. It helps determine whether to proceed, hold, review, or block before execution.",
+      },
+    },
+    {
+      name: { ja: "Allow / Proceed", en: "Allow / Proceed" },
+      definition: {
+        ja: "必要な証跡と条件が満たされ、次の段階へ進める判断。ただし、allow は常に無制限の実行許可を意味するわけではなく、境界と条件の範囲内で扱う。",
+        en: "An outcome where required evidence and conditions are satisfied enough to move forward. It does not always mean unlimited execution permission; it should be understood within defined boundaries and conditions.",
+      },
+    },
+    {
+      name: { ja: "Hold", en: "Hold" },
+      definition: {
+        ja: "情報や証跡が不足しているため、一時的に進行を止める判断。追加確認や補足証跡が必要な状態。",
+        en: "An outcome where the process pauses because information or evidence is incomplete. Additional review or supporting evidence is needed.",
+      },
+    },
+    {
+      name: { ja: "Review", en: "Review" },
+      definition: {
+        ja: "自動で進めるには不確実性やリスクがあり、人間または外部レビュアーの確認が必要な判断。",
+        en: "An outcome where uncertainty or risk is high enough that human or external review is required before moving forward.",
+      },
+    },
+    {
+      name: { ja: "Block", en: "Block" },
+      definition: {
+        ja: "条件、証跡、ポリシー、権限などの観点から、実行へ進めるべきではないと判断して止めること。",
+        en: "An outcome where the action should not proceed because conditions, evidence, policy, authority, or safety requirements are not satisfied.",
+      },
+    },
   ];
 
   const pocFixtureTerms = [
-    { name: { ja: "Policy fixture", en: "Policy fixture" }, definition: { ja: "PoCやテストで使う、想定ポリシーを表す固定データ。判断がどのルールに照らして評価されるかを確認するために使う。", en: "Fixed test data representing the expected policy in a PoC or test. It helps evaluate which rule a decision is checked against." } },
-    { name: { ja: "Evidence fixture", en: "Evidence fixture" }, definition: { ja: "PoCやテストで使う、想定証跡を表す固定データ。証跡が十分な場合、不十分な場合、不正な場合にどう判断されるかを確認するために使う。", en: "Fixed test data representing expected evidence in a PoC or test. It helps evaluate what happens when evidence is sufficient, insufficient, or invalid." } },
-    { name: { ja: "Failure reason", en: "Failure reason" }, definition: { ja: "hold / review / block になった理由。企業やレビュアーが「なぜ止まったのか」を理解するために重要な情報。", en: "The reason an outcome became hold, review, or block. It helps enterprises and reviewers understand why the process stopped or escalated." } },
+    {
+      name: { ja: "Policy fixture", en: "Policy fixture" },
+      definition: {
+        ja: "PoCやテストで使う、想定ポリシーを表す固定データ。判断がどのルールに照らして評価されるかを確認するために使う。",
+        en: "Fixed test data representing the expected policy in a PoC or test. It helps evaluate which rule a decision is checked against.",
+      },
+    },
+    {
+      name: { ja: "Evidence fixture", en: "Evidence fixture" },
+      definition: {
+        ja: "PoCやテストで使う、想定証跡を表す固定データ。証跡が十分な場合、不十分な場合、不正な場合にどう判断されるかを確認するために使う。",
+        en: "Fixed test data representing expected evidence in a PoC or test. It helps evaluate what happens when evidence is sufficient, insufficient, or invalid.",
+      },
+    },
+    {
+      name: { ja: "Failure reason", en: "Failure reason" },
+      definition: {
+        ja: "hold / review / block になった理由。企業やレビュアーが「なぜ止まったのか」を理解するために重要な情報。",
+        en: "The reason an outcome became hold, review, or block. It helps enterprises and reviewers understand why the process stopped or escalated.",
+      },
+    },
   ];
 
   return (
@@ -134,12 +188,43 @@ export default function GlossaryPage() {
     >
       {(_, lang) => (
         <>
-          <section style={sectionStyle}><h2 style={headingStyle}>{lang === "ja" ? "中核となるガバナンス用語" : "Core governance terms"}</h2>{renderTerms(coreGovernanceTerms, lang)}</section>
-          <section style={sectionStyle}><h2 style={headingStyle}>{lang === "ja" ? "証跡・監査に関する用語" : "Evidence and audit terms"}</h2>{renderTerms(evidenceAuditTerms, lang)}</section>
-          <section style={sectionStyle}><h2 style={headingStyle}>{lang === "ja" ? "判断・パイプラインに関する用語" : "Decision and pipeline terms"}</h2>{renderTerms(decisionPipelineTerms, lang)}</section>
-          <section style={sectionStyle}><h2 style={headingStyle}>{lang === "ja" ? "PoC・fixtureに関する用語" : "PoC and fixture terms"}</h2>{renderTerms(pocFixtureTerms, lang)}</section>
-          <section style={sectionStyle}><h2 style={headingStyle}>{lang === "ja" ? "これらの用語が意味しないこと" : "What these terms do not mean"}</h2><ul><li>{lang === "ja" ? "法的助言を意味しない。" : "They do not mean legal advice."}</li><li>{lang === "ja" ? "規制当局の承認を意味しない。" : "They do not mean regulatory approval."}</li><li>{lang === "ja" ? "第三者認証を意味しない。" : "They do not mean third-party certification."}</li><li>{lang === "ja" ? "すべてのリスクを自動で消すことを意味しない。" : "They do not mean all risk is automatically removed."}</li><li>{lang === "ja" ? "特定企業での本番利用可能性を単独で証明するものではない。" : "They do not independently prove production readiness for a specific organization."}</li><li>{lang === "ja" ? "実際の本番利用には、環境固有の統合、セキュリティ、運用、法務・監査レビューが必要である。" : "Production use still requires environment-specific integration, security, operations, legal, and audit review."}</li></ul></section>
-          <section style={sectionStyle}><h2 style={headingStyle}>{lang === "ja" ? "次に読むページ" : "Recommended next pages"}</h2><ul><li>{lang === "ja" ? "企業課題：企業が直面する痛みを理解する。" : "Enterprise: understand the pain companies face."}</li><li>{lang === "ja" ? "中心概念：approval is not commitment を理解する。" : "Concepts: understand approval is not commitment."}</li><li>{lang === "ja" ? "AML/KYC PoC：評価経路を確認する。" : "AML/KYC PoC: review the evaluation path."}</li><li>{lang === "ja" ? "レビュアー：外部評価の観点を確認する。" : "Reviewers: inspect external review criteria."}</li><li>{lang === "ja" ? "お問い合わせ：具体的な検証相談を送る。" : "Contact: send a concrete evaluation inquiry."}</li></ul></section>
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{lang === "ja" ? "中核となるガバナンス用語" : "Core governance terms"}</h2>
+            {renderTerms(coreGovernanceTerms, lang)}
+          </section>
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{lang === "ja" ? "証跡・監査に関する用語" : "Evidence and audit terms"}</h2>
+            {renderTerms(evidenceAuditTerms, lang)}
+          </section>
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{lang === "ja" ? "判断・パイプラインに関する用語" : "Decision and pipeline terms"}</h2>
+            {renderTerms(decisionPipelineTerms, lang)}
+          </section>
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{lang === "ja" ? "PoC・fixtureに関する用語" : "PoC and fixture terms"}</h2>
+            {renderTerms(pocFixtureTerms, lang)}
+          </section>
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{lang === "ja" ? "これらの用語が意味しないこと" : "What these terms do not mean"}</h2>
+            <ul>
+              <li>{lang === "ja" ? "法的助言を意味しない。" : "They do not mean legal advice."}</li>
+              <li>{lang === "ja" ? "規制当局の承認を意味しない。" : "They do not mean regulatory approval."}</li>
+              <li>{lang === "ja" ? "第三者認証を意味しない。" : "They do not mean third-party certification."}</li>
+              <li>{lang === "ja" ? "すべてのリスクを自動で消すことを意味しない。" : "They do not mean all risk is automatically removed."}</li>
+              <li>{lang === "ja" ? "特定企業での本番利用可能性を単独で証明するものではない。" : "They do not independently prove production readiness for a specific organization."}</li>
+              <li>{lang === "ja" ? "実際の本番利用には、環境固有の統合、セキュリティ、運用、法務・監査レビューが必要である。" : "Production use still requires environment-specific integration, security, operations, legal, and audit review."}</li>
+            </ul>
+          </section>
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{lang === "ja" ? "次に読むページ" : "Recommended next pages"}</h2>
+            <ul>
+              <li>{lang === "ja" ? "企業課題：企業が直面する痛みを理解する。" : "Enterprise: understand the pain companies face."}</li>
+              <li>{lang === "ja" ? "中心概念：approval is not commitment を理解する。" : "Concepts: understand approval is not commitment."}</li>
+              <li>{lang === "ja" ? "AML/KYC PoC：評価経路を確認する。" : "AML/KYC PoC: review the evaluation path."}</li>
+              <li>{lang === "ja" ? "レビュアー：外部評価の観点を確認する。" : "Reviewers: inspect external review criteria."}</li>
+              <li>{lang === "ja" ? "お問い合わせ：具体的な検証相談を送る。" : "Contact: send a concrete evaluation inquiry."}</li>
+            </ul>
+          </section>
         </>
       )}
     </PageShell>
