@@ -14,7 +14,21 @@ const headingStyle = {
   color: "#0b3d5b",
 };
 
-const emailLink = "mailto:veritas.fuji@gmail.com?subject=VERITAS%20OS%20Inquiry";
+const emailSubject = encodeURIComponent("VERITAS OS Inquiry");
+const emailBody = encodeURIComponent(`Hello VERITAS OS team,
+
+Affiliation / Organization:
+Inquiry type:
+Area of interest:
+What I would like to evaluate or discuss:
+
+Message:
+
+Notes:
+- Please do not include confidential information, personal data, customer data, or regulated data in this first message.
+`);
+
+const emailLink = `mailto:veritas.fuji@gmail.com?subject=${emailSubject}&body=${emailBody}`;
 
 export default function ContactPage() {
   return (
