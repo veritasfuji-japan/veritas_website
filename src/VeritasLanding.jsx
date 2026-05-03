@@ -106,7 +106,12 @@ const STYLES = `
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    display: inline;
+    display: inline-block;
+    padding-inline: 0.03em;
+    margin-inline: -0.01em;
+    overflow: visible;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   .marker {
@@ -336,7 +341,13 @@ const STYLES = `
     justify-content: center;
     margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
   }
-  .hero-mobile .display { max-width: 18ch; margin: 0 auto clamp(1.25rem, 3vw, 2.25rem); }
+  .hero-mobile .display { max-width: min(100%, 22ch); margin: 0 auto clamp(1.25rem, 3vw, 2.25rem); }
+  .hero-mobile .display.hero-title-ja {
+    font-size: clamp(2.05rem, 1.55rem + 3.8vw, 2.7rem);
+    line-height: 1.12;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
   .hero-mobile .lead { max-width: 38ch; margin: 0 auto clamp(1.75rem, 4vw, 2.75rem); }
   .hero-mobile .hero-cta {
     display: flex;
@@ -1269,7 +1280,7 @@ function Hero({ lang }) {
           <div className="hero-logo-wrap reveal">
             <VeritasLogo size={120} className="hero-logo" />
           </div>
-          <h1 className="display reveal" style={{ animationDelay: "0.1s" }}>
+          <h1 className={`display reveal ${isJa ? "hero-title-ja" : ""}`} style={{ animationDelay: "0.1s" }}>
             {isJa ? titleJa : titleEn}
           </h1>
           <p className={`lead reveal ${isJa ? "lead-ja" : ""}`} style={{ animationDelay: "0.2s" }}>{lead}</p>
