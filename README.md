@@ -51,6 +51,7 @@ Production URL:
 - `/aml-kyc-poc` — AML/KYC 1-day PoC overview
 - `/concepts` — Core VERITAS concept: approval is not commitment
 - `/reviewers` — External reviewer entrypoint
+- `/contact` — Email inquiry page
 
 Social preview image:
 

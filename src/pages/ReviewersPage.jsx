@@ -25,6 +25,7 @@ export default function ReviewersPage() {
         en: "Review VERITAS OS as auditable decision infrastructure for LLM agents.",
       }}
       ctas={[
+        { label: { ja: "問い合わせる", en: "Contact" }, href: "/contact" },
         { label: { ja: "コアリポジトリを開く", en: "Open core repository" }, href: "https://github.com/veritasfuji-japan/veritas_os" },
         { label: { ja: "ホームへ戻る", en: "Back to Home" }, href: "/" },
       ]}

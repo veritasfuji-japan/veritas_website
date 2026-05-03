@@ -1197,6 +1197,7 @@ function TopBar({ lang, setLang, menuOpen, setMenuOpen }) {
     ["#numbers", t("実装の事実", "The facts")],
     ["/aml-kyc-poc", t("金融 (AML/KYC)", "Financial")],
     ["#reviewers", t("レビュアー", "Reviewers")],
+    ["/contact", t("お問い合わせ", "Contact")],
   ];
   return (
     <header className="topbar">

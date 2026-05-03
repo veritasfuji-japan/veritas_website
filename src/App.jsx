@@ -3,12 +3,14 @@ import VeritasLanding from "./VeritasLanding.jsx";
 import AmlKycPocPage from "./pages/AmlKycPocPage.jsx";
 import ConceptsPage from "./pages/ConceptsPage.jsx";
 import ReviewersPage from "./pages/ReviewersPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 
 const routes = {
   "/": VeritasLanding,
   "/aml-kyc-poc": AmlKycPocPage,
   "/concepts": ConceptsPage,
   "/reviewers": ReviewersPage,
+  "/contact": ContactPage,
 };
 
 export default function App() {
