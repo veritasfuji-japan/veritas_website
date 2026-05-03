@@ -48,6 +48,7 @@ Production URL:
 ## Website Routes
 
 - `/` — Landing page
+- `/enterprise` — Enterprise pain points and governance value
 - `/aml-kyc-poc` — AML/KYC 1-day PoC overview
 - `/concepts` — Core VERITAS concept: approval is not commitment
 - `/reviewers` — External reviewer entrypoint
