@@ -113,6 +113,14 @@ const STYLES = `
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
   }
+  .hero-gradient-word {
+    display: inline-block;
+    padding-inline: 0.1em;
+    margin-inline: -0.02em;
+    overflow: visible;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
 
   .marker {
     display: inline-flex;
@@ -342,10 +350,32 @@ const STYLES = `
     margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
   }
   .hero-mobile .display { max-width: min(100%, 22ch); margin: 0 auto clamp(1.25rem, 3vw, 2.25rem); }
-  .hero-mobile .display.hero-title-ja {
-    font-size: clamp(2.05rem, 1.55rem + 3.8vw, 2.7rem);
+  .hero-mobile .hero-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    margin-inline: auto;
+    text-align: center;
+    overflow: visible;
+  }
+  .hero-mobile .hero-title > span {
+    display: block;
+    max-width: 100%;
+    overflow: visible;
+  }
+  .hero-mobile .hero-title-ja {
+    font-size: clamp(2.35rem, 10.5vw, 3.35rem);
     line-height: 1.12;
+    letter-spacing: -0.02em;
     word-break: keep-all;
+    overflow-wrap: normal;
+  }
+  .hero-mobile .hero-title-en {
+    font-size: clamp(2.55rem, 10vw, 3.45rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    word-break: normal;
     overflow-wrap: normal;
   }
   .hero-mobile .lead { max-width: 38ch; margin: 0 auto clamp(1.75rem, 4vw, 2.75rem); }
@@ -1220,21 +1250,32 @@ function Hero({ lang }) {
   const isJa = lang === "ja";
 
   const titleJa = (
-    <>AI の判断を、<em className="brand-gradient-text">世界に出る前に</em>統制する。</>
+    <>
+      <span>AIの判断を</span>
+      <span className="brand-gradient-text hero-gradient-word">世界に出る前に</span>
+      <span>統制する</span>
+    </>
   );
   const titleEn = (
-    <>Govern AI decisions <em className="brand-gradient-text">before</em> they touch the real world.</>
+    <>
+      <span>Govern AI decisions</span>
+      <span>
+        <span className="brand-gradient-text hero-gradient-word">before</span>{" "}
+        they touch
+      </span>
+      <span>the real world</span>
+    </>
   );
   const titleJaDesktop = (
     <>
-      AI の判断を、<br />
-      <em className="brand-gradient-text">世界に出る前に</em><br />
-      統制する。
+      AI の判断を<br />
+      <em className="brand-gradient-text hero-gradient-word">世界に出る前に</em><br />
+      統制する
     </>
   );
   const titleEnDesktop = (
     <>
-      Govern AI decisions <em className="brand-gradient-text">before</em><br />
+      Govern AI decisions <em className="brand-gradient-text hero-gradient-word">before</em><br />
       they touch the real world.
     </>
   );
@@ -1280,7 +1321,7 @@ function Hero({ lang }) {
           <div className="hero-logo-wrap reveal">
             <VeritasLogo size={120} className="hero-logo" />
           </div>
-          <h1 className={`display reveal ${isJa ? "hero-title-ja" : ""}`} style={{ animationDelay: "0.1s" }}>
+          <h1 className={`display hero-title reveal ${isJa ? "hero-title-ja" : "hero-title-en"}`} style={{ animationDelay: "0.1s" }}>
             {isJa ? titleJa : titleEn}
           </h1>
           <p className={`lead reveal ${isJa ? "lead-ja" : ""}`} style={{ animationDelay: "0.2s" }}>{lead}</p>
