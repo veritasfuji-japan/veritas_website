@@ -6,10 +6,12 @@ import ReviewersPage from "./pages/ReviewersPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import EnterprisePage from "./pages/EnterprisePage.jsx";
 import GlossaryPage from "./pages/GlossaryPage.jsx";
+import HowItWorksPage from "./pages/HowItWorksPage.jsx";
 
 const routes = {
   "/": VeritasLanding,
   "/enterprise": EnterprisePage,
+  "/how-it-works": HowItWorksPage,
   "/aml-kyc-poc": AmlKycPocPage,
   "/concepts": ConceptsPage,
   "/glossary": GlossaryPage,

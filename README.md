@@ -49,6 +49,7 @@ Production URL:
 
 - `/` — Landing page
 - `/enterprise` — Enterprise pain points and governance value
+- `/how-it-works` — Technical structure and decision governance flow
 - `/aml-kyc-poc` — AML/KYC 1-day PoC overview
 - `/concepts` — Core VERITAS concept: approval is not commitment
 - `/glossary` — VERITAS OS terminology and plain-language definitions
