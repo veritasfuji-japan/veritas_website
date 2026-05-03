@@ -74,12 +74,12 @@ export default function AmlKycPocPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("確認する証跡", "Evidence to inspect")}</h2>
             <ul>
-              <li>{t("decision output。", "Decision output.")}</li>
-              <li>{t("FUJI gate outcome。", "FUJI gate outcome.")}</li>
-              <li>{t("TrustLog evidence。", "TrustLog evidence.")}</li>
-              <li>{t("利用可能な場合の bind receipt または bind summary。", "Bind receipt or bind summary where available.")}</li>
-              <li>{t("block / hold 判断における failure reason。", "Failure reason for blocked or held decisions.")}</li>
-              <li>{t("利用可能な場合の replay または trace consistency。", "Replay or trace consistency where available.")}</li>
+              <li>{t("意思決定出力", "Decision output.")}</li>
+              <li>{t("FUJIゲート結果", "FUJI gate outcome.")}</li>
+              <li>{t("TrustLog証跡", "TrustLog evidence.")}</li>
+              <li>{t("利用可能な場合の bind receipt または bind summary", "Bind receipt or bind summary where available.")}</li>
+              <li>{t("block / hold 判断における failure reason", "Failure reason for blocked or held decisions.")}</li>
+              <li>{t("利用可能な場合の replay または trace consistency", "Replay or trace consistency where available.")}</li>
             </ul>
           </section>
 
