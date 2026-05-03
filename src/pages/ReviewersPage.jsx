@@ -1,6 +1,19 @@
 import React from "react";
 import PageShell from "../components/PageShell.jsx";
 
+const sectionStyle = {
+  marginTop: "1rem",
+  padding: "1rem",
+  border: "1px solid #d0d7de",
+  borderRadius: "8px",
+  background: "#fdfdfc",
+};
+
+const headingStyle = {
+  marginTop: 0,
+  color: "#0b3d5b",
+};
+
 export default function ReviewersPage() {
   return (
     <PageShell
@@ -18,19 +31,19 @@ export default function ReviewersPage() {
     >
       {(t) => (
         <>
-          <section>
-            <h2>{t("レビュー対象", "What to review")}</h2>
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t("レビュー対象", "What to review")}</h2>
             <ul>
-              <li>{t("意思決定パイプライン。", "Decision pipeline.")}</li>
-              <li>{t("FUJIゲート。", "FUJI gate.")}</li>
-              <li>{t("TrustLog証跡。", "TrustLog evidence.")}</li>
-              <li>{t("Bind管理対象パス。", "Bind-governed paths.")}</li>
-              <li>{t("ビルド・ドキュメント証跡。", "Build and documentation evidence.")}</li>
-              <li>{t("公開主張とリポジトリ証跡の整合性。", "Public claims alignment with repository evidence.")}</li>
+              <li>{t("意思決定パイプライン", "Decision pipeline.")}</li>
+              <li>{t("FUJIゲート", "FUJI gate.")}</li>
+              <li>{t("TrustLog証跡", "TrustLog evidence.")}</li>
+              <li>{t("Bind管理対象パス", "Bind-governed paths.")}</li>
+              <li>{t("ビルド・ドキュメント証跡", "Build and documentation evidence.")}</li>
+              <li>{t("公開主張とリポジトリ証跡の整合性", "Public claims alignment with repository evidence.")}</li>
             </ul>
           </section>
-          <section style={{ marginTop: "1rem" }}>
-            <h2>{t("レビュー姿勢", "Review posture")}</h2>
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t("レビュー姿勢", "Review posture")}</h2>
             <ul>
               <li>{t("ロードマップではなく、実装済みの挙動を確認する。", "Check implemented behavior, not roadmap promises.")}</li>
               <li>{t("主張を veritas_os と照合する。", "Validate claims against veritas_os.")}</li>
