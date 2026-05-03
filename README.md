@@ -53,6 +53,7 @@ Production URL:
 - `/aml-kyc-poc` — AML/KYC 1-day PoC overview
 - `/concepts` — Core VERITAS concept: approval is not commitment
 - `/glossary` — VERITAS OS terminology and plain-language definitions
+- `/faq` — Frequently asked questions and safe evaluation guidance
 - `/reviewers` — External reviewer entrypoint
 - `/contact` — Email inquiry page
 

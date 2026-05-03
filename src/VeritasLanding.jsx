@@ -1218,6 +1218,7 @@ function TopBar({ lang, setLang, menuOpen, setMenuOpen }) {
     ["/aml-kyc-poc", t("PoC", "PoC")],
     ["/concepts", t("中心概念", "Concepts")],
     ["/glossary", t("用語集", "Glossary")],
+    ["/faq", "FAQ"],
     ["/reviewers", t("レビュアー", "Reviewers")],
     ["/contact", t("お問い合わせ", "Contact")],
   ];
@@ -1461,6 +1462,7 @@ function RouteGuide({ lang }) {
     [t("外部レビュアー", "External reviewer"), "/reviewers", t("レビュアー", "Reviewers")],
     [t("思想を知りたい人", "Conceptual overview"), "/concepts", t("中心概念", "Concepts")],
     [t("用語を確認したい人", "Need term definitions"), "/glossary", t("用語集", "Glossary")],
+    [t("疑問を確認したい人", "Have questions"), "/faq", "FAQ"],
     [t("具体的な相談", "Concrete inquiry"), "/contact", t("お問い合わせ", "Contact")],
   ];
   return (
