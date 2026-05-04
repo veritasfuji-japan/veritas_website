@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NumbersFromClaims from "./components/NumbersFromClaims.jsx";
 
 /**
  * VERITAS OS — Responsive landing (PC + mobile, single file)
@@ -774,6 +775,57 @@ const STYLES = `
     line-height: 1.6;
     word-break: break-word;
   }
+
+
+  /* ── Evidence-backed numbers ───────────────────────────── */
+  .evidenceNumbers {
+    background: var(--paper-2);
+    border-top: 1px solid var(--rule-soft);
+    border-bottom: 1px solid var(--rule-soft);
+    padding: var(--pad-y) 0;
+  }
+  .evidenceNumbersHeader { max-width: 56rem; }
+  .evidenceNumbersGrid {
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  @media (min-width: 760px) {
+    .evidenceNumbersGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .evidenceNumberCard {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: clamp(1rem, 2vw, 1.4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .evidenceNumberValue {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 1.2rem + 2.5vw, 3rem);
+    line-height: 1;
+    color: var(--ink);
+  }
+  .evidenceNumberLabel {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+  }
+  .evidenceNumberDescription { color: var(--ink-2); font-size: 0.95rem; }
+  .evidenceNumberCaution { color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
+  .evidenceNumberLink {
+    margin-top: 0.1rem;
+    width: fit-content;
+    border-bottom: 1px solid var(--blue);
+    color: var(--blue);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+  }
+  .evidenceNumberLink:hover { color: var(--blue-deep); border-bottom-color: var(--blue-deep); }
 
   /* Pipeline */
   .pipeline {
@@ -1631,63 +1683,7 @@ function Idea({ lang }) {
 
 // ─── Numbers ────────────────────────────────────────────────────
 function Numbers({ lang }) {
-  const t = makeT(lang);
-  const isJa = lang === "ja";
-
-  const stats = [
-    { v: "87", em: "%", l: t("テストカバレッジ", "Test coverage") },
-    { v: "85", em: "/100", l: t("内部総合スナップショット", "Internal overall snapshot") },
-    { v: "5", em: "", l: t("Bind-governed paths", "Bind-governed paths") },
-    { v: "2", em: "", l: t("査読論文 (Zenodo)", "Peer-archived papers (Zenodo)") },
-  ];
-  const pipeline = ["Input", "Evidence", "Critique", "Debate", "Plan", "Value", "FUJI", "TrustLog"];
-
-  return (
-    <section id="numbers" className="numbers">
-      <div className="container">
-        <div className="sec-head">
-          <div className="marker">{t("第二節 · 数字で語る", "§ 02 · In numbers")}</div>
-          <h2 className="headline">{t("実装された事実だけ。", "Only what's implemented.")}</h2>
-          <p className={`lead ${isJa ? "lead-ja" : ""}`}>
-            {t(
-              "ロードマップではなく main ブランチの事実。最新スナップショット 2026-04-15 (前回 82 → 85)。",
-              "Not roadmap. Facts on main. Latest snapshot 2026-04-15 (previously 82 → now 85)."
-            )}
-          </p>
-        </div>
-
-        <div className="numbers-grid">
-          {stats.map((s) => (
-            <div key={s.l} className="number-cell">
-              <div className="number-val">{s.v}{s.em && <em>{s.em}</em>}</div>
-              <div className="number-label">{s.l}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="pipeline">
-          <div className="pipeline-label">
-            {t("オペレーター向け 8 段パイプライン", "Operator-facing 8-stage pipeline")}
-          </div>
-          <div className="pipeline-stages">
-            {pipeline.map((stage, i) => (
-              <React.Fragment key={stage}>
-                <span className="pipeline-stage">{stage}</span>
-                {i < pipeline.length - 1 && <span className="pipeline-arrow">→</span>}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-
-        <p className="numbers-source">
-          {t(
-            "出典: README · public-positioning.md · coverage-report.md。バージョン 2.0.0 Beta、commit bb72b21。",
-            "Sources: README · public-positioning.md · coverage-report.md. Version 2.0.0 Beta, commit bb72b21."
-          )}
-        </p>
-      </div>
-    </section>
-  );
+  return <NumbersFromClaims lang={lang} />;
 }
 
 // ─── Financial pointer ──────────────────────────────────────────
