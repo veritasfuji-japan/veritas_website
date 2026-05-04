@@ -35,6 +35,86 @@
       content="https://veritas-website-navy.vercel.app/og-image.png"
     />
     <meta name="twitter:image:alt" content="VERITAS OS - AI Governance OS" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://veritas-website-navy.vercel.app/#organization",
+            "name": "VERITAS OS",
+            "url": "https://veritas-website-navy.vercel.app/",
+            "logo": "https://veritas-website-navy.vercel.app/og-image.png",
+            "sameAs": [
+              "https://github.com/veritasfuji-japan/veritas_os",
+              "https://github.com/veritasfuji-japan/veritas_website"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://veritas-website-navy.vercel.app/#website",
+            "name": "VERITAS OS",
+            "url": "https://veritas-website-navy.vercel.app/",
+            "publisher": {
+              "@id": "https://veritas-website-navy.vercel.app/#organization"
+            },
+            "description": "VERITAS OS is an auditable decision infrastructure and bind-boundary control plane for LLM agents, designed to govern AI decisions before they touch the real world."
+          },
+          {
+            "@type": "SoftwareSourceCode",
+            "@id": "https://github.com/veritasfuji-japan/veritas_os#source",
+            "name": "VERITAS OS",
+            "codeRepository": "https://github.com/veritasfuji-japan/veritas_os",
+            "programmingLanguage": [
+              "Python",
+              "JavaScript"
+            ],
+            "description": "Decision governance and bind-boundary control plane for AI agents.",
+            "isPartOf": {
+              "@id": "https://veritas-website-navy.vercel.app/#website"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://veritas-website-navy.vercel.app/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is VERITAS OS an AI model?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. VERITAS OS is not the AI model that generates answers. It is a governance layer that checks evidence, authority, policy, and failure reasons before AI-agent decisions are committed to the real world."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What problem does VERITAS OS address?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "As AI agents move closer to execution, enterprises need a boundary that can prove who authorized what, based on which evidence, before action."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is VERITAS OS legal advice or regulatory approval?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. VERITAS OS and this website are not legal advice, regulatory approval, or third-party certification."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Where can the implementation be reviewed?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The core implementation can be reviewed in the public GitHub repository at https://github.com/veritasfuji-japan/veritas_os."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
