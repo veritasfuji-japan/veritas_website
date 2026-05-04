@@ -1,0 +1,74 @@
+{
+  "updated_at": "2026-05-04",
+  "source_repository": "https://github.com/veritasfuji-japan/veritas_os",
+  "claims": [
+    {
+      "id": "coverage",
+      "value": "87%",
+      "label": {
+        "ja": "テストカバレッジ",
+        "en": "test coverage"
+      },
+      "description": {
+        "ja": "リポジトリ上のカバレッジ証跡に基づく値。",
+        "en": "Based on coverage evidence in the repository."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os",
+      "caution": {
+        "ja": "第三者認証や規制承認を意味しません。",
+        "en": "This does not imply third-party certification or regulatory approval."
+      }
+    },
+    {
+      "id": "aml_kyc_scenarios",
+      "value": "6",
+      "label": {
+        "ja": "AML/KYC評価シナリオ",
+        "en": "AML/KYC evaluation scenarios"
+      },
+      "description": {
+        "ja": "aml_kyc_pilot_cases.json に基づくPoCシナリオ数。",
+        "en": "Number of PoC scenarios based on aml_kyc_pilot_cases.json."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os",
+      "caution": {
+        "ja": "本番利用可能性を単独で証明するものではありません。",
+        "en": "This does not independently prove production readiness."
+      }
+    },
+    {
+      "id": "bind_governed_paths",
+      "value": "5",
+      "label": {
+        "ja": "bind-governed effect paths",
+        "en": "bind-governed effect paths"
+      },
+      "description": {
+        "ja": "bind boundary adapter 実装に基づく統制対象パス数。",
+        "en": "Number of governed effect paths based on bind boundary adapter implementation."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os",
+      "caution": {
+        "ja": "網羅的な業界標準対応を意味しません。",
+        "en": "This does not imply exhaustive industry-standard coverage."
+      }
+    },
+    {
+      "id": "papers",
+      "value": "2",
+      "label": {
+        "ja": "関連論文",
+        "en": "related papers"
+      },
+      "description": {
+        "ja": "英語版・日本語版の関連研究資料。",
+        "en": "Related research materials in English and Japanese."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os",
+      "caution": {
+        "ja": "査読済み認証や規制承認を意味しません。",
+        "en": "This does not imply peer-reviewed certification or regulatory approval."
+      }
+    }
+  ]
+}
