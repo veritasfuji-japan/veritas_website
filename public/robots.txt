@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://veritas-website-navy.vercel.app/sitemap.xml
