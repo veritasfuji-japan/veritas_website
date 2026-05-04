@@ -13,7 +13,7 @@
         "ja": "リポジトリ上のカバレッジ証跡に基づく値。",
         "en": "Based on coverage evidence in the repository."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/ja/validation/coverage-report.md",
       "caution": {
         "ja": "第三者認証や規制承認を意味しません。",
         "en": "This does not imply third-party certification or regulatory approval."
@@ -30,7 +30,7 @@
         "ja": "aml_kyc_pilot_cases.json に基づくPoCシナリオ数。",
         "en": "Number of PoC scenarios based on aml_kyc_pilot_cases.json."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/veritas_os/sample_data/governance/aml_kyc_pilot_cases.json",
       "caution": {
         "ja": "本番利用可能性を単独で証明するものではありません。",
         "en": "This does not independently prove production readiness."
@@ -47,7 +47,7 @@
         "ja": "bind boundary adapter 実装に基づく統制対象パス数。",
         "en": "Number of governed effect paths based on bind boundary adapter implementation."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/veritas_os/policy/bind_boundary_adapters.py",
       "caution": {
         "ja": "網羅的な業界標準対応を意味しません。",
         "en": "This does not imply exhaustive industry-standard coverage."
@@ -64,7 +64,7 @@
         "ja": "英語版・日本語版の関連研究資料。",
         "en": "Related research materials in English and Japanese."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/README.md",
       "caution": {
         "ja": "査読済み認証や規制承認を意味しません。",
         "en": "This does not imply peer-reviewed certification or regulatory approval."
