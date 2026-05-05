@@ -1,5 +1,6 @@
 import React from "react";
 import PageShell from "../components/PageShell.jsx";
+import HumanApprovalWorkbench from "../components/HumanApprovalWorkbench.jsx";
 
 const sectionStyle = {
   marginTop: "1rem",
@@ -51,6 +52,7 @@ export default function ReviewersPage() {
               <li>{t("Webサイト上の主張は、証明そのものではなく public positioning として扱う。", "Treat website claims as public positioning, not proof by themselves.")}</li>
             </ul>
           </section>
+          <HumanApprovalWorkbench />
         </>
       )}
     </PageShell>
