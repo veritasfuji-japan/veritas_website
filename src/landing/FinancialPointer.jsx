@@ -31,7 +31,7 @@ default_failure_mode: fail_closed`;
     <div>
       <div className="pointer-cat">{t("ビーチヘッド", "Beachhead")}</div>
       <h3 className="pointer-title">
-        {t("AML/KYC コンプライアンス、1日 PoC。", "AML/KYC compliance — 1-day PoC.")}
+        {t("AML/KYC ガバナンス評価、1日 PoC。", "AML/KYC governance evaluation — 1-day PoC.")}
       </h3>
       <p className={`pointer-body ${isJa ? "pointer-body-ja" : ""}`}>
         {t(

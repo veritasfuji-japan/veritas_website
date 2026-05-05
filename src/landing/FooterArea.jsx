@@ -88,7 +88,7 @@ export default function FooterArea({ lang }) {
             <div className={`disclaimer-list ${isJa ? "disclaimer-list-ja" : ""}`}>
               <span>{t("法的判定エンジンではない", "Not a legal determination engine")}</span>
               <span>{t("第三者認証ではない", "Not a third-party certification")}</span>
-              <span>{t("特定の規制への完全準拠の保証ではない", "Not a guarantee of compliance with any framework")}</span>
+              <span>{t("特定の認証や規制当局の承認を意味しない", "Does not imply certification or regulatory approval")}</span>
               <span>{t("オーケストレーション ランタイムの置き換えではない", "Not a replacement for orchestration runtimes")}</span>
               <span>{t("AML/KYC の法的判定エンジンそのものではない", "Not a legal determination engine for AML/KYC by itself")}</span>
             </div>
@@ -125,7 +125,7 @@ export default function FooterArea({ lang }) {
 
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} {t("藤下 健志", "Takeshi Fujishita")} · Core: Proprietary EULA · Spec/SDK/CLI/Policies: MIT</span>
-            <span>v2.0.0 Beta · Python 3.11+ · Next.js 16 · commit bb72b21</span>
+            <span>v2.0.0 Beta · Python 3.11+ · Vite + React · Evidence links maintained via claims data</span>
           </div>
         </div>
       </footer>
