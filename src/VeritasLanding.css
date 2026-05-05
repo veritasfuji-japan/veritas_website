@@ -677,74 +677,6 @@
   .idea-conclusion-link:hover { color: var(--blue); border-color: var(--blue); }
 
   /* ── Numbers ────────────────────────────────────────────── */
-  .numbers {
-    background: var(--ink);
-    color: var(--paper-2);
-    padding: var(--pad-y) 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .numbers::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(rgba(255, 245, 220, 0.04) 1px, transparent 1px);
-    background-size: 4px 4px;
-    pointer-events: none;
-  }
-  .numbers .marker { color: var(--teal); }
-  .numbers .marker::before { color: var(--teal); }
-  .numbers .headline { color: var(--paper-2); }
-  .numbers .lead { color: rgba(255, 245, 220, 0.7); }
-
-  .numbers-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 1fr;
-    margin-top: clamp(2rem, 4vw, 4rem);
-    border-top: 1px solid rgba(255, 245, 220, 0.18);
-    border-left: 1px solid rgba(255, 245, 220, 0.18);
-  }
-  @media (min-width: 720px) { .numbers-grid { grid-template-columns: repeat(4, 1fr); } }
-  .number-cell {
-    padding: clamp(1.25rem, 3.5vw, 2.75rem) clamp(1.25rem, 3vw, 2.25rem);
-    border-right: 1px solid rgba(255, 245, 220, 0.18);
-    border-bottom: 1px solid rgba(255, 245, 220, 0.18);
-    display: flex;
-    flex-direction: column;
-  }
-  .number-val {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-variation-settings: "opsz" 144;
-    font-size: clamp(2rem, 1.3rem + 3vw, 4.25rem);
-    line-height: 1;
-    margin-bottom: 0.65rem;
-    letter-spacing: -0.025em;
-    overflow-wrap: break-word;
-  }
-  .number-val em {
-    font-family: var(--mono);
-    font-style: normal;
-    font-size: 0.5em;
-    color: var(--teal);
-    margin-left: 0.15em;
-    vertical-align: 0.55em;
-  }
-  .number-label {
-    font-size: clamp(0.78rem, 0.74rem + 0.2vw, 0.95rem);
-    color: rgba(255, 245, 220, 0.7);
-    line-height: 1.45;
-  }
-  .numbers-source {
-    margin-top: clamp(1.25rem, 2.5vw, 2.5rem);
-    font-family: var(--mono);
-    font-size: clamp(0.7rem, 0.66rem + 0.15vw, 0.8rem);
-    color: rgba(255, 245, 220, 0.55);
-    letter-spacing: 0.04em;
-    line-height: 1.6;
-    word-break: break-word;
-  }
 
 
   /* ── Evidence-backed numbers ───────────────────────────── */
@@ -796,51 +728,6 @@
     font-size: 0.78rem;
   }
   .evidenceNumberLink:hover { color: var(--blue-deep); border-bottom-color: var(--blue-deep); }
-
-  /* Pipeline */
-  .pipeline {
-    margin-top: clamp(2rem, 4vw, 4rem);
-    padding-top: clamp(1.5rem, 3vw, 2.5rem);
-    border-top: 1px solid rgba(255, 245, 220, 0.18);
-  }
-  .pipeline-label {
-    font-family: var(--mono);
-    font-size: clamp(0.74rem, 0.72rem + 0.1vw, 0.78rem);
-    text-transform: uppercase;
-    letter-spacing: 0.13em;
-    color: rgba(255, 245, 220, 0.55);
-    margin-bottom: clamp(1rem, 2vw, 1.5rem);
-  }
-  .pipeline-stages {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 0.5rem;
-    align-items: center;
-  }
-  @media (min-width: 1024px) {
-    .pipeline-stages { flex-wrap: nowrap; gap: 0; width: 100%; }
-  }
-  .pipeline-stage {
-    font-family: var(--mono);
-    font-size: clamp(0.76rem, 0.72rem + 0.2vw, 0.95rem);
-    font-weight: 600;
-    padding: 0.4rem 0.75rem;
-    border: 1px solid rgba(255, 245, 220, 0.25);
-    border-radius: 2px;
-    color: var(--paper-2);
-    background: rgba(255, 245, 220, 0.04);
-    text-align: center;
-  }
-  @media (min-width: 1024px) {
-    .pipeline-stage { flex: 1 1 0; padding: 1rem 0.75rem; }
-  }
-  .pipeline-arrow {
-    color: var(--teal);
-    font-family: var(--mono);
-    font-size: clamp(0.85rem, 0.8rem + 0.2vw, 1.1rem);
-    flex-shrink: 0;
-  }
-  @media (min-width: 1024px) { .pipeline-arrow { padding: 0 0.5rem; } }
 
   /* ── AML/KYC pointer ────────────────────────────────────── */
   .pointer { padding: var(--pad-y) 0; }
