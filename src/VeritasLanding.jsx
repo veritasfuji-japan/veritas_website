@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import NumbersFromClaims from "./components/NumbersFromClaims.jsx";
 import TopBar from "./landing/TopBar.jsx";
 import Hero from "./landing/Hero.jsx";

@@ -1,4 +1,3 @@
-import React from "react";
 import PageShell from "../components/PageShell.jsx";
 
 const sectionStyle = {

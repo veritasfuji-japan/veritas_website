@@ -1,4 +1,3 @@
-import React from "react";
 import VeritasLanding from "./VeritasLanding.jsx";
 import AmlKycPocPage from "./pages/AmlKycPocPage.jsx";
 import ConceptsPage from "./pages/ConceptsPage.jsx";

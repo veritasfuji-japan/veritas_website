@@ -53,7 +53,7 @@ export default function AmlKycPocConversion({ lang }) {
           <div className="marker">AML/KYC POC</div>
           <h2 className="headline poc-conversion-title">AML/KYC 1-Day PoC</h2>
           <p className="body poc-conversion-message">
-            Validate whether AI agents can be prevented from proceeding with regulated actions when evidence, authority, or human approval is missing.
+            {t("証拠・権限・人間承認が不足している規制対象アクションについて、AIエージェントが誤って実行に進まないことを検証します。", "Validate whether AI agents can be prevented from proceeding with regulated actions when evidence, authority, or human approval is missing.")}
           </p>
 
           <div className="poc-conversion-grid">
