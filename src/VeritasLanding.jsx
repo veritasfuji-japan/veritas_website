@@ -3,6 +3,7 @@ import NumbersFromClaims from "./components/NumbersFromClaims.jsx";
 import TopBar from "./landing/TopBar.jsx";
 import Hero from "./landing/Hero.jsx";
 import EnterpriseStart from "./landing/EnterpriseStart.jsx";
+import AmlKycPocConversion from "./landing/AmlKycPocConversion.jsx";
 import RouteGuide from "./landing/RouteGuide.jsx";
 import Audiences from "./landing/Audiences.jsx";
 import Idea from "./landing/Idea.jsx";
@@ -37,6 +38,7 @@ export default function VeritasLanding() {
         <TopBar lang={lang} setLang={setLang} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <main>
           <Hero lang={lang} />
+          <AmlKycPocConversion lang={lang} />
           <EnterpriseStart lang={lang} />
           <RouteGuide lang={lang} />
           <Audiences lang={lang} />
