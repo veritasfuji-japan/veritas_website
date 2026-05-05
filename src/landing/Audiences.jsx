@@ -27,8 +27,8 @@ export default function Audiences({ lang }) {
       num: "III.", tag: t("DD・投資", "INVESTING"),
       title: t("投資・買収判断", "Investing or DD"),
       body: t(
-        "内部 DD スナップショット 85/100、テストカバレッジ 87%、CI 強制の品質ゲート。",
-        "Internal DD snapshot 85/100, 87% test coverage, CI-enforced quality gates."
+        "公開リポジトリ上の証跡、テストカバレッジ、PoCシナリオ、bind-governed paths を確認する。",
+        "Review repository evidence, test coverage, PoC scenarios, and bind-governed paths."
       ),
       href: "#numbers", cta: t("Investor view へ", "Investor view"),
     },
