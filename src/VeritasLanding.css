@@ -1000,7 +1000,7 @@
     padding: clamp(2rem, 5vw, 3.6rem) 0 clamp(2.2rem, 5vw, 4rem);
   }
   .enterprise-start-wrap { background: var(--paper-2); border: 1px solid var(--rule); padding: clamp(1.1rem, 2.6vw, 2rem); }
-  .enterprise-start-headline { margin: 0.55rem 0 0.8rem; font-family: var(--serif); font-size: clamp(1.2rem, 1rem + 1vw, 1.9rem); line-height: 1.28; letter-spacing: -0.01em; }
+  .enterprise-start-headline { margin: 0.55rem 0 0.8rem; max-width: 28ch; }
   .enterprise-start-body { color: var(--ink-2); margin-bottom: 1rem; }
   .enterprise-start-grid { display: grid; gap: 0.85rem; grid-template-columns: 1fr; }
   @media (min-width: 1024px) { .enterprise-start-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
