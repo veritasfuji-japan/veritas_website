@@ -29,7 +29,17 @@ export default function EnterpriseStart({ lang }) {
       <div className="container">
         <div className="enterprise-start-wrap">
           <div className="marker">ENTERPRISE START</div>
-          <h2 className="enterprise-start-headline">{t("企業が止まる場所は、モデル性能ではなく「実行前の証明」です", "Enterprises stall not at model capability, but at proof before execution")}</h2>
+          <h2 className="enterprise-start-headline">
+            {isJa ? (
+              <>
+                企業がAI導入につまずく理由は、
+                <br />
+                モデル性能ではなく「実行前に説明・停止できる仕組み」がないことです
+              </>
+            ) : (
+              "Enterprises stall not at model capability, but at proof before execution"
+            )}
+          </h2>
           <p className={`body enterprise-start-body ${isJa ? "lead-ja" : ""}`}>
             {t("AIエージェントが判断から実行へ近づくほど、企業には「誰が、何を根拠に、どこまで許可したか」を実行前に確認できる境界が必要になります。VERITAS OS は、この境界を authority evidence、FUJI gate、TrustLog、bind boundary として扱います。", "As AI agents move from recommendations toward execution, enterprises need a boundary that can prove who authorized what, based on which evidence, before action. VERITAS OS treats that boundary through authority evidence, FUJI gate, TrustLog, and bind boundary.")}
           </p>
