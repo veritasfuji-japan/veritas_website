@@ -29,7 +29,7 @@ export default function EnterpriseStart({ lang }) {
       <div className="container">
         <div className="enterprise-start-wrap">
           <div className="marker">ENTERPRISE START</div>
-          <h2 className="enterprise-start-headline">
+          <h2 className="headline enterprise-start-headline">
             {isJa ? (
               <>
                 企業がAI導入につまずく理由は、
