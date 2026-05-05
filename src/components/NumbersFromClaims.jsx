@@ -1,4 +1,3 @@
-import React from "react";
 import claimsData from "../data/claims.json";
 
 function getLocalized(field, lang) {
