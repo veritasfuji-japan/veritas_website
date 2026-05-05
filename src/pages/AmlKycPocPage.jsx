@@ -33,8 +33,9 @@ export default function AmlKycPocPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("対象者", "Who this PoC is for")}</h2>
             <ul>
-              <li>{t("AML/KYC判断を伴うAIワークフローの導入前評価チーム。", "Teams evaluating AI workflows that include AML/KYC-sensitive decisions before rollout.")}</li>
-              <li>{t("規制対象アクションの実行条件を明確化したいコンプライアンス・リスク・監査担当。", "Compliance, risk, and audit owners who need explicit execution conditions for regulated actions.")}</li>
+              <li>{t("AI支援AML/KYC判断のガバナンスを評価するチーム。", "Teams evaluating governance for AI-assisted AML/KYC decisions.")}</li>
+              <li>{t("実行前に証跡確認を必要とするコンプライアンス・リスク・監査レビュー担当。", "Compliance, risk, and audit reviewers who need evidence before execution.")}</li>
+              <li>{t("fail-closed挙動と再実行可能な判定トレースを確認する技術評価者。", "Technical evaluators checking fail-closed behavior and replayable decision traces.")}</li>
             </ul>
           </section>
 
@@ -58,9 +59,12 @@ export default function AmlKycPocPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("検証内容 / 評価フロー", "What we test / Evaluation flow")}</h2>
             <ul>
-              <li>{t("evidence・authority・human approval 欠落時の fail-closed 制御。", "Fail-closed controls when evidence, authority, or human approval is missing.")}</li>
-              <li>{t("proceed / hold / review / block 判定と理由の追跡可能性。", "Traceability of proceed / hold / review / block outcomes and reasons.")}</li>
-              <li>{t("シナリオ実行、結果レビュー、ギャップ整理までを一連で確認。", "Run scenario evaluations, review outcomes, and consolidate implementation gaps.")}</li>
+              <li>{t("AML/KYC判定シナリオを1件選定する。", "Select one AML/KYC decision scenario.")}</li>
+              <li>{t("ポリシーと必要証跡を定義する。", "Define the policy and required evidence.")}</li>
+              <li>{t("シナリオをVERITAS判定パイプラインで実行する。", "Run the scenario through the VERITAS decision pipeline.")}</li>
+              <li>{t("利用可能な範囲でFUJI・TrustLog・bind証跡・失敗理由を確認する。", "Inspect FUJI, TrustLog, bind evidence, and failure reasons where available.")}</li>
+              <li>{t("実際の結果と期待結果を比較する。", "Compare actual outcomes against expected outcomes.")}</li>
+              <li>{t("所見と次の統合検討事項を記録する。", "Record findings and next integration questions.")}</li>
             </ul>
           </section>
 
@@ -78,9 +82,12 @@ export default function AmlKycPocPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("確認する証跡", "Evidence to inspect")}</h2>
             <ul>
-              <li>{t("判定ごとの入力証跡と判断理由。", "Input evidence and decision reasons for each gate outcome.")}</li>
-              <li>{t("承認経路・権限境界・人間承認イベントの記録。", "Approval paths, authority boundaries, and human-approval event logs.")}</li>
-              <li>{t("監査トレースの再現性と欠落箇所。", "Audit-trace reproducibility and missing evidence points.")}</li>
+              <li>{t("判定アウトプット。", "Decision output.")}</li>
+              <li>{t("FUJIゲート判定結果。", "FUJI gate outcome.")}</li>
+              <li>{t("TrustLog証跡。", "TrustLog evidence.")}</li>
+              <li>{t("利用可能な範囲でbindレシートまたはbindサマリー。", "Bind receipt or bind summary where available.")}</li>
+              <li>{t("block / hold 判定時の失敗理由。", "Failure reason for blocked or held decisions.")}</li>
+              <li>{t("利用可能な範囲でリプレイまたはトレース整合性。", "Replay or trace consistency where available.")}</li>
             </ul>
           </section>
 
@@ -97,9 +104,11 @@ export default function AmlKycPocPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("成功基準", "Success criteria")}</h2>
             <ul>
-              <li>{t("証跡・権限・承認不足時に silent proceed が発生しない。", "No silent proceed when evidence, authority, or approval is missing.")}</li>
-              <li>{t("判定結果と理由をレビューアが追跡できる。", "Reviewers can trace outcomes and decision reasons.")}</li>
-              <li>{t("次段階評価に必要なギャップが明示される。", "Gaps required for next-stage evaluation are clearly identified.")}</li>
+              <li>{t("権限証跡が不足する場合にサイレント進行しない。", "Missing authority evidence does not silently proceed.")}</li>
+              <li>{t("無効または不十分な証跡で明確なhold / review / block理由が出る。", "Invalid or insufficient evidence produces a clear hold / review / block reason.")}</li>
+              <li>{t("許可・保留・レビュー・ブロックの理由をレビューアが追跡できる。", "Reviewers can trace why a decision was allowed, held, reviewed, or blocked.")}</li>
+              <li>{t("公開主張がveritas_osリポジトリ証跡と整合する。", "Public claims remain consistent with veritas_os repository evidence.")}</li>
+              <li>{t("次段階評価に向けたギャップが明示される。", "Gaps for next-stage evaluation are explicitly identified.")}</li>
             </ul>
           </section>
 
