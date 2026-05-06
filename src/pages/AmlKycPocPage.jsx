@@ -79,6 +79,60 @@ export default function AmlKycPocPage() {
             </ul>
           </section>
 
+
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t("6つの決定論的シナリオで検証すること", "What the 6 deterministic scenarios verify")}</h2>
+            <div style={{ display: "grid", gap: "0.75rem" }}>
+              <article style={{ border: "1px solid #d0d7de", borderRadius: "6px", padding: "0.75rem", background: "#ffffff" }}>
+                <h3 style={{ margin: "0 0 0.5rem" }}>{t("高リスク国へのAML/KYC送金判断", "High-risk country AML/KYC wire decision")}</h3>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>Expected outcome:</strong> HUMAN_REVIEW_REQUIRED</p>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>What it proves:</strong> {t("高リスク判断をAIだけで進めず、人間レビューに回せること。", "High-risk decisions are routed to human review instead of proceeding automatically.")}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_aml_kyc_anchor_high_risk_country</p>
+              </article>
+
+              <article style={{ border: "1px solid #d0d7de", borderRadius: "6px", padding: "0.75rem", background: "#ffffff" }}>
+                <h3 style={{ margin: "0 0 0.5rem" }}>{t("制裁リスト部分一致", "Sanctions partial match")}</h3>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>Expected outcome:</strong> HOLD</p>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>What it proves:</strong> {t("制裁リスクが曖昧な場合に silent proceed しないこと。", "Ambiguous sanctions risk does not silently proceed.")}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_sanctions_partial_match_no_proceed</p>
+              </article>
+
+              <article style={{ border: "1px solid #d0d7de", borderRadius: "6px", padding: "0.75rem", background: "#ffffff" }}>
+                <h3 style={{ margin: "0 0 0.5rem" }}>{t("資金源証跡の不足", "Missing source-of-funds evidence")}</h3>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>Expected outcome:</strong> HOLD</p>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>What it proves:</strong> {t("必要証跡が不足する場合に判断を保留できること。", "Decisions are held when required evidence is missing.")}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_source_of_funds_missing</p>
+              </article>
+
+              <article style={{ border: "1px solid #d0d7de", borderRadius: "6px", padding: "0.75rem", background: "#ffffff" }}>
+                <h3 style={{ margin: "0 0 0.5rem" }}>{t("ポリシー定義の不足", "Missing policy definition")}</h3>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>Expected outcome:</strong> HOLD</p>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>What it proves:</strong> {t("判断基準が未定義な場合に無理に進めないこと。", "The system does not proceed when the required policy definition is missing.")}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_policy_definition_missing</p>
+              </article>
+
+              <article style={{ border: "1px solid #d0d7de", borderRadius: "6px", padding: "0.75rem", background: "#ffffff" }}>
+                <h3 style={{ margin: "0 0 0.5rem" }}>{t("十分な証跡があるケース", "Sufficient evidence provided")}</h3>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>Expected outcome:</strong> PROCEED</p>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>What it proves:</strong> {t("条件が揃っている場合は正しく進められること。", "The system can proceed when evidence and policy requirements are satisfied.")}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_sufficient_evidence_proceed</p>
+              </article>
+
+              <article style={{ border: "1px solid #d0d7de", borderRadius: "6px", padding: "0.75rem", background: "#ffffff" }}>
+                <h3 style={{ margin: "0 0 0.5rem" }}>{t("セキュア制御不足", "Missing secure controls")}</h3>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>Expected outcome:</strong> BLOCK</p>
+                <p style={{ margin: "0 0 0.35rem" }}><strong>What it proves:</strong> {t("本番・銀行連携前提の安全条件が不足する場合にブロックできること。", "The system blocks when required secure controls are missing.")}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_secure_controls_missing_block</p>
+              </article>
+            </div>
+            <p style={{ marginTop: "0.85rem", fontSize: "0.95rem", color: "#57606a" }}>
+              {t(
+                "この6シナリオは、VERITASの実行前ガバナンス挙動を確認するための決定論的fixtureです。実際の金融機関の全AML/KYC要件を網羅するものではなく、PoCにおける評価起点として使用します。",
+                "These six scenarios are deterministic fixtures for evaluating VERITAS pre-execution governance behavior. They do not represent complete AML/KYC coverage for a financial institution and are intended as a PoC evaluation starting point."
+              )}
+            </p>
+          </section>
+
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("確認する証跡", "Evidence to inspect")}</h2>
             <ul>
