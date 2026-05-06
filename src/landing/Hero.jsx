@@ -68,7 +68,7 @@ export default function Hero({ lang }) {
   const roles = [
     ["01", t("導入評価", "Customer"), "#financial"],
     ["02", t("運用", "Operator"), "#numbers"],
-    ["03", t("DD・投資", "Investor"), "#numbers"],
+    ["03", t("DD・投資", "Investor / DD"), "/reviewers"],
     ["04", t("第三者監査", "Reviewer"), "/reviewers"],
   ];
 

@@ -35,7 +35,7 @@ export default function AmlKycPocPage() {
             <ul>
               <li>{t("AI支援AML/KYC判断のガバナンスを評価するチーム。", "Teams evaluating governance for AI-assisted AML/KYC decisions.")}</li>
               <li>{t("実行前に証跡確認を必要とするコンプライアンス・リスク・監査レビュー担当。", "Compliance, risk, and audit reviewers who need evidence before execution.")}</li>
-              <li>{t("fail-closed挙動と再実行可能な判定トレースを確認する技術評価者。", "Technical evaluators checking fail-closed behavior and replayable decision traces.")}</li>
+              <li>{t("fail-closed（安全側停止）挙動と再実行可能な判定トレースを確認する技術評価者。", "Technical evaluators checking fail-closed behavior and replayable decision traces.")}</li>
             </ul>
           </section>
 
@@ -74,8 +74,8 @@ export default function AmlKycPocPage() {
               <li>{t("PoCレポート", "PoC report")}</li>
               <li>{t("シナリオ結果", "Scenario results")}</li>
               <li>{t("監査トレース例", "Audit trace examples")}</li>
-              <li>{t("evidence gap サマリ", "Evidence gap summary")}</li>
-              <li>{t("本番移行 readiness gap リスト", "Production-readiness gap list")}</li>
+              <li>{t("証跡ギャップサマリ", "Evidence gap summary")}</li>
+              <li>{t("本番移行に向けたギャップリスト", "Production-readiness gap list")}</li>
             </ul>
           </section>
 
@@ -105,7 +105,7 @@ export default function AmlKycPocPage() {
             <h2 style={headingStyle}>{t("成功基準", "Success criteria")}</h2>
             <ul>
               <li>{t("権限証跡が不足する場合にサイレント進行しない。", "Missing authority evidence does not silently proceed.")}</li>
-              <li>{t("無効または不十分な証跡で明確なhold / review / block理由が出る。", "Invalid or insufficient evidence produces a clear hold / review / block reason.")}</li>
+              <li>{t("無効または不十分な証跡で明確な hold / review / block の理由が出る。", "Invalid or insufficient evidence produces a clear hold / review / block reason.")}</li>
               <li>{t("許可・保留・レビュー・ブロックの理由をレビューアが追跡できる。", "Reviewers can trace why a decision was allowed, held, reviewed, or blocked.")}</li>
               <li>{t("公開主張がveritas_osリポジトリ証跡と整合する。", "Public claims remain consistent with veritas_os repository evidence.")}</li>
               <li>{t("次段階評価に向けたギャップが明示される。", "Gaps for next-stage evaluation are explicitly identified.")}</li>
