@@ -140,7 +140,7 @@ export default function AmlKycPocConversion({ lang }) {
               <span aria-hidden>→</span>
             </a>
             <a href="/contact" className="btn btn-secondary">
-              {t("PoC範囲を相談する", "Request PoC Scope")}
+              {t("評価について相談する", "Contact for Evaluation")}
             </a>
           </div>
         </div>
