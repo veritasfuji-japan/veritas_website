@@ -62,6 +62,16 @@ const noteItems = [
   ],
 ];
 
+const otherInquiryItems = [
+  ["共同研究・技術レビュー", "Research collaboration and technical review"],
+  ["メディア・登壇・取材", "Media, speaking, and interview requests"],
+  ["GitHubレビュー・外部フィードバック", "GitHub review and external feedback"],
+  [
+    "AIガバナンス、監査、実行前制御に関する意見交換",
+    "Discussion on AI governance, auditability, and pre-execution control",
+  ],
+];
+
 const emailSubject = encodeURIComponent("VERITAS OS Inquiry");
 const emailBody = encodeURIComponent(`Hello VERITAS OS team,
 
@@ -132,6 +142,21 @@ export default function ContactPage() {
                 "You do not need to prepare all of the above. Start by sharing the workflow you want to evaluate and the AI-driven decision you want to control before execution.",
               )}
             </p>
+          </section>
+
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t("その他の連絡", "Other inquiries")}</h2>
+            <p>
+              {t(
+                "PoCや評価相談以外にも、VERITAS OSに関する共同研究、技術レビュー、メディア・登壇、GitHubレビュー、外部フィードバックについて連絡できます。",
+                "Beyond PoC and evaluation discussions, you can also reach out about research collaboration, technical review, media or speaking opportunities, GitHub review, and external feedback for VERITAS OS.",
+              )}
+            </p>
+            <ul>
+              {otherInquiryItems.map(([ja, en]) => (
+                <li key={en}>{t(ja, en)}</li>
+              ))}
+            </ul>
           </section>
 
           <section style={sectionStyle}>
