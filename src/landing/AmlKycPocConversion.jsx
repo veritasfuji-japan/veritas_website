@@ -30,6 +30,39 @@ export default function AmlKycPocConversion({ lang }) {
     },
   ];
 
+
+
+  const sampleOutputItems = [
+    {
+      label: t("検証シナリオ", "Scenario tested"),
+      value: t("海外送金の高リスク申請で、提出証跡が不足しているケース。", "High-risk cross-border transfer request with incomplete submitted evidence."),
+    },
+    {
+      label: t("期待される判定", "Expected outcome"),
+      value: t("追加証跡が揃うまで hold に遷移し、担当者レビューへ送る。", "Transition to hold until additional evidence is provided, then route to reviewer."),
+    },
+    {
+      label: t("実際の判定", "Actual outcome"),
+      value: t("hold（自動実行は停止）。", "hold (automatic execution stopped)."),
+    },
+    {
+      label: t("停止・保留理由", "Failure or hold reason"),
+      value: t("受益者確認書類の有効期限が切れており、authority条件を満たさない。", "Beneficiary verification document was expired, so authority conditions were not met."),
+    },
+    {
+      label: t("不足していた証跡", "Evidence gap"),
+      value: t("最新の本人確認書類と、送金目的を裏付ける補助資料。", "Updated identity document and supporting material for transfer purpose."),
+    },
+    {
+      label: t("監査トレース参照", "Audit trace reference"),
+      value: t("sample trace: POC-EVAL-07 / step-04 / decision-log。", "sample trace: POC-EVAL-07 / step-04 / decision-log."),
+    },
+    {
+      label: t("次段階の統合論点", "Next integration question"),
+      value: t("既存審査キューへ hold理由をどの粒度で連携するか。", "What granularity should hold reasons be synced to the existing review queue?"),
+    },
+  ];
+
   return (
     <section className="poc-conversion">
       <div className="container">
@@ -59,6 +92,26 @@ export default function AmlKycPocConversion({ lang }) {
               </article>
             ))}
           </div>
+
+
+
+          <article className="poc-conversion-sample" aria-label={t("PoC成果物サンプル", "Sample PoC Output")}>
+            <h3>{t("PoC成果物サンプル", "Sample PoC Output")}</h3>
+            <p className="body poc-conversion-sample-copy">
+              {t(
+                "1日PoCでは、単なるデモではなく、評価シナリオごとに「何が許可され、何が保留・レビュー・ブロックされたのか」を証跡付きで整理します。",
+                "The 1-day PoC is not just a demo. It summarizes which scenario was allowed, held, reviewed, or blocked — with supporting evidence and trace context."
+              )}
+            </p>
+            <dl className="poc-conversion-sample-list">
+              {sampleOutputItems.map((item) => (
+                <div key={item.label} className="poc-conversion-sample-row">
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </article>
 
           <p className="small poc-conversion-next">
             {t(
