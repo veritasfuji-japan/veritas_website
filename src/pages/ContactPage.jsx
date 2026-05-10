@@ -47,13 +47,24 @@ export default function ContactPage() {
       {(t) => (
         <>
           <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t("問い合わせ内容", "Inquiry types")}</h2>
+            <h2 style={headingStyle}>{t("相談できる内容", "What you can discuss")}</h2>
             <ul>
-              <li>{t("AML/KYC PoCに関する相談", "AML/KYC PoC inquiries")}</li>
-              <li>{t("外部レビュー・技術評価", "External review or technical evaluation")}</li>
-              <li>{t("企業導入前の検証", "Pre-adoption enterprise evaluation")}</li>
-              <li>{t("共同開発・研究協力", "Collaboration or research discussions")}</li>
-              <li>{t("メディア・登壇・取材に関する連絡", "Media, speaking, or interview requests")}</li>
+              <li>{t("AML/KYC 1-Day PoCの範囲確認", "AML/KYC 1-Day PoC scope review")}</li>
+              <li>{t("6つの評価シナリオの自社業務への当てはめ", "Mapping the six evaluation scenarios to your workflow")}</li>
+              <li>{t("AIエージェント導入前の停止・保留・レビュー条件の整理", "Defining allow, hold, review, and block conditions before AI-agent execution")}</li>
+              <li>{t("必要な証跡、ログ、既存審査フローの確認", "Reviewing required evidence, logs, and existing approval flows")}</li>
+              <li>{t("技術レビュー、投資DD、外部評価向けの説明整理", "Preparing materials for technical review, investor due diligence, or external evaluation")}</li>
+            </ul>
+          </section>
+
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t("初回連絡に含めるとよい情報", "Helpful context for the first message")}</h2>
+            <ul>
+              <li>{t("想定している業務領域", "Target workflow or domain")}</li>
+              <li>{t("AIエージェントに実行させたい、または止めたい判断", "AI-agent actions you want to allow, hold, review, or block")}</li>
+              <li>{t("現在の承認フローやレビュー体制", "Current approval or review process")}</li>
+              <li>{t("必要な証跡や監査ログの種類", "Required evidence or audit-log expectations")}</li>
+              <li>{t("PoC、技術レビュー、投資DD、共同研究などの相談目的", "Whether the request is for PoC, technical review, due diligence, or research discussion")}</li>
             </ul>
           </section>
 
@@ -66,6 +77,12 @@ export default function ContactPage() {
               )}
             </p>
             <a href={emailLink} style={{ textDecoration: "underline" }}>{t("メールを送る", "Send email")}</a>
+            <p>
+              {t(
+                "上記の内容をすべて揃える必要はありません。まずは、評価したい業務と、AIに実行させる前に止めたい判断を共有してください。",
+                "You do not need to prepare all of the above. Start by sharing the workflow you want to evaluate and the AI-driven decision you want to control before execution.",
+              )}
+            </p>
           </section>
 
           <section style={sectionStyle}>
@@ -75,6 +92,12 @@ export default function ContactPage() {
               <li>{t("機密情報、個人情報、顧客データ、規制対象データは初回メールに含めないでください。", "Do not include confidential information, personal data, customer data, or regulated data in the first message.")}</li>
               <li>{t("Webサイト上の主張は、veritas_os リポジトリ上の証跡と照合して確認してください。", "Public website claims should be validated against the veritas_os repository evidence.")}</li>
             </ul>
+            <p>
+              {t(
+                "VERITAS OSは、現時点では法的助言、規制当局承認、第三者認証、本番運用可否、ライブ銀行連携を主張しません。初回相談では、PoCまたは評価範囲として安全に確認できる内容から整理します。",
+                "VERITAS OS does not currently claim legal advice, regulatory approval, third-party certification, production readiness, or live bank integration. The first discussion should focus on what can be safely evaluated as a PoC or assessment scope.",
+              )}
+            </p>
           </section>
         </>
       )}
