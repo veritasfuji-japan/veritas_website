@@ -5,7 +5,7 @@ export default function AmlKycPocConversion({ lang }) {
 
   const sections = [
     {
-      title: t("Who this is for", "Who this is for"),
+      title: t("対象者", "Who this is for"),
       items: [
         t("AML/KYC判断を含むAIワークフローを導入前に評価する、金融機関・決済・フィンテックの実務チーム。", "Financial institutions, payments, and fintech teams evaluating AI workflows with AML/KYC-sensitive decisions before rollout."),
         t("規制対象アクションの実行条件を明確にしたい、コンプライアンス・リスク・監査の責任者。", "Compliance, risk, and audit owners who need explicit execution conditions for regulated actions."),
@@ -13,7 +13,7 @@ export default function AmlKycPocConversion({ lang }) {
       ],
     },
     {
-      title: t("What the 1-day PoC proves", "What the 1-day PoC proves"),
+      title: t("1日PoCで検証すること", "What the 1-day PoC proves"),
       items: [
         t("evidence・authority・human approval が不足するケースで、規制対象アクションを fail-closed できること。", "Regulated actions can be fail-closed when evidence, authority, or human approval is missing."),
         t("proceed / hold / review / block 判定と理由を、評価シナリオ内で追跡できること。", "Proceed / hold / review / block outcomes and reasons are traceable within evaluation scenarios."),
@@ -21,7 +21,7 @@ export default function AmlKycPocConversion({ lang }) {
       ],
     },
     {
-      title: t("What you receive", "What you receive"),
+      title: t("提供物", "What you receive"),
       items: [
         t("PoCレポート（検証範囲・前提・結果・未解決ギャップを明記）。", "A PoC report documenting scope, assumptions, outcomes, and unresolved gaps."),
         t("シナリオ別の判定結果サマリ（proceed / hold / review / block）。", "Scenario-by-scenario decision summary (proceed / hold / review / block)."),
