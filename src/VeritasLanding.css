@@ -1079,3 +1079,57 @@
   font-size: 0.94rem;
   line-height: 1.65;
 }
+
+
+.poc-conversion-sample {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  border-radius: 2px;
+  padding: clamp(0.95rem, 2.3vw, 1.35rem);
+  display: grid;
+  gap: 0.85rem;
+}
+
+.poc-conversion-sample h3 {
+  font-size: 1rem;
+}
+
+.poc-conversion-sample-copy {
+  font-size: 0.93rem;
+  max-width: 78ch;
+}
+
+.poc-conversion-sample-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.poc-conversion-sample-row {
+  display: grid;
+  grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+  gap: 0.7rem 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.poc-conversion-sample-row dt {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.poc-conversion-sample-row dd {
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .poc-conversion-sample-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
