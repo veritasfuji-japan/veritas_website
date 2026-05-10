@@ -1043,6 +1043,11 @@
   max-width: 70ch;
 }
 
+.poc-conversion-boundary,
+.poc-conversion-next {
+  max-width: 78ch;
+}
+
 .poc-conversion-grid {
   display: grid;
   gap: 1rem;
