@@ -5,43 +5,27 @@ export default function AmlKycPocConversion({ lang }) {
 
   const sections = [
     {
-      title: t("対象者", "Who it is for"),
+      title: t("Who this is for", "Who this is for"),
       items: [
-        t("AML/KYC判断を伴うAIワークフローの導入前評価を担当するチーム。", "Teams evaluating AI workflows that include AML/KYC-sensitive decisions before rollout."),
-        t("規制対象アクションの実行条件を明示したいコンプライアンス・リスク・監査担当。", "Compliance, risk, and audit owners who need explicit execution conditions for regulated actions."),
-        t("証跡不足時にAIエージェントを止められるかを実証したい技術評価者。", "Technical evaluators validating that agents can be stopped when evidence is incomplete."),
+        t("AML/KYC判断を含むAIワークフローを導入前に評価する、金融機関・決済・フィンテックの実務チーム。", "Financial institutions, payments, and fintech teams evaluating AI workflows with AML/KYC-sensitive decisions before rollout."),
+        t("規制対象アクションの実行条件を明確にしたい、コンプライアンス・リスク・監査の責任者。", "Compliance, risk, and audit owners who need explicit execution conditions for regulated actions."),
+        t("証跡不足時にAIエージェントを停止できるかを検証したい、技術評価・統制設計担当。", "Technical evaluators and control designers validating that agents can be stopped when evidence is incomplete."),
       ],
     },
     {
-      title: t("検証内容", "What we test"),
+      title: t("What the 1-day PoC proves", "What the 1-day PoC proves"),
       items: [
-        t("evidence、authority、human approval が不足した場合の fail-closed 制御。", "Fail-closed controls when evidence, authority, or human approval is missing."),
-        t("proceed / hold / review / block の判定と理由の追跡可能性。", "Traceability of proceed / hold / review / block outcomes and reasons."),
-        t("評価シナリオ上での監査トレース再現性。", "Audit-trace reproducibility across evaluation scenarios."),
+        t("evidence・authority・human approval が不足するケースで、規制対象アクションを fail-closed できること。", "Regulated actions can be fail-closed when evidence, authority, or human approval is missing."),
+        t("proceed / hold / review / block 判定と理由を、評価シナリオ内で追跡できること。", "Proceed / hold / review / block outcomes and reasons are traceable within evaluation scenarios."),
+        t("同一シナリオで監査トレースを再現し、evidence gap を明示できること。", "Audit traces can be reproduced for the same scenarios, with evidence gaps explicitly identified."),
       ],
     },
     {
-      title: t("対象外", "What is out of scope"),
+      title: t("What you receive", "What you receive"),
       items: [
-        t("法的助言、規制当局承認、第三者認証の提供。", "Legal advice, regulatory approval, or third-party certification."),
-        t("環境固有レビューなしの本番運用可否判断。", "Production-readiness claims without environment-specific review."),
-        t("初回評価での本番顧客データ利用やライブ金融システム接続。", "Production customer data use or live financial-system connectivity in initial evaluation."),
-      ],
-    },
-    {
-      title: t("提供物", "Deliverables"),
-      items: [
-        t("PoCレポート。", "PoC report."),
-        t("シナリオ別の結果サマリ。", "Scenario-by-scenario results summary."),
-        t("監査トレース例と evidence gap サマリ。", "Audit trace examples and evidence-gap summary."),
-      ],
-    },
-    {
-      title: t("成功基準", "Success criteria"),
-      items: [
-        t("証跡や承認が不足するケースで silent proceed が起きない。", "No silent proceed when evidence or authority is missing."),
-        t("判定結果と理由をレビューアが追跡できる。", "Reviewers can trace outcomes and decision reasons."),
-        t("次段階の評価に向けた gap が明示される。", "Gaps for next-stage evaluation are explicitly identified."),
+        t("PoCレポート（検証範囲・前提・結果・未解決ギャップを明記）。", "A PoC report documenting scope, assumptions, outcomes, and unresolved gaps."),
+        t("シナリオ別の判定結果サマリ（proceed / hold / review / block）。", "Scenario-by-scenario decision summary (proceed / hold / review / block)."),
+        t("監査トレース例と、次段階評価に向けた evidence gap 一覧。", "Audit trace examples and an evidence-gap list for next-stage evaluation."),
       ],
     },
   ];
@@ -56,6 +40,13 @@ export default function AmlKycPocConversion({ lang }) {
             {t("証拠・権限・人間承認が不足している規制対象アクションについて、AIエージェントが誤って実行に進まないことを検証します。", "Validate whether AI agents can be prevented from proceeding with regulated actions when evidence, authority, or human approval is missing.")}
           </p>
 
+          <p className="small poc-conversion-boundary">
+            {t(
+              "このPoCは法的助言、規制当局承認、第三者認証、本番運用可否、ライブ銀行連携を主張しません。",
+              "This PoC does not claim legal advice, regulatory approval, third-party certification, production readiness, or live bank integration."
+            )}
+          </p>
+
           <div className="poc-conversion-grid">
             {sections.map((section) => (
               <article key={section.title} className="poc-conversion-card">
@@ -67,16 +58,14 @@ export default function AmlKycPocConversion({ lang }) {
                 </ul>
               </article>
             ))}
-            <article className="poc-conversion-card">
-              <h3>{t("実施形式", "Engagement format")}</h3>
-              <p>
-                {t(
-                  "PoCの範囲と実施形式は、対象ワークフロー、リスク境界、評価目的を初回確認した上で個別に定義します。",
-                  "PoC scope and engagement format are defined after an initial review of the target workflow, risk boundary, and evaluation goals."
-                )}
-              </p>
-            </article>
           </div>
+
+          <p className="small poc-conversion-next">
+            {t(
+              "次のステップ: 1) PoC範囲を確認 2) 評価シナリオを確定 3) 1日検証を実施。",
+              "Next: (1) confirm PoC scope, (2) finalize evaluation scenarios, (3) run the 1-day evaluation."
+            )}
+          </p>
 
           <div className="hero-cta">
             <a href="/aml-kyc-poc" className="btn btn-primary">
