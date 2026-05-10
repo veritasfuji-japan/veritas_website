@@ -120,13 +120,27 @@ export default function AmlKycPocConversion({ lang }) {
             )}
           </p>
 
+          <article className="poc-conversion-scenarios" aria-label={t("6つの評価シナリオを見る", "View the 6 evaluation scenarios")}>
+            <h3>{t("6つの評価シナリオを見る", "View the 6 evaluation scenarios")}</h3>
+            <p className="body">
+              {t(
+                "詳細ページでは、AML/KYC PoCで使う6つの決定論的fixtureを確認できます。各シナリオは、期待される判定、停止・保留理由、確認すべき証跡を説明します。",
+                "The detailed page shows the six deterministic fixtures used for the AML/KYC PoC. Each scenario explains the expected outcome, hold/block reason, and evidence to inspect."
+              )}
+            </p>
+            <a href="/aml-kyc-poc" className="poc-conversion-scenarios-link">
+              {t("6つのシナリオを見る", "View 6 Scenarios")}
+              <span aria-hidden>→</span>
+            </a>
+          </article>
+
           <div className="hero-cta">
             <a href="/aml-kyc-poc" className="btn btn-primary">
-              {t("PoC範囲を相談する", "Request PoC Scope")}
+              {t("6つのシナリオを見る", "View 6 Scenarios")}
               <span aria-hidden>→</span>
             </a>
             <a href="/contact" className="btn btn-secondary">
-              {t("評価について相談する", "Contact for Evaluation")}
+              {t("PoC範囲を相談する", "Request PoC Scope")}
             </a>
           </div>
         </div>
