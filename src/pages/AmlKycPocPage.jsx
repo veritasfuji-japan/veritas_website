@@ -23,8 +23,8 @@ export default function AmlKycPocPage() {
         en: "Validate that AI agents do not proceed with regulated actions when evidence, authority, or human approval is missing.",
       }}
       ctas={[
-        { label: { ja: "PoC範囲を相談する", en: "Request PoC Scope" }, href: "/contact" },
-        { label: { ja: "評価について相談する", en: "Contact for Evaluation" }, href: "/contact" },
+        { label: { ja: "AML/KYC PoCを見る", en: "View AML/KYC PoC" }, href: "/aml-kyc-poc" },
+        { label: { ja: "相談する", en: "Contact" }, href: "/contact" },
         { label: { ja: "ホームへ戻る", en: "Back to Home" }, href: "/" },
       ]}
     >
@@ -87,14 +87,14 @@ export default function AmlKycPocPage() {
                 <h3 style={{ margin: "0 0 0.5rem" }}>{t("高リスク国へのAML/KYC送金判断", "High-risk country AML/KYC wire decision")}</h3>
                 <p style={{ margin: "0 0 0.35rem" }}><strong>Expected outcome:</strong> HUMAN_REVIEW_REQUIRED</p>
                 <p style={{ margin: "0 0 0.35rem" }}><strong>What it proves:</strong> {t("高リスク判断をAIだけで進めず、人間レビューに回せること。", "High-risk decisions are routed to human review instead of proceeding automatically.")}</p>
-                <p style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_aml_kyc_high_risk_country_wire_manual_review</p>
+                <p className="poc-fixture-line" style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_aml_kyc_high_risk_country_wire_manual_review</p>
               </article>
 
               <article style={{ border: "1px solid #d0d7de", borderRadius: "6px", padding: "0.75rem", background: "#ffffff" }}>
                 <h3 style={{ margin: "0 0 0.5rem" }}>{t("制裁リスト部分一致", "Sanctions partial match")}</h3>
                 <p style={{ margin: "0 0 0.35rem" }}><strong>Expected outcome:</strong> HOLD</p>
                 <p style={{ margin: "0 0 0.35rem" }}><strong>What it proves:</strong> {t("制裁リスクが曖昧な場合に silent proceed しないこと。", "Ambiguous sanctions risk does not silently proceed.")}</p>
-                <p style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_sanctions_partial_match_no_auto_proceed</p>
+                <p className="poc-fixture-line" style={{ margin: 0, fontSize: "0.85rem", color: "#57606a" }}><strong>Fixture:</strong> pilot_sanctions_partial_match_no_auto_proceed</p>
               </article>
 
               <article style={{ border: "1px solid #d0d7de", borderRadius: "6px", padding: "0.75rem", background: "#ffffff" }}>
