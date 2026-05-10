@@ -13,6 +13,55 @@ const headingStyle = {
   color: "#0b3d5b",
 };
 
+const discussItems = [
+  ["AML/KYC 1-Day PoCの範囲確認", "AML/KYC 1-Day PoC scope review"],
+  [
+    "6つの評価シナリオの自社業務への当てはめ",
+    "Mapping the six evaluation scenarios to your workflow",
+  ],
+  [
+    "AIエージェント導入前の停止・保留・レビュー条件の整理",
+    "Defining allow, hold, review, and block conditions before AI-agent execution",
+  ],
+  [
+    "必要な証跡、ログ、既存審査フローの確認",
+    "Reviewing required evidence, logs, and existing approval flows",
+  ],
+  [
+    "技術レビュー、投資DD、外部評価向けの説明整理",
+    "Preparing materials for technical review, investor due diligence, or external evaluation",
+  ],
+];
+
+const firstMessageItems = [
+  ["想定している業務領域", "Target workflow or domain"],
+  [
+    "AIエージェントに実行させたい、または止めたい判断",
+    "AI-agent actions you want to allow, hold, review, or block",
+  ],
+  ["現在の承認フローやレビュー体制", "Current approval or review process"],
+  ["必要な証跡や監査ログの種類", "Required evidence or audit-log expectations"],
+  [
+    "PoC、技術レビュー、投資DD、共同研究などの相談目的",
+    "Whether the request is for PoC, technical review, due diligence, or research discussion",
+  ],
+];
+
+const noteItems = [
+  [
+    "このページは問い合わせフォームではなく、メール起動リンクです。",
+    "This page uses email links, not a web contact form.",
+  ],
+  [
+    "機密情報、個人情報、顧客データ、規制対象データは初回メールに含めないでください。",
+    "Do not include confidential information, personal data, customer data, or regulated data in the first message.",
+  ],
+  [
+    "Webサイト上の主張は、veritas_os リポジトリ上の証跡と照合して確認してください。",
+    "Public website claims should be validated against the veritas_os repository evidence.",
+  ],
+];
+
 const emailSubject = encodeURIComponent("VERITAS OS Inquiry");
 const emailBody = encodeURIComponent(`Hello VERITAS OS team,
 
@@ -49,22 +98,20 @@ export default function ContactPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("相談できる内容", "What you can discuss")}</h2>
             <ul>
-              <li>{t("AML/KYC 1-Day PoCの範囲確認", "AML/KYC 1-Day PoC scope review")}</li>
-              <li>{t("6つの評価シナリオの自社業務への当てはめ", "Mapping the six evaluation scenarios to your workflow")}</li>
-              <li>{t("AIエージェント導入前の停止・保留・レビュー条件の整理", "Defining allow, hold, review, and block conditions before AI-agent execution")}</li>
-              <li>{t("必要な証跡、ログ、既存審査フローの確認", "Reviewing required evidence, logs, and existing approval flows")}</li>
-              <li>{t("技術レビュー、投資DD、外部評価向けの説明整理", "Preparing materials for technical review, investor due diligence, or external evaluation")}</li>
+              {discussItems.map(([ja, en]) => (
+                <li key={en}>{t(ja, en)}</li>
+              ))}
             </ul>
           </section>
 
           <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t("初回連絡に含めるとよい情報", "Helpful context for the first message")}</h2>
+            <h2 style={headingStyle}>
+              {t("初回連絡に含めるとよい情報", "Helpful context for the first message")}
+            </h2>
             <ul>
-              <li>{t("想定している業務領域", "Target workflow or domain")}</li>
-              <li>{t("AIエージェントに実行させたい、または止めたい判断", "AI-agent actions you want to allow, hold, review, or block")}</li>
-              <li>{t("現在の承認フローやレビュー体制", "Current approval or review process")}</li>
-              <li>{t("必要な証跡や監査ログの種類", "Required evidence or audit-log expectations")}</li>
-              <li>{t("PoC、技術レビュー、投資DD、共同研究などの相談目的", "Whether the request is for PoC, technical review, due diligence, or research discussion")}</li>
+              {firstMessageItems.map(([ja, en]) => (
+                <li key={en}>{t(ja, en)}</li>
+              ))}
             </ul>
           </section>
 
@@ -76,7 +123,9 @@ export default function ContactPage() {
                 "Please use the email link below. In the first message, briefly include your affiliation, area of interest, and what you would like to evaluate or discuss.",
               )}
             </p>
-            <a href={emailLink} style={{ textDecoration: "underline" }}>{t("メールを送る", "Send email")}</a>
+            <a href={emailLink} style={{ textDecoration: "underline" }}>
+              {t("メールを送る", "Send email")}
+            </a>
             <p>
               {t(
                 "上記の内容をすべて揃える必要はありません。まずは、評価したい業務と、AIに実行させる前に止めたい判断を共有してください。",
@@ -88,9 +137,9 @@ export default function ContactPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("注意", "Important note")}</h2>
             <ul>
-              <li>{t("このページは問い合わせフォームではなく、メール起動リンクです。", "This page uses email links, not a web contact form.")}</li>
-              <li>{t("機密情報、個人情報、顧客データ、規制対象データは初回メールに含めないでください。", "Do not include confidential information, personal data, customer data, or regulated data in the first message.")}</li>
-              <li>{t("Webサイト上の主張は、veritas_os リポジトリ上の証跡と照合して確認してください。", "Public website claims should be validated against the veritas_os repository evidence.")}</li>
+              {noteItems.map(([ja, en]) => (
+                <li key={en}>{t(ja, en)}</li>
+              ))}
             </ul>
             <p>
               {t(
