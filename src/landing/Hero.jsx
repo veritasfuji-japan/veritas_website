@@ -44,14 +44,14 @@ export default function Hero({ lang }) {
   const cta = (
     <>
       <a href="/enterprise" className="btn btn-primary">
-        {t("企業課題を見る", "See enterprise pain points")}
+        {t("企業課題を見る", "View Enterprise Problem")}
         <span aria-hidden>→</span>
       </a>
       <a href="/aml-kyc-poc" className="btn btn-secondary">
-        {t("PoC範囲を相談する", "Request PoC Scope")}
+        {t("AML/KYC PoCを見る", "View AML/KYC PoC")}
       </a>
-      <a href="/contact" className="btn btn-secondary">
-        {t("評価について相談する", "Contact for Evaluation")}
+      <a href="/contact" className="hero-cta-tertiary">
+        {t("相談する", "Contact")}
       </a>
     </>
   );
