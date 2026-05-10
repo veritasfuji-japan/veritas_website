@@ -128,10 +128,6 @@ export default function AmlKycPocConversion({ lang }) {
                 "The detailed page shows the six deterministic fixtures used for the AML/KYC PoC. Each scenario explains the expected outcome, hold/block reason, and evidence to inspect."
               )}
             </p>
-            <a href="/aml-kyc-poc" className="poc-conversion-scenarios-link">
-              {t("6つのシナリオを見る", "View 6 Scenarios")}
-              <span aria-hidden>→</span>
-            </a>
           </article>
 
           <div className="hero-cta">
