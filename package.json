@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check:claims": "node scripts/check-public-claims.mjs"
+    "check:claims": "node scripts/check-public-claims.mjs",
+    "check:unicode": "node scripts/check-hidden-unicode.mjs"
   },
   "dependencies": {
     "react": "^19.2.5",
