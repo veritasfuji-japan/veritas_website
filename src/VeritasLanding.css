@@ -1127,6 +1127,39 @@
   line-height: 1.6;
 }
 
+.poc-conversion-scenarios {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  border-radius: 2px;
+  padding: clamp(0.95rem, 2.3vw, 1.35rem);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.poc-conversion-scenarios h3 {
+  font-size: 1rem;
+}
+
+.poc-conversion-scenarios .body {
+  max-width: 78ch;
+}
+
+.poc-conversion-scenarios-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--blue-deep);
+}
+
+.poc-conversion-scenarios-link:hover {
+  color: var(--blue);
+}
+
 @media (max-width: 720px) {
   .poc-conversion-sample-row {
     grid-template-columns: 1fr;
