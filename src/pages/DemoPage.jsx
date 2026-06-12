@@ -163,41 +163,223 @@ function formatReasonCode(reasonCode) {
     .join(" ");
 }
 
+const colors = {
+  surface: "#FAF6EB",
+  surfaceRaised: "#FFF9EC",
+  darkSurface: "#20232B",
+  ink: "#15161A",
+  inkSoft: "#2A2D33",
+  muted: "#5A5C62",
+  rule: "#E3DDCC",
+  ruleStrong: "#CFC6B1",
+  notice: "#FFF2D9",
+  noticeRule: "#D99A2B",
+  allowed: "#72E0C8",
+  blocked: "#FFB0B8",
+  escalated: "#FFD27A",
+};
+
+const radii = {
+  surface: "14px",
+  compact: "10px",
+};
+
+const spacing = {
+  surface: "clamp(1.15rem, 0.9rem + 1vw, 1.75rem)",
+};
+
 const styles = {
-  notice: { marginTop: "1rem", padding: "0.85rem 1rem", border: "1px solid #C9C2AE", background: "#FAF6EB", color: "#2A2D33", fontSize: "0.95rem" },
-  valueSummary: { marginTop: "1rem", padding: "1.15rem", border: "1px solid #15161A", background: "#FFFDF7", boxShadow: "0 12px 28px rgba(21,22,26,0.08)" },
-  valueLead: { margin: "0.35rem 0 0", fontSize: "1.05rem", lineHeight: 1.65 },
-  scenarioTabs: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(13rem, 1fr))", gap: "0.75rem", marginTop: "1.25rem" },
-  tabButton: (active) => ({ border: active ? "2px solid #15161A" : "1px solid #DDD7C5", background: active ? "#15161A" : "#FAF6EB", color: active ? "#FAF6EB" : "#15161A", padding: "0.85rem", textAlign: "left", cursor: "pointer", minHeight: "4.5rem" }),
-  demoGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(17rem, 1fr))", gap: "1rem", marginTop: "1rem" },
-  panel: { border: "1px solid #DDD7C5", background: "#FAF6EB", padding: "1rem", minHeight: "100%" },
-  panelDark: { border: "1px solid #2C3140", background: "#20232B", color: "#FAF6EB", padding: "1rem", minHeight: "100%", boxShadow: "0 10px 24px rgba(21,22,26,0.12)" },
-  eyebrow: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#5A5C62", margin: "0 0 0.5rem" },
-  darkEyebrow: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#BFC7D5", margin: "0 0 0.5rem" },
-  h2: { fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(1.35rem, 1.1rem + 1.4vw, 2rem)", margin: "0 0 0.65rem", lineHeight: 1.2 },
-  h3: { fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(1.2rem, 1rem + 1vw, 1.65rem)", margin: "0 0 0.65rem", lineHeight: 1.25 },
+  notice: {
+    marginTop: "1.2rem",
+    padding: "0.95rem 1rem 0.95rem 1.15rem",
+    border: `1px solid ${colors.rule}`,
+    borderLeft: `4px solid ${colors.noticeRule}`,
+    borderRadius: radii.compact,
+    background: colors.notice,
+    color: colors.inkSoft,
+    fontSize: "0.95rem",
+  },
+  valueSummary: {
+    marginTop: "1.35rem",
+    padding: "clamp(1.25rem, 1rem + 1.2vw, 2rem)",
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surface,
+    boxShadow: "0 18px 40px rgba(80, 64, 35, 0.08)",
+  },
+  valueLead: {
+    margin: "0.55rem 0 0",
+    maxWidth: "58rem",
+    fontSize: "1.08rem",
+    lineHeight: 1.75,
+    color: colors.inkSoft,
+  },
+  scenarioTabs: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(13rem, 1fr))",
+    gap: "0.75rem",
+    marginTop: "1.6rem",
+  },
+  tabButton: (active) => ({
+    border: `1px solid ${active ? colors.darkSurface : colors.rule}`,
+    borderRadius: radii.compact,
+    background: active ? colors.darkSurface : colors.surface,
+    color: active ? colors.surface : colors.ink,
+    padding: "0.9rem",
+    textAlign: "left",
+    cursor: "pointer",
+    minHeight: "4.2rem",
+    boxShadow: active ? "0 10px 22px rgba(32, 35, 43, 0.14)" : "none",
+  }),
+  tabLabel: (active) => ({
+    display: "block",
+    color: active ? "#D9E0EA" : colors.muted,
+    fontSize: "0.78rem",
+    lineHeight: 1.35,
+  }),
+  tabTitle: {
+    display: "block",
+    marginTop: "0.35rem",
+    lineHeight: 1.45,
+  },
+  demoGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(17rem, 1fr))",
+    gap: "1rem",
+    marginTop: "1.25rem",
+  },
+  panel: {
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surface,
+    padding: spacing.surface,
+    minHeight: "100%",
+  },
+  panelDark: {
+    border: "1px solid rgba(250, 246, 235, 0.16)",
+    borderRadius: radii.surface,
+    background: colors.darkSurface,
+    color: colors.surface,
+    padding: spacing.surface,
+    minHeight: "100%",
+    boxShadow: "0 22px 46px rgba(21, 22, 26, 0.24)",
+  },
+  eyebrow: {
+    fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+    fontSize: "0.75rem",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    color: colors.muted,
+    margin: "0 0 0.55rem",
+  },
+  darkEyebrow: {
+    fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+    fontSize: "0.75rem",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+    color: "#BFC7D5",
+    margin: "0 0 0.55rem",
+  },
+  h2: {
+    fontFamily: "'Fraunces', 'Times New Roman', serif",
+    fontSize: "clamp(1.35rem, 1.1rem + 1.4vw, 2rem)",
+    margin: "0 0 0.65rem",
+    lineHeight: 1.2,
+  },
+  h3: {
+    fontFamily: "'Fraunces', 'Times New Roman', serif",
+    fontSize: "clamp(1.2rem, 1rem + 1vw, 1.65rem)",
+    margin: "0 0 0.65rem",
+    lineHeight: 1.25,
+  },
   metaGrid: { display: "grid", gap: "0.55rem", marginTop: "1rem" },
-  metaItem: { borderTop: "1px solid #DDD7C5", paddingTop: "0.55rem" },
-  mono: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.85rem", overflowWrap: "anywhere" },
-  checks: { display: "grid", gap: "0.6rem", marginTop: "0.75rem" },
-  check: { display: "flex", justifyContent: "space-between", gap: "0.75rem", border: "1px solid #DDD7C5", background: "#FFFDF7", padding: "0.65rem" },
-  status: (tone) => ({ fontFamily: "'IBM Plex Mono', ui-monospace, monospace", color: tone === "pass" ? "#0E7E73" : tone === "fail" ? "#8C1F2F" : "#8A5A00", fontSize: "0.78rem", textTransform: "uppercase", whiteSpace: "nowrap" }),
-  decisionBadge: (tone) => ({ display: "inline-block", border: "1px solid currentColor", padding: "0.35rem 0.6rem", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", letterSpacing: "0.06em", color: tone === "allowed" ? "#72E0C8" : tone === "blocked" ? "#FFB0B8" : "#FFD27A", marginBottom: "0.75rem" }),
-  decisionSection: { marginTop: "0.85rem", paddingTop: "0.75rem", borderTop: "1px solid rgba(250,246,235,0.18)" },
+  metaItem: { borderTop: `1px solid ${colors.rule}`, paddingTop: "0.55rem" },
+  mono: {
+    fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+    fontSize: "0.85rem",
+    overflowWrap: "anywhere",
+  },
+  checks: { display: "grid", gap: "0.55rem", marginTop: "0.85rem" },
+  check: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: "0.75rem",
+    borderBottom: `1px solid ${colors.rule}`,
+    padding: "0.55rem 0",
+  },
+  status: (tone) => ({
+    fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+    color: tone === "pass" ? "#0E7E73" : tone === "fail" ? "#8C1F2F" : "#8A5A00",
+    fontSize: "0.78rem",
+    textTransform: "uppercase",
+    whiteSpace: "nowrap",
+  }),
+  decisionBadge: (tone) => ({
+    display: "inline-block",
+    border: "1px solid currentColor",
+    borderRadius: "999px",
+    padding: "0.35rem 0.65rem",
+    fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+    letterSpacing: "0.06em",
+    color: colors[tone],
+    marginBottom: "0.75rem",
+  }),
+  decisionSection: {
+    marginTop: "1rem",
+    paddingTop: "0.85rem",
+    borderTop: "1px solid rgba(250, 246, 235, 0.16)",
+  },
   decisionSectionTitle: { display: "block", marginBottom: "0.35rem", color: "#D9E0EA" },
   evidenceList: { display: "grid", gap: "0.35rem", marginTop: "0.85rem", padding: 0, listStyle: "none" },
-  evidenceItem: { display: "grid", gap: "0.2rem", borderTop: "1px solid rgba(250,246,235,0.18)", paddingTop: "0.45rem" },
+  evidenceItem: {
+    display: "grid",
+    gap: "0.2rem",
+    borderTop: "1px solid rgba(250, 246, 235, 0.16)",
+    paddingTop: "0.45rem",
+  },
   evidenceLabel: { color: "#BFC7D5", fontSize: "0.78rem" },
-  detail: { marginTop: "0.65rem", borderTop: "1px solid rgba(250,246,235,0.18)", paddingTop: "0.55rem" },
-  lightDetail: { marginTop: "0.85rem", borderTop: "1px solid #DDD7C5", paddingTop: "0.65rem" },
+  detail: {
+    marginTop: "0.8rem",
+    borderTop: "1px solid rgba(250, 246, 235, 0.16)",
+    paddingTop: "0.65rem",
+  },
+  lightDetail: { marginTop: "0.95rem", borderTop: `1px solid ${colors.rule}`, paddingTop: "0.7rem" },
   detailSummary: { cursor: "pointer", color: "#D9E0EA", fontSize: "0.85rem", fontWeight: 700 },
-  lightDetailSummary: { cursor: "pointer", color: "#15161A", fontSize: "0.9rem", fontWeight: 700 },
+  lightDetailSummary: { cursor: "pointer", color: colors.ink, fontSize: "0.9rem", fontWeight: 700 },
   steps: { marginTop: "1rem", paddingLeft: "1.2rem" },
-  sourceCard: { marginTop: "1rem", padding: "1rem", border: "1px solid #DDD7C5", background: "#FFFDF7" },
+  sourceCard: {
+    marginTop: "1.2rem",
+    padding: spacing.surface,
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surfaceRaised,
+  },
   sourceLinks: { display: "grid", gap: "0.65rem", margin: "1rem 0 0", padding: 0, listStyle: "none" },
-  sourceLink: { display: "inline-flex", alignItems: "center", gap: "0.25rem", width: "fit-content", color: "#1D4F91", fontWeight: 700, textDecoration: "none", borderBottom: "1px solid currentColor", overflowWrap: "anywhere" },
-  sourceNote: { marginTop: "1rem", color: "#5A5C62", fontSize: "0.92rem" },
-  section: { marginTop: "1rem", padding: "1rem", border: "1px solid #DDD7C5", background: "#FDFDFC" },
+  sourceLink: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.25rem",
+    width: "fit-content",
+    color: "#1D4F91",
+    fontWeight: 700,
+    textDecoration: "none",
+    borderBottom: "1px solid currentColor",
+    overflowWrap: "anywhere",
+  },
+  sourceNote: { marginTop: "1rem", color: colors.muted, fontSize: "0.92rem" },
+  reviewerSection: {
+    marginTop: "1.35rem",
+    padding: spacing.surface,
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surface,
+  },
+  positioningSection: {
+    marginTop: "1.5rem",
+    padding: "0.35rem 0.25rem 0.35rem 1rem",
+    borderLeft: `2px solid ${colors.ruleStrong}`,
+    color: colors.inkSoft,
+  },
 };
 
 function resolveText(value, lang) {
@@ -286,9 +468,17 @@ export default function DemoPage() {
             {scenarios.map((item) => {
               const active = item.id === selectedScenarioId;
               return (
-                <button key={item.id} type="button" onClick={() => setSelectedScenarioId(item.id)} style={styles.tabButton(active)} aria-pressed={active}>
-                  <span style={{ display: "block", ...styles.mono }}>{resolveText(item.shortLabel, lang)}</span>
-                  <span style={{ display: "block", marginTop: "0.4rem" }}>{resolveText(item.title, lang)}</span>
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setSelectedScenarioId(item.id)}
+                  style={styles.tabButton(active)}
+                  aria-pressed={active}
+                >
+                  <span style={{ ...styles.mono, ...styles.tabLabel(active) }}>
+                    {resolveText(item.shortLabel, lang)}
+                  </span>
+                  <span style={styles.tabTitle}>{resolveText(item.title, lang)}</span>
                 </button>
               );
             })}
@@ -373,7 +563,7 @@ export default function DemoPage() {
             </article>
           </section>
 
-          <section style={styles.section}>
+          <section style={styles.reviewerSection}>
             <p style={styles.eyebrow}>4 / Reviewer Evidence Packet</p>
             <h2 style={styles.h2}>{t("レビュアーが確認すること", "What the reviewer inspects")}</h2>
             <p>{t("このデモは、Mission Controlでレビュアーが見るべき観点を簡略化して表示しています。", "This demo simplifies the reviewer-facing points that Mission Control should make visible.")}</p>
@@ -385,7 +575,7 @@ export default function DemoPage() {
             <EvidenceSources t={t} />
           </section>
 
-          <section style={styles.section}>
+          <section style={styles.positioningSection}>
             <p style={styles.eyebrow}>5 / Positioning</p>
             <h2 style={styles.h2}>{t("このデモで伝えるVERITASの核", "Core point this demo communicates")}</h2>
             <p>{t("VERITASはAIの返答をきれいにするガードレールではなく、AIが実行する直前に、誰が・どの権限で・どのルールに基づき許可したかを証拠化するcontrol planeです。", "VERITAS is not a guardrail for polishing AI responses. It is a control plane that records who authorized an AI action, under what authority, and under which rule before execution.")}</p>
