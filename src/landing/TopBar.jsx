@@ -6,6 +6,7 @@ export default function TopBar({ lang, setLang, menuOpen, setMenuOpen }) {
   const links = [
     ["/enterprise", t("企業課題", "Enterprise")],
     ["/how-it-works", t("仕組み", "How it works")],
+    ["/demo", t("デモ", "Demo")],
     ["/aml-kyc-poc", t("PoC", "PoC")],
     ["/concepts", t("中心概念", "Concepts")],
     ["/glossary", t("用語集", "Glossary")],
