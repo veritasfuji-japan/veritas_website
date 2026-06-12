@@ -40,19 +40,22 @@ const navLinkStyles = {
 };
 
 const cardStyles = {
-  background: "#FAF6EB",
-  border: "1px solid #DDD7C5",
-  padding: "1.25rem",
-  marginTop: "1rem",
+  background: "rgba(250, 246, 235, 0.58)",
+  border: "1px solid #E3DDCC",
+  borderRadius: "14px",
+  padding: "1.1rem 1.25rem",
+  marginTop: "1.5rem",
 };
 
 const linkButtonStyles = {
   display: "inline-block",
-  border: "1px solid #15161A",
+  border: "1px solid #CFC6B1",
+  borderRadius: "999px",
   padding: "0.55rem 0.95rem",
   marginRight: "0.75rem",
   marginTop: "0.6rem",
   textDecoration: "none",
+  background: "#FAF6EB",
 };
 
 const languageToggleStyles = {
