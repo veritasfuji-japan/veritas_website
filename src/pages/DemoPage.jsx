@@ -115,6 +115,25 @@ const scenarios = [
   },
 ];
 
+const evidenceSourceLinks = [
+  {
+    label: "One-Day PoC Walkthrough",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/poc/one-day-poc-walkthrough.md",
+  },
+  {
+    label: "One-Day PoC Reviewer Pack",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/poc/one-day-poc-reviewer-pack.md",
+  },
+  {
+    label: "One-Day PoC Evidence Pack",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/poc/one-day-poc-evidence-pack.md",
+  },
+  {
+    label: "AML/KYC PoC Fixture Runner",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/scripts/run_aml_kyc_poc_fixture.py",
+  },
+];
+
 const styles = {
   notice: { marginTop: "1rem", padding: "0.85rem 1rem", border: "1px solid #C9C2AE", background: "#FAF6EB", color: "#2A2D33", fontSize: "0.95rem" },
   scenarioTabs: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(13rem, 1fr))", gap: "0.75rem", marginTop: "1.25rem" },
@@ -135,6 +154,11 @@ const styles = {
   evidenceList: { display: "grid", gap: "0.55rem", marginTop: "0.75rem" },
   evidenceItem: { borderTop: "1px solid rgba(250,246,235,0.24)", paddingTop: "0.55rem" },
   steps: { marginTop: "1rem", paddingLeft: "1.2rem" },
+  sourceCard: { marginTop: "1rem", padding: "1rem", border: "1px solid #DDD7C5", background: "#FFFDF7" },
+  sourceLinks: { display: "grid", gap: "0.65rem", margin: "1rem 0 0", padding: 0, listStyle: "none" },
+  sourceLink: { color: "#1D4F91", fontWeight: 700, overflowWrap: "anywhere" },
+  sourceUrl: { display: "block", marginTop: "0.15rem", color: "#5A5C62", overflowWrap: "anywhere" },
+  sourceNote: { marginTop: "1rem", color: "#5A5C62", fontSize: "0.92rem" },
   section: { marginTop: "1rem", padding: "1rem", border: "1px solid #DDD7C5", background: "#FDFDFC" },
 };
 
@@ -149,6 +173,36 @@ function MetaItem({ label, value }) {
       <strong>{label}</strong>
       <div style={styles.mono}>{value}</div>
     </div>
+  );
+}
+
+function EvidenceSources({ fixture, t }) {
+  return (
+    <section style={styles.sourceCard} aria-label={t("証拠ソース", "Evidence sources")}>
+      <p style={styles.eyebrow}>{t("証拠ソース", "Evidence sources")}</p>
+      <h3 style={styles.h2}>{t("証拠ソース", "Evidence sources")}</h3>
+      <p>{t("このデモは、公開されているVERITAS OSのPoC資料およびfixture命名に接続されています。", "This demo is connected to public VERITAS OS PoC materials and fixture naming.")}</p>
+      <div style={styles.metaItem}>
+        <strong>{t("Fixture reference:", "Fixture reference:")}</strong>
+        <div style={styles.mono}>{fixture}</div>
+      </div>
+      <ul style={styles.sourceLinks}>
+        {evidenceSourceLinks.map((link) => (
+          <li key={link.href}>
+            <a href={link.href} target="_blank" rel="noreferrer noopener" style={styles.sourceLink}>
+              {link.label}
+            </a>
+            <span style={{ ...styles.mono, ...styles.sourceUrl }}>{link.href}</span>
+          </li>
+        ))}
+      </ul>
+      <p style={styles.sourceNote}>
+        {t(
+          "これらのリンクは実装およびPoC文脈を示すものです。本番導入、規制認証、第三者監査承認を示すものではありません。",
+          "These links provide implementation and PoC context. They do not imply production deployment, regulatory certification, or third-party audit approval."
+        )}
+      </p>
+    </section>
   );
 }
 
@@ -243,6 +297,7 @@ export default function DemoPage() {
                 <li key={resolveText(step, lang)}>{resolveText(step, lang)}</li>
               ))}
             </ol>
+            <EvidenceSources fixture={scenario.evidence.fixture} t={t} />
           </section>
 
           <section style={styles.section}>
