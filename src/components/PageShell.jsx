@@ -90,7 +90,7 @@ const resolveText = (value, lang) => {
   return lang === "ja" ? value.ja : value.en;
 };
 
-export default function PageShell({ label, title, pageTitle, subtitle, children, ctas }) {
+export default function PageShell({ label, title, pageTitle, subtitle, children, ctas = [] }) {
   const [lang, setLang] = useState("ja");
   const t = (ja, en) => (lang === "ja" ? ja : en);
 
@@ -180,29 +180,31 @@ export default function PageShell({ label, title, pageTitle, subtitle, children,
         <h1 className="page-shell-title" style={{ fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(1.9rem, 1.35rem + 2.4vw, 3.5rem)", lineHeight: 1.12, marginTop: "0.35rem" }}>{resolvedTitle}</h1>
         <p style={{ color: "#2A2D33", maxWidth: "50rem", marginTop: "0.8rem" }}>{resolvedSubtitle}</p>
         {renderedChildren}
-        <section style={cardStyles}>
-          <h2 style={{ fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(1.3rem, 1.05rem + 1vw, 1.9rem)", marginBottom: "0.5rem" }}>{t("次へ", "Next")}</h2>
-          {ctas.map((cta) => {
-            const resolvedCtaLabel = resolveText(cta.label, lang);
-            return (
-              <a
-                key={cta.href}
-                href={cta.href}
-                style={linkButtonStyles}
-                target={cta.href.startsWith("http") ? "_blank" : undefined}
-                rel={cta.href.startsWith("http") ? "noreferrer noopener" : undefined}
-              >
-                {resolvedCtaLabel}
-              </a>
-            );
-          })}
-          <p style={{ marginTop: "1rem", color: "#4A4D54", fontSize: "0.92rem" }}>
-            {t(
-              "本サイト上の主張は、veritas_os リポジトリ上の証跡と照合して確認してください。",
-              "Public website claims should be validated against the veritas_os repository evidence.",
-            )}
-          </p>
-        </section>
+        {ctas.length > 0 && (
+          <section style={cardStyles}>
+            <h2 style={{ fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(1.3rem, 1.05rem + 1vw, 1.9rem)", marginBottom: "0.5rem" }}>{t("次へ", "Next")}</h2>
+            {ctas.map((cta) => {
+              const resolvedCtaLabel = resolveText(cta.label, lang);
+              return (
+                <a
+                  key={cta.href}
+                  href={cta.href}
+                  style={linkButtonStyles}
+                  target={cta.href.startsWith("http") ? "_blank" : undefined}
+                  rel={cta.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                >
+                  {resolvedCtaLabel}
+                </a>
+              );
+            })}
+            <p style={{ marginTop: "1rem", color: "#4A4D54", fontSize: "0.92rem" }}>
+              {t(
+                "本サイト上の主張は、veritas_os リポジトリ上の証跡と照合して確認してください。",
+                "Public website claims should be validated against the veritas_os repository evidence.",
+              )}
+            </p>
+          </section>
+        )}
       </div>
     </main>
   );
