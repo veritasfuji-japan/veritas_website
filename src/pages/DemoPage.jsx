@@ -20,6 +20,10 @@ const scenarios = [
       ja: "必要なAuthority Evidenceが存在しないため、実行前に停止します。",
       en: "Required Authority Evidence is unavailable, so VERITAS blocks before execution.",
     },
+    businessImpact: {
+      ja: "AIは、権限証跡なしに高リスクKYCアクションを承認できませんでした。",
+      en: "The AI could not approve a high-risk KYC action without authority evidence.",
+    },
     checks: [
       { label: "Authority Evidence", status: "missing", tone: "fail" },
       { label: "Human Approval Receipt", status: "not accepted", tone: "warn" },
@@ -57,6 +61,10 @@ const scenarios = [
       ja: "制裁リスクが曖昧なため、AI単独では進めず、人間レビューに回します。",
       en: "Sanctions risk is ambiguous, so VERITAS prevents silent proceed and routes to human review.",
     },
+    businessImpact: {
+      ja: "AIは、制裁リスクが人間レビューを必要とする状況で、静かに処理を進めることができませんでした。",
+      en: "The AI could not silently proceed where sanctions risk required human review.",
+    },
     checks: [
       { label: "Authority Evidence", status: "present", tone: "pass" },
       { label: "Human Approval Receipt", status: "required", tone: "warn" },
@@ -93,6 +101,10 @@ const scenarios = [
     reason: {
       ja: "必要な証跡、承認、ポリシー条件が揃っているため、Evidence Chainを残して実行を許可します。",
       en: "Required evidence, approval, and policy conditions are satisfied, so VERITAS allows execution with an Evidence Chain.",
+    },
+    businessImpact: {
+      ja: "AIは、権限・承認・ポリシー・bind coverageが満たされた場合にのみ実行を許可されました。",
+      en: "The AI was allowed to proceed only because authority, approval, policy, and bind coverage were satisfied.",
     },
     checks: [
       { label: "Authority Evidence", status: "present", tone: "pass" },
@@ -134,7 +146,14 @@ const evidenceSourceLinks = [
   },
 ];
 
-const compactEvidenceKeys = ["decision_id", "execution_intent_id", "bind_receipt_id"];
+const technicalEvidenceKeys = [
+  "reason_code",
+  "decision_id",
+  "execution_intent_id",
+  "bind_receipt_id",
+  "audit_path",
+  "fixture",
+];
 
 function formatReasonCode(reasonCode) {
   return reasonCode
@@ -146,6 +165,8 @@ function formatReasonCode(reasonCode) {
 
 const styles = {
   notice: { marginTop: "1rem", padding: "0.85rem 1rem", border: "1px solid #C9C2AE", background: "#FAF6EB", color: "#2A2D33", fontSize: "0.95rem" },
+  valueSummary: { marginTop: "1rem", padding: "1.15rem", border: "1px solid #15161A", background: "#FFFDF7", boxShadow: "0 12px 28px rgba(21,22,26,0.08)" },
+  valueLead: { margin: "0.35rem 0 0", fontSize: "1.05rem", lineHeight: 1.65 },
   scenarioTabs: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(13rem, 1fr))", gap: "0.75rem", marginTop: "1.25rem" },
   tabButton: (active) => ({ border: active ? "2px solid #15161A" : "1px solid #DDD7C5", background: active ? "#15161A" : "#FAF6EB", color: active ? "#FAF6EB" : "#15161A", padding: "0.85rem", textAlign: "left", cursor: "pointer", minHeight: "4.5rem" }),
   demoGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(17rem, 1fr))", gap: "1rem", marginTop: "1rem" },
@@ -162,14 +183,15 @@ const styles = {
   check: { display: "flex", justifyContent: "space-between", gap: "0.75rem", border: "1px solid #DDD7C5", background: "#FFFDF7", padding: "0.65rem" },
   status: (tone) => ({ fontFamily: "'IBM Plex Mono', ui-monospace, monospace", color: tone === "pass" ? "#0E7E73" : tone === "fail" ? "#8C1F2F" : "#8A5A00", fontSize: "0.78rem", textTransform: "uppercase", whiteSpace: "nowrap" }),
   decisionBadge: (tone) => ({ display: "inline-block", border: "1px solid currentColor", padding: "0.35rem 0.6rem", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", letterSpacing: "0.06em", color: tone === "allowed" ? "#72E0C8" : tone === "blocked" ? "#FFB0B8" : "#FFD27A", marginBottom: "0.75rem" }),
-  reasonCode: { display: "inline-block", marginTop: "0.25rem", padding: "0.18rem 0.35rem", border: "1px solid rgba(250,246,235,0.24)", borderRadius: "2px", background: "rgba(250,246,235,0.08)", color: "#BFC7D5", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.72rem", overflowWrap: "anywhere" },
+  decisionSection: { marginTop: "0.85rem", paddingTop: "0.75rem", borderTop: "1px solid rgba(250,246,235,0.18)" },
+  decisionSectionTitle: { display: "block", marginBottom: "0.35rem", color: "#D9E0EA" },
   evidenceList: { display: "grid", gap: "0.35rem", marginTop: "0.85rem", padding: 0, listStyle: "none" },
   evidenceItem: { display: "grid", gap: "0.2rem", borderTop: "1px solid rgba(250,246,235,0.18)", paddingTop: "0.45rem" },
   evidenceLabel: { color: "#BFC7D5", fontSize: "0.78rem" },
   detail: { marginTop: "0.65rem", borderTop: "1px solid rgba(250,246,235,0.18)", paddingTop: "0.55rem" },
-  detailSummary: { cursor: "pointer", color: "#D9E0EA", fontSize: "0.85rem" },
-  codeBlock: { display: "block", marginTop: "0.45rem", padding: "0.6rem 0.7rem", border: "1px solid #DDD7C5", background: "#F4EFE3", color: "#15161A", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.78rem", lineHeight: 1.55, overflowWrap: "anywhere", whiteSpace: "normal" },
-  darkCodeBlock: { display: "block", marginTop: "0.45rem", padding: "0.55rem 0.65rem", border: "1px solid rgba(250,246,235,0.18)", background: "rgba(250,246,235,0.08)", color: "#FAF6EB", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.76rem", lineHeight: 1.55, overflowWrap: "anywhere", whiteSpace: "normal" },
+  lightDetail: { marginTop: "0.85rem", borderTop: "1px solid #DDD7C5", paddingTop: "0.65rem" },
+  detailSummary: { cursor: "pointer", color: "#D9E0EA", fontSize: "0.85rem", fontWeight: 700 },
+  lightDetailSummary: { cursor: "pointer", color: "#15161A", fontSize: "0.9rem", fontWeight: 700 },
   steps: { marginTop: "1rem", paddingLeft: "1.2rem" },
   sourceCard: { marginTop: "1rem", padding: "1rem", border: "1px solid #DDD7C5", background: "#FFFDF7" },
   sourceLinks: { display: "grid", gap: "0.65rem", margin: "1rem 0 0", padding: 0, listStyle: "none" },
@@ -192,31 +214,30 @@ function MetaItem({ label, value }) {
   );
 }
 
-function EvidenceSources({ fixture, t }) {
+function EvidenceSources({ t }) {
   return (
-    <section style={styles.sourceCard} aria-label={t("証拠ソース", "Evidence sources")}>
-      <p style={styles.eyebrow}>{t("証拠ソース", "Evidence sources")}</p>
-      <h3 style={styles.h3}>{t("証拠ソース", "Evidence sources")}</h3>
-      <p>{t("このデモは、公開されているVERITAS OSのPoC資料およびfixture命名に接続されています。", "This demo is connected to public VERITAS OS PoC materials and fixture naming.")}</p>
-      <div style={styles.metaItem}>
-        <strong>{t("Fixture:", "Fixture:")}</strong>
-        <code style={styles.codeBlock}>{fixture}</code>
-      </div>
-      <ul style={styles.sourceLinks}>
-        {evidenceSourceLinks.map((link) => (
-          <li key={link.href}>
-            <a href={link.href} target="_blank" rel="noreferrer noopener" style={styles.sourceLink}>
-              {link.label} <span aria-hidden>↗</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-      <p style={styles.sourceNote}>
-        {t(
-          "これらのリンクは実装およびPoC文脈を示すものです。本番導入、規制認証、第三者監査承認を示すものではありません。",
-          "These links provide implementation and PoC context. They do not imply production deployment, regulatory certification, or third-party audit approval."
-        )}
-      </p>
+    <section style={styles.sourceCard} aria-label={t("PoCソースリンク", "PoC source links")}>
+      <p style={styles.eyebrow}>{t("公開証跡", "Public proof")}</p>
+      <h3 style={styles.h3}>{t("必要な人だけがPoCソースを開ける", "PoC sources stay available without dominating the demo")}</h3>
+      <p>{t("初見では価値と判断結果を優先し、GitHub上の実装・PoCリンクは折りたたんで表示します。", "First-time readers see value and outcomes first; GitHub implementation and PoC links remain available inside the disclosure below.")}</p>
+      <details style={styles.lightDetail}>
+        <summary style={styles.lightDetailSummary}>{t("PoC source links", "PoC source links")}</summary>
+        <ul style={styles.sourceLinks}>
+          {evidenceSourceLinks.map((link) => (
+            <li key={link.href}>
+              <a href={link.href} target="_blank" rel="noreferrer noopener" style={styles.sourceLink}>
+                {link.label} <span aria-hidden>↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p style={styles.sourceNote}>
+          {t(
+            "これらのリンクは実装およびPoC文脈を示すものです。本番導入、規制認証、第三者監査承認を示すものではありません。",
+            "These links provide implementation and PoC context. They do not imply production deployment, regulatory certification, or third-party audit approval."
+          )}
+        </p>
+      </details>
     </section>
   );
 }
@@ -236,11 +257,23 @@ export default function DemoPage() {
       ctas={[
         { label: { ja: "AML/KYC PoCを見る", en: "View AML/KYC PoC" }, href: "/aml-kyc-poc" },
         { label: { ja: "仕組みを見る", en: "How it works" }, href: "/how-it-works" },
-        { label: { ja: "GitHubで確認", en: "Validate on GitHub" }, href: "https://github.com/veritasfuji-japan/veritas_os" },
       ]}
     >
       {(t, lang) => (
         <>
+          <section style={styles.valueSummary}>
+            <p style={styles.eyebrow}>{t("価値サマリー", "Value summary")}</p>
+            <h2 style={styles.h2}>
+              {t("AIの実行が企業の結果になる前に止まる", "AI action stopped before business consequence")}
+            </h2>
+            <p style={styles.valueLead}>
+              {t(
+                "VERITASは、AIエージェントが規制・金融・業務上の結果に企業を拘束する前に、その実行が許可されているかを判定します。",
+                "VERITAS shows whether an AI agent is allowed to act before it can bind the enterprise to a regulated, financial, or operational consequence."
+              )}
+            </p>
+          </section>
+
           <section style={styles.notice}>
             <strong>{t("注意:", "Note:")}</strong>{" "}
             {t(
@@ -266,11 +299,16 @@ export default function DemoPage() {
               <p style={styles.eyebrow}>1 / AI Agent Request</p>
               <h2 style={styles.h2}>{resolveText(scenario.title, lang)}</h2>
               <p>{resolveText(scenario.agentRequest, lang)}</p>
-              <div style={styles.metaGrid}>
-                <MetaItem label="action_class" value={scenario.actionClass} />
-                <MetaItem label="requested_scope" value={scenario.requestedScope} />
-                <MetaItem label="customer_risk_context" value={scenario.riskContext} />
-              </div>
+              <details style={styles.lightDetail}>
+                <summary style={styles.lightDetailSummary}>
+                  {t("Request technical context", "Request technical context")}
+                </summary>
+                <div style={styles.metaGrid}>
+                  <MetaItem label="action_class" value={scenario.actionClass} />
+                  <MetaItem label="requested_scope" value={scenario.requestedScope} />
+                  <MetaItem label="customer_risk_context" value={scenario.riskContext} />
+                </div>
+              </details>
             </article>
 
             <article style={styles.panel}>
@@ -289,25 +327,48 @@ export default function DemoPage() {
 
             <article style={styles.panelDark}>
               <p style={styles.darkEyebrow}>3 / Decision + Evidence Chain</p>
-              <span style={styles.decisionBadge(scenario.decisionTone)}>{scenario.decision}</span>
-              <h2 style={styles.h2}>{formatReasonCode(scenario.reasonCode)}</h2>
-              <code style={styles.reasonCode}>{scenario.reasonCode}</code>
-              <p>{resolveText(scenario.reason, lang)}</p>
-              <ul style={styles.evidenceList}>
-                {compactEvidenceKeys.map((key) => (
-                  <li key={key} style={styles.evidenceItem}>
-                    <strong style={styles.evidenceLabel}>{key}</strong>
-                    <span style={styles.mono}>{scenario.evidence[key]}</span>
-                  </li>
-                ))}
-              </ul>
+              <section style={{ marginTop: 0 }}>
+                <strong style={styles.decisionSectionTitle}>{t("Result", "Result")}</strong>
+                <span style={styles.decisionBadge(scenario.decisionTone)}>{scenario.decision}</span>
+              </section>
+              <section style={styles.decisionSection}>
+                <strong style={styles.decisionSectionTitle}>
+                  {t("VERITASがこう判定した理由", "Why VERITAS decided this")}
+                </strong>
+                <h2 style={styles.h2}>{formatReasonCode(scenario.reasonCode)}</h2>
+                <p>{resolveText(scenario.reason, lang)}</p>
+              </section>
+              <section style={styles.decisionSection}>
+                <strong style={styles.decisionSectionTitle}>
+                  {t("何が防止または許可されたか", "What was prevented or allowed")}
+                </strong>
+                <p>{resolveText(scenario.businessImpact, lang)}</p>
+              </section>
+              <section style={styles.decisionSection}>
+                <strong style={styles.decisionSectionTitle}>
+                  {t("生成された監査証跡", "Audit proof generated")}
+                </strong>
+                <p>
+                  {t(
+                    "判定、実行意図、bind receiptをEvidence Chainとして保存し、後続監査で追跡できるようにします。",
+                    "VERITAS stores the decision, execution intent, and bind receipt as an Evidence Chain for later audit."
+                  )}
+                </p>
+              </section>
               <details style={styles.detail}>
-                <summary style={styles.detailSummary}>audit_path</summary>
-                <code style={styles.darkCodeBlock}>{scenario.evidence.audit_path}</code>
-              </details>
-              <details style={styles.detail}>
-                <summary style={styles.detailSummary}>fixture</summary>
-                <code style={styles.darkCodeBlock}>{scenario.evidence.fixture}</code>
+                <summary style={styles.detailSummary}>
+                  {t("Technical evidence details", "Technical evidence details")}
+                </summary>
+                <ul style={styles.evidenceList}>
+                  {technicalEvidenceKeys.map((key) => (
+                    <li key={key} style={styles.evidenceItem}>
+                      <strong style={styles.evidenceLabel}>{key}</strong>
+                      <span style={styles.mono}>
+                        {key === "reason_code" ? scenario.reasonCode : scenario.evidence[key]}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </details>
             </article>
           </section>
@@ -321,7 +382,7 @@ export default function DemoPage() {
                 <li key={resolveText(step, lang)}>{resolveText(step, lang)}</li>
               ))}
             </ol>
-            <EvidenceSources fixture={scenario.evidence.fixture} t={t} />
+            <EvidenceSources t={t} />
           </section>
 
           <section style={styles.section}>
