@@ -18,6 +18,7 @@ const routes = {
   "/concepts": ConceptsPage,
   "/glossary": GlossaryPage,
   "/faq": FaqPage,
+  "/reviewer": ReviewersPage,
   "/reviewers": ReviewersPage,
   "/contact": ContactPage,
 };

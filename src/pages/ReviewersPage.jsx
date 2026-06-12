@@ -1,68 +1,264 @@
 import PageShell from "../components/PageShell.jsx";
 
-const sectionStyle = {
-  marginTop: "1rem",
-  padding: "1rem",
-  border: "1px solid #d0d7de",
-  borderRadius: "8px",
-  background: "#fdfdfc",
+const CORE_REPOSITORY_URL = "https://github.com/veritasfuji-japan/veritas_os";
+
+const sectionHeader = {
+  marginBottom: "1rem",
 };
 
-const headingStyle = {
-  marginTop: 0,
-  color: "#0b3d5b",
+const sectionEyebrow = {
+  color: "#2456C7",
+  fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+  fontSize: "0.75rem",
+  letterSpacing: "0.12em",
+  marginBottom: "0.35rem",
+  textTransform: "uppercase",
 };
+
+const sectionTitle = {
+  color: "#0b3d5b",
+  fontFamily: "'Fraunces', 'Times New Roman', serif",
+  fontSize: "clamp(1.35rem, 1.1rem + 1.15vw, 2rem)",
+  lineHeight: 1.18,
+  margin: 0,
+};
+
+function SectionHeading({ eyebrow, title }) {
+  return (
+    <div style={sectionHeader}>
+      <p style={sectionEyebrow}>{eyebrow}</p>
+      <h2 style={sectionTitle}>{title}</h2>
+    </div>
+  );
+}
+
+function ExternalLink({ children, className = "reviewer-button reviewer-button-secondary", href }) {
+  return (
+    <a
+      className={className}
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noreferrer noopener" : undefined}
+    >
+      {children}
+    </a>
+  );
+}
 
 export default function ReviewersPage() {
   return (
     <PageShell
-      label={{ ja: "レビュアー", en: "REVIEWERS" }}
-      pageTitle={{ ja: "外部レビュアー", en: "Reviewers" }}
-      title={{ ja: "外部レビュアー", en: "External Reviewers" }}
+      label={{ ja: "外部レビュー", en: "EXTERNAL REVIEW" }}
+      pageTitle={{ ja: "外部レビュー", en: "External Review" }}
+      title={{ ja: "外部レビュー", en: "External Review" }}
       subtitle={{
-        ja: "LLMエージェントのための監査可能な意思決定インフラとして、VERITAS OSをレビューするための入口です。",
-        en: "Review VERITAS OS as auditable decision infrastructure for LLM agents.",
+        ja: "VERITAS OS を、LLMエージェントのための監査可能な意思決定インフラとして評価するための入口です。",
+        en: "An entry point for evaluating VERITAS OS as an auditable decision infrastructure layer for LLM agents.",
       }}
-      ctas={[
-        { label: { ja: "問い合わせる", en: "Contact" }, href: "/contact" },
-        { label: { ja: "コアリポジトリを開く", en: "Open core repository" }, href: "https://github.com/veritasfuji-japan/veritas_os" },
-        { label: { ja: "ホームへ戻る", en: "Back to Home" }, href: "/" },
-      ]}
     >
-      {(t) => (
-        <>
-          <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t("レビュー対象", "What to review")}</h2>
-            <ul>
-              <li>{t("意思決定パイプライン", "Decision pipeline.")}</li>
-              <li>{t("FUJIゲート", "FUJI gate.")}</li>
-              <li>{t("TrustLog証跡", "TrustLog evidence.")}</li>
-              <li>{t("Bind管理対象パス", "Bind-governed paths.")}</li>
-              <li>{t("ビルド・ドキュメント証跡", "Build and documentation evidence.")}</li>
-              <li>{t("公開主張とリポジトリ証跡の整合性", "Public claims alignment with repository evidence.")}</li>
-            </ul>
-          </section>
+      {(t) => {
+        const audienceItems = [
+          {
+            title: t("技術レビュアー", "Technical reviewers"),
+            body: t(
+              "実装済みの挙動、制御境界、Evidence Chain を確認したい人。",
+              "Inspect implemented behavior, control boundaries, and evidence-chain structure.",
+            ),
+          },
+          {
+            title: t("DD / 投資家", "DD / investors"),
+            body: t(
+              "PoC-ready と本番適用準備の境界、主張の適切さ、次段階ギャップを確認したい人。",
+              "Assess the boundary between PoC-readiness and production-readiness, claims discipline, and next-step gaps.",
+            ),
+          },
+          {
+            title: t("監査・ガバナンス関係者", "Audit / governance stakeholders"),
+            body: t(
+              "誰が何を許可したかを、どこまで検証可能に扱っているかを見たい人。",
+              "Review how the system handles who authorized what, and how verifiable that approval is.",
+            ),
+          },
+        ];
 
-          <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t("DD・投資向け確認観点", "Investor / DD review points")}</h2>
-            <ul>
-              <li>{t("公開主張が veritas_os の実装証跡と整合しているか。", "Whether public claims align with veritas_os repository evidence.")}</li>
-              <li>{t("PoC-ready と本番適用準備の境界が明確か。", "Whether the boundary between PoC-ready and deployment readiness is clear.")}</li>
-              <li>{t("第三者認証、規制承認、本番導入を過大に主張していないか。", "Whether the site avoids overclaiming third-party certification, regulatory approval, or production deployment.")}</li>
-              <li>{t("AML/KYC PoC のデータ境界、提供物、成功基準が明確か。", "Whether the AML/KYC PoC data boundary, deliverables, and success criteria are clear.")}</li>
-              <li>{t("次段階評価に必要なギャップが明示されているか。", "Whether gaps for next-stage evaluation are explicitly identified.")}</li>
-            </ul>
-          </section>
-          <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t("レビュー姿勢", "Review posture")}</h2>
-            <ul>
-              <li>{t("ロードマップではなく、実装済みの挙動を確認する。", "Check implemented behavior, not roadmap promises.")}</li>
-              <li>{t("主張を veritas_os と照合する。", "Validate claims against veritas_os.")}</li>
-              <li>{t("Webサイト上の主張は、証明そのものではなく public positioning として扱う。", "Treat website claims as public positioning, not proof by themselves.")}</li>
-            </ul>
-          </section>
-        </>
-      )}
+        const reviewItems = [
+          {
+            title: t("意思決定パイプライン", "Decision pipeline"),
+            body: t("AI判断から governance decision までの流れ。", "The path from AI judgment to governance decision."),
+          },
+          {
+            title: t("FUJIゲート", "FUJI gate"),
+            body: t("不十分・不正・危険な経路を fail-closed で止める制御点。", "Control points that fail-closed on insufficient, invalid, or unsafe paths."),
+          },
+          {
+            title: t("TrustLog証跡", "TrustLog evidence"),
+            body: t("意思決定、receipt、Evidence Chain の追跡可能性。", "Traceability for decisions, receipts, and the Evidence Chain."),
+          },
+          {
+            title: t("Bind管理対象パス", "Bind-governed paths"),
+            body: t("承認と現実世界への commit の境界。", "The boundary between authorization and real-world commit."),
+          },
+          {
+            title: t("ビルド・ドキュメント証跡", "Build and documentation evidence"),
+            body: t("実装、ドキュメント、PoC素材の整合性。", "Alignment across implementation, documentation, and PoC materials."),
+          },
+          {
+            title: t("公開主張との整合性", "Public-claims alignment"),
+            body: t("Web上の表現が、リポジトリ証跡と矛盾していないか。", "Whether website language stays consistent with repository evidence."),
+          },
+        ];
+
+        const reviewSteps = [
+          t("ロードマップではなく、実装済みの挙動を見る", "Review implemented behavior, not roadmap promises"),
+          t("Webの主張を veritas_os の証跡と照合する", "Cross-check website claims against veritas_os evidence"),
+          t("public positioning と実証済み範囲を分けて評価する", "Separate public positioning from demonstrated scope"),
+        ];
+
+        const ddItems = [
+          {
+            title: t("主張と証跡の整合性", "Claims-to-evidence alignment"),
+            body: t("公開主張が veritas_os の実装証跡と整合しているか。", "Whether public claims align with veritas_os implementation evidence."),
+          },
+          {
+            title: t("PoC-ready と本番準備の境界", "PoC-ready versus production-readiness"),
+            body: t("PoCとして見せている範囲と、本番適用準備の範囲が明確に分かれているか。", "Whether PoC scope and production-readiness scope are clearly separated."),
+          },
+          {
+            title: t("過剰主張の回避", "Avoidance of overclaiming"),
+            body: t("第三者認証、規制承認、本番導入を過大に示していないか。", "Whether the page avoids overstating third-party certification, regulatory approval, or production deployment."),
+          },
+          {
+            title: t("AML/KYC PoC の評価枠", "AML/KYC PoC evaluation frame"),
+            body: t("データ境界、提供物、成功基準が明確か。", "Whether data boundaries, deliverables, and success criteria are clear."),
+          },
+          {
+            title: t("次段階ギャップ", "Next-step gaps"),
+            body: t("次の評価・導入判断に必要な未解決ギャップが明示されているか。", "Whether unresolved gaps for the next evaluation or adoption decision are explicit."),
+          },
+        ];
+
+        const nonClaims = [
+          t("本番導入済みであることを示すものではない", "It does not claim production deployment"),
+          t("規制当局の承認を示すものではない", "It does not claim regulatory approval"),
+          t("第三者監査承認や第三者認証を示すものではない", "It does not claim third-party audit approval or certification"),
+          t("特定企業への適用可能性を保証するものではない", "It does not guarantee applicability for a specific enterprise"),
+          t("Web上の説明だけで十分な証明になることを示すものではない", "It does not claim that website text alone is sufficient proof"),
+        ];
+
+        const nextSteps = [
+          { label: t("コアリポジトリを開く", "Open Core Repository"), href: CORE_REPOSITORY_URL, primary: true },
+          { label: t("AML/KYC PoCを見る", "View AML/KYC PoC"), href: "/aml-kyc-poc" },
+          { label: t("デモを見る", "View Demo"), href: "/demo" },
+          { label: t("問い合わせる", "Contact"), href: "/contact" },
+        ];
+
+        return (
+          <>
+            <section className="reviewer-hero-panel" aria-label={t("外部レビューの概要", "External review overview")}>
+              <p>
+                {t(
+                  "このページは、実装済みの挙動、PoC境界、公開主張とリポジトリ証跡の整合性を確認したい外部レビュアー向けに設計されています。",
+                  "This page is designed for external reviewers who want to inspect implemented behavior, PoC boundaries, and the alignment between public claims and repository evidence.",
+                )}
+              </p>
+              <div className="reviewer-hero-actions" aria-label={t("主要リンク", "Primary links")}>
+                <ExternalLink className="reviewer-button reviewer-button-primary" href={CORE_REPOSITORY_URL}>
+                  {t("コアリポジトリを開く", "Open Core Repository")}
+                </ExternalLink>
+                <ExternalLink href="/aml-kyc-poc">{t("AML/KYC PoCを見る", "View AML/KYC PoC")}</ExternalLink>
+                <ExternalLink href="/demo">{t("デモを見る", "View Demo")}</ExternalLink>
+              </div>
+            </section>
+
+            <section className="reviewer-section reviewer-audience-section">
+              <SectionHeading eyebrow="01" title={t("このページの対象", "Who this is for")} />
+              <div className="reviewer-audience-grid">
+                {audienceItems.map((item) => (
+                  <article className="reviewer-audience-card" key={item.title}>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="reviewer-section">
+              <SectionHeading eyebrow="02" title={t("レビュー対象", "What to review")} />
+              <div className="reviewer-card-grid">
+                {reviewItems.map((item) => (
+                  <article className="reviewer-review-card" key={item.title}>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="reviewer-section reviewer-steps-section">
+              <SectionHeading eyebrow="03" title={t("どう確認するか", "How to review")} />
+              <ol className="reviewer-steps-list">
+                {reviewSteps.map((step, index) => (
+                  <li key={step}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{step}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+
+            <section className="reviewer-section reviewer-checkpoints-section">
+              <SectionHeading eyebrow="04" title={t("DD・投資向け確認観点", "DD / investor checkpoints")} />
+              <div className="reviewer-checklist">
+                {ddItems.map((item) => (
+                  <article className="reviewer-check-item" key={item.title}>
+                    <span aria-hidden="true">✓</span>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.body}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="reviewer-section reviewer-non-claims-section">
+              <details className="reviewer-disclosure">
+                <summary>{t("このページが主張しないこと", "What this page does not claim")}</summary>
+                <ul>
+                  {nonClaims.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </details>
+            </section>
+
+            <section className="reviewer-next-section">
+              <div>
+                <SectionHeading eyebrow="05" title={t("次に見るもの", "Next steps")} />
+                <p>
+                  {t(
+                    "本サイト上の主張は、veritas_os リポジトリ上の証跡と照合して確認してください。",
+                    "Public website claims should be validated against the evidence in the veritas_os repository.",
+                  )}
+                </p>
+              </div>
+              <ol className="reviewer-next-list">
+                {nextSteps.map((step, index) => (
+                  <li key={step.href}>
+                    <span>{index + 1}</span>
+                    <ExternalLink
+                      className={step.primary ? "reviewer-button reviewer-button-primary" : "reviewer-button reviewer-button-secondary"}
+                      href={step.href}
+                    >
+                      {step.label}
+                    </ExternalLink>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          </>
+        );
+      }}
     </PageShell>
   );
 }
