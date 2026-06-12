@@ -1285,3 +1285,109 @@
     overflow-wrap: anywhere;
   }
 }
+
+/* Button-like segmented scenario switcher for the public /demo page. */
+.demo-scenario-tabs {
+  align-items: stretch;
+}
+
+.demo-scenario-tab {
+  display: flex;
+  min-height: 5.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid #DDD7C5;
+  border-radius: 12px;
+  background: #FFF9EC;
+  color: #15161A;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(21, 22, 26, 0.04);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  -webkit-tap-highlight-color: rgba(32, 35, 43, 0.12);
+}
+
+.demo-scenario-tab:hover {
+  border-color: #B8AD96;
+  background: #FFFDF7;
+  box-shadow: 0 12px 24px rgba(80, 64, 35, 0.12);
+  transform: translateY(-1px);
+}
+
+.demo-scenario-tab:active {
+  box-shadow: 0 4px 12px rgba(80, 64, 35, 0.12);
+  transform: translateY(1px);
+}
+
+.demo-scenario-tab:focus-visible {
+  outline: 3px solid rgba(217, 154, 43, 0.55);
+  outline-offset: 3px;
+}
+
+.demo-scenario-tab.is-active {
+  border-color: #20232B;
+  background: #20232B;
+  color: #FAF6EB;
+  box-shadow: 0 16px 30px rgba(32, 35, 43, 0.22);
+}
+
+.demo-scenario-tab.is-active:hover {
+  border-color: #20232B;
+  background: #292D36;
+  box-shadow: 0 18px 34px rgba(32, 35, 43, 0.26);
+}
+
+.demo-scenario-tab-copy {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.demo-scenario-tab-label {
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.demo-scenario-tab-description {
+  color: #5A5C62;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.demo-scenario-tab.is-active .demo-scenario-tab-description {
+  color: #D9E0EA;
+}
+
+.demo-scenario-tab-status {
+  flex: 0 0 auto;
+  min-width: 4.6rem;
+  padding: 0.26rem 0.5rem;
+  border: 1px solid #DDD7C5;
+  border-radius: 999px;
+  background: #FAF6EB;
+  color: #2A2D33;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.demo-scenario-tab.is-active .demo-scenario-tab-status {
+  border-color: rgba(250, 246, 235, 0.32);
+  background: #FAF6EB;
+  color: #15161A;
+}
+
+@media (max-width: 560px) {
+  .demo-scenario-tab {
+    min-height: 5.75rem;
+    padding: 1rem;
+  }
+}

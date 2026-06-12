@@ -214,33 +214,33 @@ const styles = {
     lineHeight: 1.75,
     color: colors.inkSoft,
   },
-  scenarioTabs: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(13rem, 1fr))",
-    gap: "0.75rem",
+  scenarioSwitcher: {
     marginTop: "1.6rem",
   },
-  tabButton: (active) => ({
-    border: `1px solid ${active ? colors.darkSurface : colors.rule}`,
-    borderRadius: radii.compact,
-    background: active ? colors.darkSurface : colors.surface,
-    color: active ? colors.surface : colors.ink,
-    padding: "0.9rem",
-    textAlign: "left",
-    cursor: "pointer",
-    minHeight: "4.2rem",
-    boxShadow: active ? "0 10px 22px rgba(32, 35, 43, 0.14)" : "none",
-  }),
-  tabLabel: (active) => ({
-    display: "block",
-    color: active ? "#D9E0EA" : colors.muted,
-    fontSize: "0.78rem",
+  scenarioSwitcherHeader: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "baseline",
+    justifyContent: "space-between",
+    gap: "0.4rem 0.8rem",
+    marginBottom: "0.65rem",
+  },
+  scenarioSwitcherTitle: {
+    margin: 0,
+    color: colors.ink,
+    fontSize: "1rem",
     lineHeight: 1.35,
-  }),
-  tabTitle: {
-    display: "block",
-    marginTop: "0.35rem",
+  },
+  scenarioSwitcherHelp: {
+    margin: 0,
+    color: colors.muted,
+    fontSize: "0.88rem",
     lineHeight: 1.45,
+  },
+  scenarioTabs: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(14rem, 1fr))",
+    gap: "0.65rem",
   },
   demoGrid: {
     display: "grid",
@@ -464,24 +464,50 @@ export default function DemoPage() {
             )}
           </section>
 
-          <section style={styles.scenarioTabs} aria-label={t("デモシナリオ", "Demo scenarios")}>
-            {scenarios.map((item) => {
-              const active = item.id === selectedScenarioId;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setSelectedScenarioId(item.id)}
-                  style={styles.tabButton(active)}
-                  aria-pressed={active}
-                >
-                  <span style={{ ...styles.mono, ...styles.tabLabel(active) }}>
-                    {resolveText(item.shortLabel, lang)}
-                  </span>
-                  <span style={styles.tabTitle}>{resolveText(item.title, lang)}</span>
-                </button>
-              );
-            })}
+          <section style={styles.scenarioSwitcher} aria-labelledby="scenario-switcher-title">
+            <div style={styles.scenarioSwitcherHeader}>
+              <h2 id="scenario-switcher-title" style={styles.scenarioSwitcherTitle}>
+                {t("シナリオを選択", "Select a scenario")}
+              </h2>
+              <p style={styles.scenarioSwitcherHelp}>
+                {t("タップして判定例を切り替え", "Tap to switch decision examples")}
+              </p>
+            </div>
+            <div
+              className="demo-scenario-tabs"
+              role="group"
+              aria-label={t("デモシナリオ", "Demo scenarios")}
+              style={styles.scenarioTabs}
+            >
+              {scenarios.map((item) => {
+                const active = item.id === selectedScenarioId;
+                const statusText = active
+                  ? t("選択中", "Selected")
+                  : t("表示する", "Show");
+
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={`demo-scenario-tab${active ? " is-active" : ""}`}
+                    onClick={() => setSelectedScenarioId(item.id)}
+                    aria-pressed={active}
+                  >
+                    <span className="demo-scenario-tab-copy">
+                      <span className="demo-scenario-tab-label">
+                        {resolveText(item.shortLabel, lang)}
+                      </span>
+                      <span className="demo-scenario-tab-description">
+                        {resolveText(item.title, lang)}
+                      </span>
+                    </span>
+                    <span className="demo-scenario-tab-status" aria-hidden="true">
+                      {statusText}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </section>
 
           <section style={styles.demoGrid}>
