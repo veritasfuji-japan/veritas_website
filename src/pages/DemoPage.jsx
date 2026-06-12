@@ -121,18 +121,28 @@ const evidenceSourceLinks = [
     href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/poc/one-day-poc-walkthrough.md",
   },
   {
-    label: "One-Day PoC Reviewer Pack",
+    label: "Reviewer Pack",
     href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/poc/one-day-poc-reviewer-pack.md",
   },
   {
-    label: "One-Day PoC Evidence Pack",
+    label: "Evidence Pack",
     href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/poc/one-day-poc-evidence-pack.md",
   },
   {
-    label: "AML/KYC PoC Fixture Runner",
+    label: "Fixture Runner",
     href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/scripts/run_aml_kyc_poc_fixture.py",
   },
 ];
+
+const compactEvidenceKeys = ["decision_id", "execution_intent_id", "bind_receipt_id"];
+
+function formatReasonCode(reasonCode) {
+  return reasonCode
+    .toLowerCase()
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
 
 const styles = {
   notice: { marginTop: "1rem", padding: "0.85rem 1rem", border: "1px solid #C9C2AE", background: "#FAF6EB", color: "#2A2D33", fontSize: "0.95rem" },
@@ -140,10 +150,11 @@ const styles = {
   tabButton: (active) => ({ border: active ? "2px solid #15161A" : "1px solid #DDD7C5", background: active ? "#15161A" : "#FAF6EB", color: active ? "#FAF6EB" : "#15161A", padding: "0.85rem", textAlign: "left", cursor: "pointer", minHeight: "4.5rem" }),
   demoGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(17rem, 1fr))", gap: "1rem", marginTop: "1rem" },
   panel: { border: "1px solid #DDD7C5", background: "#FAF6EB", padding: "1rem", minHeight: "100%" },
-  panelDark: { border: "1px solid #1A1F2E", background: "#15161A", color: "#FAF6EB", padding: "1rem", minHeight: "100%" },
+  panelDark: { border: "1px solid #2C3140", background: "#20232B", color: "#FAF6EB", padding: "1rem", minHeight: "100%", boxShadow: "0 10px 24px rgba(21,22,26,0.12)" },
   eyebrow: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#5A5C62", margin: "0 0 0.5rem" },
   darkEyebrow: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#BFC7D5", margin: "0 0 0.5rem" },
-  h2: { fontFamily: "'Fraunces', 'Times New Roman', serif", margin: "0 0 0.65rem", lineHeight: 1.2 },
+  h2: { fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(1.35rem, 1.1rem + 1.4vw, 2rem)", margin: "0 0 0.65rem", lineHeight: 1.2 },
+  h3: { fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(1.2rem, 1rem + 1vw, 1.65rem)", margin: "0 0 0.65rem", lineHeight: 1.25 },
   metaGrid: { display: "grid", gap: "0.55rem", marginTop: "1rem" },
   metaItem: { borderTop: "1px solid #DDD7C5", paddingTop: "0.55rem" },
   mono: { fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.85rem", overflowWrap: "anywhere" },
@@ -151,13 +162,18 @@ const styles = {
   check: { display: "flex", justifyContent: "space-between", gap: "0.75rem", border: "1px solid #DDD7C5", background: "#FFFDF7", padding: "0.65rem" },
   status: (tone) => ({ fontFamily: "'IBM Plex Mono', ui-monospace, monospace", color: tone === "pass" ? "#0E7E73" : tone === "fail" ? "#8C1F2F" : "#8A5A00", fontSize: "0.78rem", textTransform: "uppercase", whiteSpace: "nowrap" }),
   decisionBadge: (tone) => ({ display: "inline-block", border: "1px solid currentColor", padding: "0.35rem 0.6rem", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", letterSpacing: "0.06em", color: tone === "allowed" ? "#72E0C8" : tone === "blocked" ? "#FFB0B8" : "#FFD27A", marginBottom: "0.75rem" }),
-  evidenceList: { display: "grid", gap: "0.55rem", marginTop: "0.75rem" },
-  evidenceItem: { borderTop: "1px solid rgba(250,246,235,0.24)", paddingTop: "0.55rem" },
+  reasonCode: { display: "inline-block", marginTop: "0.25rem", padding: "0.18rem 0.35rem", border: "1px solid rgba(250,246,235,0.24)", borderRadius: "2px", background: "rgba(250,246,235,0.08)", color: "#BFC7D5", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.72rem", overflowWrap: "anywhere" },
+  evidenceList: { display: "grid", gap: "0.35rem", marginTop: "0.85rem", padding: 0, listStyle: "none" },
+  evidenceItem: { display: "grid", gap: "0.2rem", borderTop: "1px solid rgba(250,246,235,0.18)", paddingTop: "0.45rem" },
+  evidenceLabel: { color: "#BFC7D5", fontSize: "0.78rem" },
+  detail: { marginTop: "0.65rem", borderTop: "1px solid rgba(250,246,235,0.18)", paddingTop: "0.55rem" },
+  detailSummary: { cursor: "pointer", color: "#D9E0EA", fontSize: "0.85rem" },
+  codeBlock: { display: "block", marginTop: "0.45rem", padding: "0.6rem 0.7rem", border: "1px solid #DDD7C5", background: "#F4EFE3", color: "#15161A", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.78rem", lineHeight: 1.55, overflowWrap: "anywhere", whiteSpace: "normal" },
+  darkCodeBlock: { display: "block", marginTop: "0.45rem", padding: "0.55rem 0.65rem", border: "1px solid rgba(250,246,235,0.18)", background: "rgba(250,246,235,0.08)", color: "#FAF6EB", fontFamily: "'IBM Plex Mono', ui-monospace, monospace", fontSize: "0.76rem", lineHeight: 1.55, overflowWrap: "anywhere", whiteSpace: "normal" },
   steps: { marginTop: "1rem", paddingLeft: "1.2rem" },
   sourceCard: { marginTop: "1rem", padding: "1rem", border: "1px solid #DDD7C5", background: "#FFFDF7" },
   sourceLinks: { display: "grid", gap: "0.65rem", margin: "1rem 0 0", padding: 0, listStyle: "none" },
-  sourceLink: { color: "#1D4F91", fontWeight: 700, overflowWrap: "anywhere" },
-  sourceUrl: { display: "block", marginTop: "0.15rem", color: "#5A5C62", overflowWrap: "anywhere" },
+  sourceLink: { display: "inline-flex", alignItems: "center", gap: "0.25rem", width: "fit-content", color: "#1D4F91", fontWeight: 700, textDecoration: "none", borderBottom: "1px solid currentColor", overflowWrap: "anywhere" },
   sourceNote: { marginTop: "1rem", color: "#5A5C62", fontSize: "0.92rem" },
   section: { marginTop: "1rem", padding: "1rem", border: "1px solid #DDD7C5", background: "#FDFDFC" },
 };
@@ -180,19 +196,18 @@ function EvidenceSources({ fixture, t }) {
   return (
     <section style={styles.sourceCard} aria-label={t("証拠ソース", "Evidence sources")}>
       <p style={styles.eyebrow}>{t("証拠ソース", "Evidence sources")}</p>
-      <h3 style={styles.h2}>{t("証拠ソース", "Evidence sources")}</h3>
+      <h3 style={styles.h3}>{t("証拠ソース", "Evidence sources")}</h3>
       <p>{t("このデモは、公開されているVERITAS OSのPoC資料およびfixture命名に接続されています。", "This demo is connected to public VERITAS OS PoC materials and fixture naming.")}</p>
       <div style={styles.metaItem}>
-        <strong>{t("Fixture reference:", "Fixture reference:")}</strong>
-        <div style={styles.mono}>{fixture}</div>
+        <strong>{t("Fixture:", "Fixture:")}</strong>
+        <code style={styles.codeBlock}>{fixture}</code>
       </div>
       <ul style={styles.sourceLinks}>
         {evidenceSourceLinks.map((link) => (
           <li key={link.href}>
             <a href={link.href} target="_blank" rel="noreferrer noopener" style={styles.sourceLink}>
-              {link.label}
+              {link.label} <span aria-hidden>↗</span>
             </a>
-            <span style={{ ...styles.mono, ...styles.sourceUrl }}>{link.href}</span>
           </li>
         ))}
       </ul>
@@ -275,16 +290,25 @@ export default function DemoPage() {
             <article style={styles.panelDark}>
               <p style={styles.darkEyebrow}>3 / Decision + Evidence Chain</p>
               <span style={styles.decisionBadge(scenario.decisionTone)}>{scenario.decision}</span>
-              <h2 style={styles.h2}>{scenario.reasonCode}</h2>
+              <h2 style={styles.h2}>{formatReasonCode(scenario.reasonCode)}</h2>
+              <code style={styles.reasonCode}>{scenario.reasonCode}</code>
               <p>{resolveText(scenario.reason, lang)}</p>
-              <div style={styles.evidenceList}>
-                {Object.entries(scenario.evidence).map(([key, value]) => (
-                  <div key={key} style={styles.evidenceItem}>
-                    <strong>{key}</strong>
-                    <div style={styles.mono}>{value}</div>
-                  </div>
+              <ul style={styles.evidenceList}>
+                {compactEvidenceKeys.map((key) => (
+                  <li key={key} style={styles.evidenceItem}>
+                    <strong style={styles.evidenceLabel}>{key}</strong>
+                    <span style={styles.mono}>{scenario.evidence[key]}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
+              <details style={styles.detail}>
+                <summary style={styles.detailSummary}>audit_path</summary>
+                <code style={styles.darkCodeBlock}>{scenario.evidence.audit_path}</code>
+              </details>
+              <details style={styles.detail}>
+                <summary style={styles.detailSummary}>fixture</summary>
+                <code style={styles.darkCodeBlock}>{scenario.evidence.fixture}</code>
+              </details>
             </article>
           </section>
 
