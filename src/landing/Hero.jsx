@@ -44,9 +44,12 @@ export default function Hero({ lang }) {
   const cta = (
     <>
       <div className="hero-cta-main">
-        <a href="/enterprise" className="btn btn-primary">
-          {t("企業課題を見る", "View Enterprise Problem")}
+        <a href="/demo" className="btn btn-primary">
+          {t("デモを見る", "View Demo")}
           <span aria-hidden>→</span>
+        </a>
+        <a href="/enterprise" className="btn btn-secondary">
+          {t("企業課題を見る", "View Enterprise Problem")}
         </a>
         <a href="/aml-kyc-poc" className="btn btn-secondary">
           {t("AML/KYC PoCを見る", "View AML/KYC PoC")}
