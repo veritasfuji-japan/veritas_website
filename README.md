@@ -68,6 +68,20 @@ Verify generated route metadata with:
 
     npm run check:route-html
 
+## Public Website Integrity Checks
+
+Use these commands before publishing public website changes:
+
+    npm run check:claims
+    npm run check:unicode
+    npm run check:fixtures
+    npm run check:proof-urls
+    npm run build
+    npm run check:route-html
+    npm run check:site-integrity
+
+These checks keep public routes, metadata, proof URLs, fixture IDs, and public claims aligned with reviewer-facing repository evidence. Run `npm run check:site-integrity` after `npm run build` because it verifies the generated `dist/` route HTML.
+
 ## Current Status
 
 - Public Vercel deployment is active.
