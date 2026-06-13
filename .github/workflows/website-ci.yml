@@ -29,5 +29,17 @@ jobs:
       - name: Run public claims guardrail
         run: npm run check:claims
 
+      - name: Run hidden Unicode guardrail
+        run: npm run check:unicode
+
+      - name: Run fixture reference guardrail
+        run: npm run check:fixtures
+
       - name: Build website
         run: npm run build
+
+      - name: Run route HTML guardrail
+        run: npm run check:route-html
+
+      - name: Run public site integrity guardrail
+        run: npm run check:site-integrity

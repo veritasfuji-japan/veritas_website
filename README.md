@@ -80,7 +80,7 @@ Use these commands before publishing public website changes:
     npm run check:route-html
     npm run check:site-integrity
 
-These checks keep public routes, metadata, proof URLs, fixture IDs, and public claims aligned with reviewer-facing repository evidence. Run `npm run check:site-integrity` after `npm run build` because it verifies the generated `dist/` route HTML.
+These checks keep public routes, metadata, proof URLs, fixture IDs, and public claims aligned with reviewer-facing repository evidence. Run `npm run check:site-integrity` after `npm run build` because it verifies the generated `dist/` route HTML. Deterministic offline guardrails run in Website CI for pull requests and pushes to `main`; proof URL reachability runs on a scheduled/manual workflow because it depends on external network access.
 
 ## Current Status
 

@@ -433,7 +433,6 @@ checkMailtoSafety();
 runCommand("npm", ["run", "check:claims"]);
 runCommand("npm", ["run", "check:unicode"]);
 runCommand("npm", ["run", "check:fixtures"]);
-runCommand("npm", ["run", "check:proof-urls"]);
 runCommand("npm", ["run", "check:route-html"]);
 
 if (findings.length > 0) {
