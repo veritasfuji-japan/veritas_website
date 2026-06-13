@@ -31,14 +31,15 @@ export default function Hero({ lang }) {
   );
   const titleEnDesktop = (
     <>
-      Govern AI decisions <em className="brand-gradient-text hero-gradient-word">before</em><br />
-      they touch the real world.
+      Govern AI decisions<br />
+      <em className="brand-gradient-text hero-gradient-word">before</em><br />
+      they touch the real world
     </>
   );
 
   const lead = t(
-    "意思決定の承認と実行 (commit) の境界を分離するコントロールプレーン。AI エージェントの判断を、レビュー可能・追跡可能・再実行可能・監査可能・強制可能にします。",
-    "A control plane that separates approval from commitment — making every AI-agent decision reviewable, traceable, replayable, auditable, and enforceable."
+    "意思決定の承認と実行commitの境界を分離するコントロールプレーン。AIエージェントの判断を、実行前にレビュー可能・追跡可能・再現可能・監査可能な形で検証します。",
+    "A control plane that separates decision approval from execution commitment. VERITAS OS makes AI-agent decisions reviewable, traceable, replayable, and auditable before execution."
   );
 
   const cta = (
@@ -51,31 +52,34 @@ export default function Hero({ lang }) {
         <a href="/enterprise" className="btn btn-secondary">
           {t("企業課題を見る", "View Enterprise Problem")}
         </a>
-        <a href="/aml-kyc-poc" className="btn btn-secondary">
-          {t("AML/KYC PoCを見る", "View AML/KYC PoC")}
+      </div>
+      <div className="hero-text-links">
+        <a href="/aml-kyc-poc" className="hero-cta-tertiary">
+          {t("PoCを見る", "View PoC")}
+          <span aria-hidden>→</span>
+        </a>
+        <a href="/contact" className="hero-cta-tertiary">
+          {t("相談する", "Contact")}
+          <span aria-hidden>→</span>
         </a>
       </div>
-      <a href="/contact" className="hero-cta-tertiary">
-        {t("相談する", "Contact")}
-        <span aria-hidden>→</span>
-      </a>
     </>
   );
 
   const meta = (
     <>
-      <span className="hero-meta-item">SHA-256 hash chain</span>
-      <span className="hero-meta-item">Ed25519 signed</span>
+      <span className="hero-meta-item">Evidence chain</span>
       <span className="hero-meta-item">Fail-closed gates</span>
-      <span className="hero-meta-item">EU AI Act</span>
+      <span className="hero-meta-item">Reviewer-facing artifacts</span>
+      <span className="hero-meta-item">Bind-boundary control</span>
     </>
   );
 
   const roles = [
-    ["01", t("導入評価", "Customer"), "#financial"],
-    ["02", t("運用", "Operator"), "#numbers"],
-    ["03", t("DD・投資", "Investor / DD"), "/reviewers"],
-    ["04", t("第三者監査", "Reviewer"), "/reviewers"],
+    ["01", t("企業課題", "Problem"), "/enterprise"],
+    ["02", t("仕組み", "Flow"), "/how-it-works"],
+    ["03", "PoC", "/aml-kyc-poc"],
+    ["04", t("レビュー", "Review"), "/reviewers"],
   ];
 
   return (
@@ -121,14 +125,14 @@ export default function Hero({ lang }) {
             <div className="bind-card">
               <div className="bind-card-head">
                 <span className="bind-card-title">{t("Bind 境界の系譜", "Bind-boundary lineage")}</span>
-                <span className="bind-pill">committed</span>
+                <span className="bind-pill">reviewable</span>
               </div>
               <BindFlow />
               <div className="bind-receipts">
                 {[
-                  ["FUJI", "allow", "var(--sage)"],
-                  ["telos", "0.84", "var(--blue)"],
-                  ["replay", "match", "var(--muted)"],
+                  ["FUJI", "gate", "var(--sage)"],
+                  ["TrustLog", "trace", "var(--blue)"],
+                  ["bind", "boundary", "var(--muted)"],
                 ].map(([k, v, c]) => (
                   <div key={k}>
                     <div className="bind-key">{k}</div>

@@ -5,22 +5,25 @@ export default function EnterpriseStart({ lang }) {
   const isJa = lang === "ja";
   const cards = [
     {
-      title: t("企業の痛み", "Enterprise pain"),
-      body: t("判断理由、証跡、承認境界がログやツールに散らばり、実行前に止める根拠が曖昧になる。", "Rationale, evidence, and approval boundaries scatter across logs and tools, making pre-execution control unclear."),
-      cta: t("痛みを見る", "Read enterprise pain"),
-      href: "/enterprise",
+      title: "Approval is scattered",
+      body: t(
+        "承認、証跡、判断理由がツールやログに分散する。",
+        "Approvals, evidence, and rationale scatter across tools and logs."
+      ),
     },
     {
-      title: t("評価経路", "Evaluation path"),
-      body: t("AML/KYC PoCで、fail-closed挙動、証跡、failure reason、review / block の判断を確認する。", "Use the AML/KYC PoC to inspect fail-closed behavior, evidence, failure reasons, and review / block outcomes."),
-      cta: t("PoCを見る", "View PoC"),
-      href: "/aml-kyc-poc",
+      title: "Logs arrive too late",
+      body: t(
+        "ログは事後に残るが、実行前に止める境界にはなりにくい。",
+        "Logs record what happened, but they rarely create a pre-execution boundary."
+      ),
     },
     {
-      title: t("外部レビュー", "External review"),
-      body: t("実装済み挙動、公開主張、証跡、コアリポジトリとの整合性を確認する。", "Review implemented behavior, public claims, evidence, and alignment with the core repository."),
-      cta: t("レビュー観点を見る", "View review criteria"),
-      href: "/reviewers",
+      title: "Commit needs proof",
+      body: t(
+        "外部システムへcommitする前に、権限・証跡・ポリシーを確認する必要がある。",
+        "Before committing to external systems, authority, evidence, and policy must be checked."
+      ),
     },
   ];
 
@@ -28,30 +31,27 @@ export default function EnterpriseStart({ lang }) {
     <section className="enterprise-start">
       <div className="container">
         <div className="enterprise-start-wrap">
-          <div className="marker">ENTERPRISE START</div>
+          <div className="marker">{t("企業が止まる場所", "Where enterprises get stuck")}</div>
           <h2 className="headline enterprise-start-headline">
-            {isJa ? (
-              <>
-                企業がAI導入につまずく理由は、
-                <br />
-                モデル性能ではなく「実行前に説明・停止できる仕組み」がないことです
-              </>
-            ) : (
-              "Enterprises stall not at model capability, but at proof before execution"
-            )}
+            {t("企業が止まる場所", "Where enterprises get stuck")}
           </h2>
           <p className={`body enterprise-start-body ${isJa ? "lead-ja" : ""}`}>
-            {t("AIエージェントが判断から実行へ近づくほど、企業には「誰が、何を根拠に、どこまで許可したか」を実行前に確認できる境界が必要になります。VERITAS OS は、この境界を authority evidence、FUJI gate、TrustLog、bind boundary として扱います。", "As AI agents move from recommendations toward execution, enterprises need a boundary that can prove who authorized what, based on which evidence, before action. VERITAS OS treats that boundary through authority evidence, FUJI gate, TrustLog, and bind boundary.")}
+            {t(
+              "AIエージェントが判断から実行へ近づくほど、企業の課題は「モデルが賢いか」ではなく、「誰が、何を根拠に、どこまで許可したかを実行前に確認できるか」に移ります。",
+              "As AI agents move closer to execution, the enterprise question shifts from “is the model smart?” to “who authorized what, based on which evidence, before action?”"
+            )}
           </p>
           <div className="enterprise-start-grid">
             {cards.map((card) => (
-              <a key={card.title} href={card.href} className="enterprise-start-card">
+              <article key={card.title} className="enterprise-start-card">
                 <h3 className="enterprise-start-title">{card.title}</h3>
                 <p className={`body ${isJa ? "aud-body-ja" : ""}`}>{card.body}</p>
-                <span className="enterprise-start-cta">{card.cta} →</span>
-              </a>
+              </article>
             ))}
           </div>
+          <a href="/enterprise" className="btn btn-secondary enterprise-start-action">
+            {t("企業課題を見る", "View Enterprise Problem")}
+          </a>
         </div>
       </div>
     </section>
