@@ -90,20 +90,13 @@ const resolveText = (value, lang) => {
   return lang === "ja" ? value.ja : value.en;
 };
 
-export default function PageShell({ label, title, pageTitle, subtitle, children, ctas = [] }) {
+export default function PageShell({ label, title, subtitle, children, ctas = [] }) {
   const [lang, setLang] = useState("ja");
   const t = (ja, en) => (lang === "ja" ? ja : en);
 
   const resolvedLabel = resolveText(label, lang);
   const resolvedTitle = resolveText(title, lang);
-  const resolvedPageTitle = resolveText(pageTitle, lang) || resolvedTitle;
   const resolvedSubtitle = resolveText(subtitle, lang);
-
-  useEffect(() => {
-    if (resolvedPageTitle) {
-      document.title = `${resolvedPageTitle} | VERITAS OS`;
-    }
-  }, [resolvedPageTitle]);
 
   useEffect(() => {
     document.documentElement.lang = lang;

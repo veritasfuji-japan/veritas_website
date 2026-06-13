@@ -8,6 +8,7 @@ import EnterprisePage from "./pages/EnterprisePage.jsx";
 import GlossaryPage from "./pages/GlossaryPage.jsx";
 import HowItWorksPage from "./pages/HowItWorksPage.jsx";
 import FaqPage from "./pages/FaqPage.jsx";
+import useRouteMeta from "./hooks/useRouteMeta.js";
 
 const routes = {
   "/": VeritasLanding,
@@ -24,7 +25,7 @@ const routes = {
 };
 
 export default function App() {
-  const path = window.location.pathname;
+  const path = useRouteMeta();
   const Page = routes[path] || VeritasLanding;
 
   return <Page />;

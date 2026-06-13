@@ -62,6 +62,8 @@ Social preview image:
 
 - `/og-image.svg`
 
+Route-specific client-side metadata is maintained for major public pages. Static social previews remain conservative because the site is deployed as a Vite SPA.
+
 ## Current Status
 
 - Public Vercel deployment is active.
