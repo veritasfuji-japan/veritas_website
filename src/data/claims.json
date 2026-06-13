@@ -44,10 +44,10 @@
         "en": "bind-governed effect paths"
       },
       "description": {
-        "ja": "bind boundary adapter 実装に基づく統制対象パス数。",
-        "en": "Number of governed effect paths based on bind boundary adapter implementation."
+        "ja": "文書化された operator-governed effect paths に基づく統制対象パス数。",
+        "en": "Number of documented operator-governed effect paths."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/veritas_os/policy/bind_boundary_adapters.py",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/validation/current-implementation-matrix.md",
       "caution": {
         "ja": "網羅的な業界標準対応を意味しません。",
         "en": "This does not imply exhaustive industry-standard coverage."
