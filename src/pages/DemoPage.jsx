@@ -35,7 +35,7 @@ const scenarios = [
       execution_intent_id: "intent_aml_kyc_high_risk_001",
       bind_receipt_id: "bind_rcpt_block_001",
       audit_path: "trustlog/aml-kyc/high-risk/manual-review/authority-missing",
-      fixture: "pilot_aml_kyc_high_risk_country_wire_manual_review",
+      fixture: "pilot_aml_kyc_anchor_high_risk_country",
     },
     reviewerSteps: [
       { ja: "Authority Evidenceの発行元と権限スコープを確認する。", en: "Check the Authority Evidence issuer and authority scope." },
@@ -76,7 +76,7 @@ const scenarios = [
       execution_intent_id: "intent_sanctions_partial_match_014",
       bind_receipt_id: "bind_rcpt_hold_014",
       audit_path: "trustlog/aml-kyc/sanctions/partial-match/manual-review",
-      fixture: "pilot_sanctions_partial_match_no_auto_proceed",
+      fixture: "pilot_sanctions_partial_match_no_proceed",
     },
     reviewerSteps: [
       { ja: "部分一致の根拠とfalse positive判定の有無を確認する。", en: "Review the partial-match basis and whether false-positive resolution exists." },

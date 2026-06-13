@@ -51,6 +51,7 @@ Production URL:
 - `/enterprise` — Enterprise pain points and governance value
 - `/how-it-works` — Technical structure and decision governance flow
 - `/aml-kyc-poc` — AML/KYC 1-day PoC overview
+- `/demo` — Public Mission Control-style demo for pre-execution governance
 - `/concepts` — Core VERITAS concept: approval is not commitment
 - `/glossary` — VERITAS OS terminology and plain-language definitions
 - `/faq` — Frequently asked questions and safe evaluation guidance
@@ -64,7 +65,7 @@ Social preview image:
 ## Current Status
 
 - Public Vercel deployment is active.
-- Landing page and static CTA pages are implemented.
+- Landing page, static CTA pages, and the public demo page are implemented.
 - Static pages currently cover AML/KYC PoC, Concepts, and Reviewers.
 - Public claims should remain aligned with the veritas_os repository evidence.
 
