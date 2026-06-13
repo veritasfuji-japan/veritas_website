@@ -4,10 +4,11 @@ import TopBar from "./landing/TopBar.jsx";
 import Hero from "./landing/Hero.jsx";
 import EnterpriseStart from "./landing/EnterpriseStart.jsx";
 import AmlKycPocConversion from "./landing/AmlKycPocConversion.jsx";
+import ControlFlowSnapshot from "./landing/ControlFlowSnapshot.jsx";
+import ReviewEvidenceSnapshot from "./landing/ReviewEvidenceSnapshot.jsx";
 import RouteGuide from "./landing/RouteGuide.jsx";
-import Audiences from "./landing/Audiences.jsx";
 import Idea from "./landing/Idea.jsx";
-import FinancialPointer from "./landing/FinancialPointer.jsx";
+import FinalContactCta from "./landing/FinalContactCta.jsx";
 import FooterArea from "./landing/FooterArea.jsx";
 import "./VeritasLanding.css";
 
@@ -38,13 +39,14 @@ export default function VeritasLanding() {
         <TopBar lang={lang} setLang={setLang} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <main>
           <Hero lang={lang} />
-          <AmlKycPocConversion lang={lang} />
           <EnterpriseStart lang={lang} />
+          <ControlFlowSnapshot lang={lang} />
+          <AmlKycPocConversion lang={lang} />
+          <ReviewEvidenceSnapshot lang={lang} />
           <RouteGuide lang={lang} />
-          <Audiences lang={lang} />
           <Idea lang={lang} />
           <NumbersFromClaims lang={lang} />
-          <FinancialPointer lang={lang} />
+          <FinalContactCta lang={lang} />
         </main>
         <FooterArea lang={lang} />
       </div>
