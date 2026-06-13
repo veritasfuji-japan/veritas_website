@@ -62,7 +62,11 @@ Social preview image:
 
 - `/og-image.svg`
 
-Route-specific client-side metadata is maintained for major public pages. Static social previews remain conservative because the site is deployed as a Vite SPA.
+Route-specific client-side metadata is maintained for major public pages. After `npm run build`, the Vite SPA also generates static per-route HTML files for major public URLs so social crawlers and link previews can read route-specific title, description, canonical, Open Graph, and Twitter metadata from the initial HTML.
+
+Verify generated route metadata with:
+
+    npm run check:route-html
 
 ## Current Status
 

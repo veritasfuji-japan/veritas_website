@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-route-html.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "check:claims": "node scripts/check-public-claims.mjs",
     "check:unicode": "node scripts/check-hidden-unicode.mjs",
     "check:fixtures": "node scripts/check-fixture-references.mjs",
-    "check:proof-urls": "node scripts/check-proof-urls.mjs"
+    "check:proof-urls": "node scripts/check-proof-urls.mjs",
+    "check:route-html": "node scripts/check-route-html.mjs"
   },
   "dependencies": {
     "react": "^19.2.5",
