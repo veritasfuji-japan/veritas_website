@@ -1667,3 +1667,232 @@
     max-width: 31rem;
   }
 }
+
+/* FAQ page */
+.faq-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.faq-hero-actions {
+  margin-top: 1.2rem;
+}
+
+.faq-button {
+  align-items: center;
+  background: #faf6eb;
+  border: 1px solid #cfc6b1;
+  border-radius: 999px;
+  color: #15161a;
+  display: inline-flex;
+  font-size: 0.95rem;
+  justify-content: center;
+  min-height: 2.65rem;
+  padding: 0.58rem 0.95rem;
+  text-decoration: none;
+}
+
+.faq-section,
+.faq-category,
+.faq-non-claims,
+.faq-next-steps,
+.faq-empty-state {
+  background: rgba(250, 246, 235, 0.7);
+  border: 1px solid #e3ddcc;
+  border-radius: 16px;
+  margin-top: 1.25rem;
+  padding: clamp(1rem, 2.8vw, 1.45rem);
+}
+
+.faq-section-heading {
+  margin-bottom: 0.9rem;
+}
+
+.faq-section-heading p {
+  color: #4a4d54;
+  margin: 0.35rem 0 0;
+  max-width: 44rem;
+}
+
+.faq-section-heading h2 {
+  color: #0b3d5b;
+  font-family: 'Fraunces', 'Times New Roman', serif;
+  font-size: clamp(1.25rem, 1.08rem + 0.8vw, 1.85rem);
+  line-height: 1.18;
+  margin: 0;
+}
+
+.faq-section-heading .faq-eyebrow {
+  color: #2456c7;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+}
+
+.faq-key-grid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.faq-key-card,
+.faq-disclosure {
+  background: #fffaf0;
+  border: 1px solid #e6decb;
+  border-radius: 14px;
+}
+
+.faq-key-card {
+  padding: 1rem;
+}
+
+.faq-key-card h3 {
+  color: #15161a;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 1rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.faq-key-card p,
+.faq-disclosure p,
+.faq-non-claims p {
+  color: #2a2d33;
+  margin: 0.55rem 0 0;
+}
+
+.faq-quick-jump {
+  display: flex;
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.faq-quick-jump a {
+  background: #fffaf0;
+  border: 1px solid #d9d0ba;
+  border-radius: 999px;
+  color: #1c2a2e;
+  flex: 0 0 auto;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.85rem;
+  text-decoration: none;
+}
+
+.faq-search {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.faq-search label {
+  color: #5a5c62;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.faq-search input {
+  background: #fffaf0;
+  border: 1px solid #d9d0ba;
+  border-radius: 12px;
+  color: #15161a;
+  font: inherit;
+  min-height: 2.85rem;
+  padding: 0.65rem 0.8rem;
+  width: 100%;
+}
+
+.faq-accordion-stack {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+}
+
+.faq-category {
+  scroll-margin-top: 1rem;
+}
+
+.faq-items {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.faq-disclosure summary {
+  align-items: center;
+  color: #15161a;
+  cursor: pointer;
+  display: flex;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.98rem;
+  gap: 1rem;
+  justify-content: space-between;
+  line-height: 1.45;
+  list-style: none;
+  min-height: 3.15rem;
+  padding: 0.85rem 1rem;
+}
+
+.faq-disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-disclosure summary::after {
+  color: #2456c7;
+  content: "+";
+  flex: 0 0 auto;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.faq-disclosure[open] summary::after {
+  content: "-";
+}
+
+.faq-disclosure p {
+  border-top: 1px solid #eee5d2;
+  padding: 0.85rem 1rem 1rem;
+}
+
+.faq-non-claims {
+  background: #fff3dc;
+  border-color: #ead4a8;
+}
+
+.faq-next-steps {
+  display: grid;
+  gap: 0.2rem;
+}
+
+@media (max-width: 560px) {
+  .faq-actions,
+  .faq-button {
+    width: 100%;
+  }
+
+  .faq-button {
+    padding-inline: 0.85rem;
+  }
+}
+
+@media (min-width: 780px) {
+  .faq-key-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .faq-filter-section {
+    align-items: end;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+  }
+
+  .faq-filter-section .faq-section-heading,
+  .faq-filter-section .faq-quick-jump {
+    grid-column: 1 / -1;
+  }
+}
