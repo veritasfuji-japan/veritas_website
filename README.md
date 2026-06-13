@@ -56,7 +56,7 @@ Production URL:
 - `/glossary` — VERITAS OS terminology and plain-language definitions
 - `/faq` — Frequently asked questions and safe evaluation guidance
 - `/reviewers` — External reviewer entrypoint
-- `/contact` — Email inquiry page
+- `/contact` — Email inquiry page for PoC evaluation and external review
 
 Social preview image:
 

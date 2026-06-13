@@ -82,12 +82,12 @@ const routeMetadata = [
   },
   {
     path: "/contact",
-    jaTitle: "VERITAS OS Contact — 評価相談",
-    enTitle: "VERITAS OS Contact — Evaluation Inquiry",
+    jaTitle: "VERITAS OS お問い合わせ — PoC評価・レビュー相談",
+    enTitle: "VERITAS OS Contact — PoC Evaluation and Review Inquiry",
     jaDescription:
-      "VERITAS OSの評価相談や公開情報に関する問い合わせ先を案内します。機密情報、個人情報、顧客データ、規制対象データは送信しないでください。",
+      "VERITAS OS のPoC評価、技術レビュー、外部評価、共同研究に関する初回連絡ページです。1つのAI判断経路をもとに、証跡、権限、ポリシー、allow / hold / review / block の分岐を相談できます。",
     enDescription:
-      "Contact information for VERITAS OS evaluation inquiries and public materials. Do not send confidential, personal, customer, or regulated data.",
+      "Contact VERITAS OS for PoC evaluation, technical review, external assessment, or research collaboration. Start with one AI-agent decision path and map evidence, authority, policy, and allow / hold / review / block behavior.",
   },
 ];
 

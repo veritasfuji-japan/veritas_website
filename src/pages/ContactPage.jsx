@@ -19,11 +19,31 @@ Notes:
 `);
 
 const emailLink = `mailto:veritas.fuji@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+const pocEmailSubject = encodeURIComponent("VERITAS OS 1-Day PoC Evaluation");
+const pocEmailLink = `mailto:veritas.fuji@gmail.com?subject=${pocEmailSubject}&body=${emailBody}`;
 
 const heroActions = [
   { label: ["メールを送る", "Send email"], href: emailLink, primary: true },
-  { label: ["コアリポジトリを開く", "Open Core Repository"], href: coreRepositoryUrl, external: true },
   { label: ["デモを見る", "View Demo"], href: "/demo" },
+  { label: ["AML/KYC PoCを見る", "View AML/KYC PoC"], href: "/aml-kyc-poc" },
+];
+
+const pocDecisionItems = [
+  [
+    "AIに実行させたい、または止めたい判断",
+    "The AI action to allow, hold, review, or block",
+  ],
+  ["その判断に必要な証跡", "Evidence required before execution"],
+  ["誰が承認すべきか", "Who should approve the action"],
+  ["どのポリシーやルールが関係するか", "Which policy or rule applies"],
+  [
+    "証跡不足時にどう止めたいか",
+    "What should happen when evidence is missing",
+  ],
+  [
+    "監査・レビュー時に何を残したいか",
+    "What should remain for audit or review",
+  ],
 ];
 
 const contactTopics = [
@@ -149,9 +169,10 @@ export default function ContactPage() {
       }}
       ctas={[
         { label: { ja: "メールを送る", en: "Send email" }, href: emailLink },
-        { label: { ja: "ホームへ戻る", en: "Back to Home" }, href: "/" },
-        { label: { ja: "コアリポジトリを開く", en: "Open Core Repository" }, href: coreRepositoryUrl },
+        { label: { ja: "デモを見る", en: "View Demo" }, href: "/demo" },
         { label: { ja: "AML/KYC PoCを見る", en: "View AML/KYC PoC" }, href: "/aml-kyc-poc" },
+        { label: { ja: "レビュアー入口を見る", en: "View Reviewer Entrypoint" }, href: "/reviewers" },
+        { label: { ja: "コアリポジトリを開く", en: "Open Core Repository" }, href: coreRepositoryUrl },
       ]}
     >
       {(t) => (
@@ -186,6 +207,44 @@ export default function ContactPage() {
             >
               {t("メールを送る", "Send email")}
             </a>
+          </section>
+
+          <section className="contact-poc-card" aria-labelledby="contact-poc-heading">
+            <div className="contact-poc-header">
+              <div>
+                <p className="contact-kicker">PoC evaluation inquiry</p>
+                <h2 id="contact-poc-heading" style={sectionHeadingStyle}>
+                  {t("1つのAI判断経路からPoC相談を始める", "Start with one AI decision path")}
+                </h2>
+                <p style={sectionIntroStyle}>
+                  {t(
+                    "VERITAS OS の評価は、抽象的なAIガバナンス議論よりも、1つの具体的なAIエージェント判断経路から始めると進めやすくなります。",
+                    "VERITAS OS is easiest to evaluate through one concrete AI-agent decision path rather than an abstract AI governance discussion.",
+                  )}
+                </p>
+                <p className="contact-poc-supporting">
+                  {t(
+                    "AIが何をしようとしているのか、その実行に必要な証跡は何か、誰が承認すべきか、どの条件なら allow / hold / review / block になるべきかを整理します。",
+                    "The evaluation maps what the AI is trying to do, what evidence is required, who should authorize it, and when the action should allow, hold, review, or block.",
+                  )}
+                </p>
+              </div>
+              <a
+                href={pocEmailLink}
+                className="contact-primary-email"
+                style={primaryButtonStyle}
+              >
+                {t("PoC評価についてメールする", "Email about PoC evaluation")}
+              </a>
+            </div>
+            <div className="contact-poc-grid">
+              {pocDecisionItems.map(([ja, en]) => (
+                <div className="contact-poc-row" key={en}>
+                  <span aria-hidden="true">✓</span>
+                  <p>{t(ja, en)}</p>
+                </div>
+              ))}
+            </div>
           </section>
 
           <section aria-labelledby="contact-topics-heading">
@@ -239,8 +298,8 @@ export default function ContactPage() {
             </p>
             <p>
               {t(
-                "VERITAS OSは、現時点では法的助言、規制当局承認、第三者認証、本番運用可否、ライブ銀行連携を主張しません。",
-                "VERITAS OS does not currently claim legal advice, regulatory approval, third-party certification, production readiness, or live bank integration.",
+                "VERITAS OS は、法的助言、規制当局承認、第三者認証、本番運用可否、ライブ銀行連携を主張しません。",
+                "VERITAS OS does not claim legal advice, regulatory approval, third-party certification, production readiness, or live bank integration.",
               )}
             </p>
           </section>
