@@ -12,7 +12,8 @@
     "check:unicode": "node scripts/check-hidden-unicode.mjs",
     "check:fixtures": "node scripts/check-fixture-references.mjs",
     "check:proof-urls": "node scripts/check-proof-urls.mjs",
-    "check:route-html": "node scripts/check-route-html.mjs"
+    "check:route-html": "node scripts/check-route-html.mjs",
+    "check:site-integrity": "node scripts/check-public-site-integrity.mjs"
   },
   "dependencies": {
     "react": "^19.2.5",

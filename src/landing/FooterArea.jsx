@@ -23,7 +23,7 @@ export default function FooterArea({ lang }) {
       ["Zenodo (EN)", "https://doi.org/10.5281/zenodo.17838349", true],
       ["Zenodo (JP)", "https://doi.org/10.5281/zenodo.17838456", true],
       ["LinkedIn", "https://www.linkedin.com/in/takeshi-fujishita-279709392", true],
-      ["Email", "mailto:veritas.fuji@gmail.com"],
+      ["Email", "mailto:veritas.fuji@gmail.com?subject=VERITAS%20OS%20inquiry"],
     ] },
   ];
 

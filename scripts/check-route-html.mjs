@@ -22,16 +22,13 @@ const requiredSingleTags = [
   ["title", /<title\b[^>]*>[\s\S]*?<\/title>/gi],
   ["meta description", /<meta\s+[^>]*name=["']description["'][^>]*>/gi],
   ["canonical URL", /<link\s+[^>]*rel=["']canonical["'][^>]*>/gi],
-];
-
-const requiredMetadata = [
-  ["og:title", /<meta\s+[^>]*property=["']og:title["'][^>]*>/i],
-  ["og:description", /<meta\s+[^>]*property=["']og:description["'][^>]*>/i],
-  ["og:url", /<meta\s+[^>]*property=["']og:url["'][^>]*>/i],
-  ["twitter:title", /<meta\s+[^>]*name=["']twitter:title["'][^>]*>/i],
+  ["og:title", /<meta\s+[^>]*property=["']og:title["'][^>]*>/gi],
+  ["og:description", /<meta\s+[^>]*property=["']og:description["'][^>]*>/gi],
+  ["og:url", /<meta\s+[^>]*property=["']og:url["'][^>]*>/gi],
+  ["twitter:title", /<meta\s+[^>]*name=["']twitter:title["'][^>]*>/gi],
   [
     "twitter:description",
-    /<meta\s+[^>]*name=["']twitter:description["'][^>]*>/i,
+    /<meta\s+[^>]*name=["']twitter:description["'][^>]*>/gi,
   ],
 ];
 
@@ -55,12 +52,6 @@ for (const routeFile of routeFiles) {
     const count = countMatches(html, pattern);
     if (count !== 1) {
       findings.push(`${routeFile}: expected one ${label}, found ${count}`);
-    }
-  }
-
-  for (const [label, pattern] of requiredMetadata) {
-    if (!pattern.test(html)) {
-      findings.push(`${routeFile}: missing ${label}`);
     }
   }
 }
