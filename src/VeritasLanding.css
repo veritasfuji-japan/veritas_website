@@ -2231,3 +2231,242 @@
     padding-left: 1rem;
   }
 }
+
+/* Action-led contact page. */
+.contact-page {
+  display: grid;
+  gap: 1.15rem;
+  margin-top: 1rem;
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.contact-hero-note {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.38rem 0.7rem;
+  border: 1px solid #D8CDB6;
+  border-radius: 999px;
+  background: #FFF9EC;
+  color: #4D4F55;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.contact-hero-actions,
+.contact-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.contact-action,
+.contact-primary-email {
+  -webkit-tap-highlight-color: rgba(21, 22, 26, 0.12);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.contact-action:hover,
+.contact-primary-email:hover {
+  transform: translateY(-1px);
+}
+
+.contact-action-primary:hover,
+.contact-primary-email:hover {
+  box-shadow: 0 14px 28px rgba(21, 22, 26, 0.2) !important;
+}
+
+.contact-primary-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.2rem;
+  padding: clamp(1.05rem, 2vw, 1.45rem);
+  border: 1px solid #DDD3BE;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #FFFDF7 0%, #FBF2DE 100%);
+  box-shadow: 0 18px 36px rgba(80, 64, 35, 0.12);
+}
+
+.contact-kicker {
+  margin: 0 0 0.35rem;
+  color: #2D607F;
+  font-family: var(--mono, 'IBM Plex Mono', ui-monospace, monospace);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-primary-email {
+  min-width: 11rem;
+}
+
+.contact-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.8rem;
+}
+
+.contact-topic-card {
+  min-height: 10.5rem;
+  padding: 0.9rem;
+  border: 1px solid #E0D7C4;
+  border-radius: 16px;
+  background: rgba(255, 253, 247, 0.72);
+}
+
+.contact-topic-card h3 {
+  margin: 0;
+  color: #15161A;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.contact-topic-card p {
+  margin: 0.5rem 0 0;
+  color: #4A4D54;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.contact-template-card,
+.contact-other-section {
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid #DED5C0;
+  border-radius: 18px;
+  background: #FFFDF7;
+}
+
+.contact-template-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.contact-soft-badge,
+.contact-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #D8CDB6;
+  border-radius: 999px;
+  background: #FAF6EB;
+  color: #33363D;
+  line-height: 1.25;
+}
+
+.contact-soft-badge {
+  flex: 0 0 auto;
+  padding: 0.35rem 0.6rem;
+  color: #2D607F;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.contact-checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.contact-check-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 3rem;
+  padding: 0.62rem 0.72rem;
+  border: 1px solid #E5DDCA;
+  border-radius: 14px;
+  background: #FAF6EB;
+}
+
+.contact-check-row span {
+  display: inline-grid;
+  flex: 0 0 1.35rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #EAF0F8;
+  color: #0B3D5B;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.contact-check-row p {
+  margin: 0;
+  color: #33363D;
+  font-size: 0.94rem;
+  line-height: 1.35;
+}
+
+.contact-notice {
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid #E2C28C;
+  border-radius: 18px;
+  background: #FFF1CE;
+}
+
+.contact-notice p {
+  margin: 0.65rem 0 0;
+  color: #4B3A1A;
+  line-height: 1.62;
+}
+
+.contact-chip-row {
+  margin-top: 0.9rem;
+}
+
+.contact-chip {
+  padding: 0.48rem 0.72rem;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 980px) {
+  .contact-topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-page {
+    gap: 0.95rem;
+  }
+
+  .contact-hero-actions,
+  .contact-chip-row {
+    gap: 0.55rem;
+  }
+
+  .contact-action,
+  .contact-primary-email {
+    width: 100%;
+  }
+
+  .contact-primary-card,
+  .contact-template-header {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-primary-card,
+  .contact-template-header {
+    display: grid;
+  }
+
+  .contact-topic-grid,
+  .contact-checklist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-topic-card {
+    min-height: 0;
+  }
+
+  .contact-soft-badge {
+    width: fit-content;
+  }
+}
