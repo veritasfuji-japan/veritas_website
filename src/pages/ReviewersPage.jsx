@@ -1,6 +1,40 @@
 import PageShell from "../components/PageShell.jsx";
 
 const CORE_REPOSITORY_URL = "https://github.com/veritasfuji-japan/veritas_os";
+const REVIEWER_EVIDENCE_DOCS = [
+  {
+    title: "Reviewer Evidence Index",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/external-reviewer-artifact-index.md",
+    description: {
+      ja: "外部レビュアー向けの主要証跡、検証レポート、スキーマへの入口。",
+      en: "Entry point for reviewer artifacts, validation reports, and schemas.",
+    },
+  },
+  {
+    title: "Reviewer Evidence Assurance Overview",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/reviewer-evidence-assurance-overview.md",
+    description: {
+      ja: "Evidence Chain、レビューパケット、失敗理由カタログの保証モデル概要。",
+      en: "Assurance model overview for the Evidence Chain, reviewer packet, and failure reason catalog.",
+    },
+  },
+  {
+    title: "Reviewer Evidence Packet",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/reviewer-evidence-packet.md",
+    description: {
+      ja: "レビュアーがケース結果、証跡サマリ、検証サマリを確認するためのパケット仕様。",
+      en: "Packet specification for inspecting case outcomes, evidence summaries, and verification summaries.",
+    },
+  },
+];
+const REVIEWER_EVIDENCE_FLOW = [
+  "AI Decision",
+  "Evidence Chain",
+  "Reviewer Packet",
+  "Failure Reason Catalog",
+  "Validation Report",
+  "Assurance Overview",
+];
 
 const sectionHeader = {
   marginBottom: "1rem",
@@ -56,7 +90,7 @@ export default function ReviewersPage() {
         en: "An entry point for evaluating VERITAS OS as an auditable decision infrastructure layer for LLM agents.",
       }}
     >
-      {(t) => {
+      {(t, lang) => {
         const audienceItems = [
           {
             title: t("技術レビュアー", "Technical reviewers"),
@@ -137,6 +171,11 @@ export default function ReviewersPage() {
           },
         ];
 
+        const reviewerEvidenceIntro = t(
+          "VERITAS は、AI実行判断を実行前に検査・検証・再現できることを示す、決定論的なレビュアー向け証跡を提供します。",
+          "VERITAS provides deterministic reviewer-facing evidence demonstrating how AI execution decisions can be inspected, validated, and reproduced before execution.",
+        );
+
         const nonClaims = [
           t("本番導入済みであることを示すものではない", "It does not claim production deployment"),
           t("規制当局の承認を示すものではない", "It does not claim regulatory approval"),
@@ -206,8 +245,31 @@ export default function ReviewersPage() {
               </ol>
             </section>
 
+
+            <section className="reviewer-section reviewer-evidence-docs-section">
+              <SectionHeading eyebrow="04" title="Reviewer Evidence" />
+              <p>{reviewerEvidenceIntro}</p>
+              <div className="reviewer-card-grid" aria-label={t("Reviewer Evidence ドキュメント", "Reviewer Evidence documentation")}>
+                {REVIEWER_EVIDENCE_DOCS.map((doc) => (
+                  <article className="reviewer-review-card" key={doc.href}>
+                    <h3>{doc.title}</h3>
+                    <p>{lang === "ja" ? doc.description.ja : doc.description.en}</p>
+                    <ExternalLink href={doc.href}>{t("GitHubで開く", "Open on GitHub")}</ExternalLink>
+                  </article>
+                ))}
+              </div>
+              <ol className="reviewer-evidence-flow" aria-label={t("証跡保証アーキテクチャ", "Evidence assurance architecture")}>
+                {REVIEWER_EVIDENCE_FLOW.map((step, index) => (
+                  <li key={step}>
+                    <span>{step}</span>
+                    {index < REVIEWER_EVIDENCE_FLOW.length - 1 && <strong aria-hidden="true">↓</strong>}
+                  </li>
+                ))}
+              </ol>
+            </section>
+
             <section className="reviewer-section reviewer-checkpoints-section">
-              <SectionHeading eyebrow="04" title={t("DD・投資向け確認観点", "DD / investor checkpoints")} />
+              <SectionHeading eyebrow="05" title={t("DD・投資向け確認観点", "DD / investor checkpoints")} />
               <div className="reviewer-checklist">
                 {ddItems.map((item) => (
                   <article className="reviewer-check-item" key={item.title}>
@@ -234,7 +296,7 @@ export default function ReviewersPage() {
 
             <section className="reviewer-next-section">
               <div>
-                <SectionHeading eyebrow="05" title={t("次に見るもの", "Next steps")} />
+                <SectionHeading eyebrow="06" title={t("次に見るもの", "Next steps")} />
                 <p>
                   {t(
                     "本サイト上の主張は、veritas_os リポジトリ上の証跡と照合して確認してください。",
