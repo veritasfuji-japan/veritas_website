@@ -1463,6 +1463,7 @@
 .reviewer-audience-card,
 .reviewer-review-card,
 .reviewer-check-item,
+.reviewer-evidence-flow,
 .reviewer-next-section,
 .reviewer-disclosure {
   background: rgba(250, 246, 235, 0.74);
@@ -1509,6 +1510,7 @@
 }
 
 .reviewer-steps-list,
+.reviewer-evidence-flow,
 .reviewer-next-list,
 .reviewer-disclosure ul {
   list-style: none;
@@ -1543,6 +1545,42 @@
   color: var(--ink-2);
   line-height: 1.6;
   margin: 0;
+}
+
+
+.reviewer-evidence-docs-section > p {
+  color: var(--ink-2);
+  line-height: 1.65;
+  margin: 0 0 1rem;
+  max-width: 58rem;
+}
+
+.reviewer-evidence-flow {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0 0;
+  padding: 0.9rem;
+}
+
+.reviewer-evidence-flow li {
+  align-items: center;
+  display: grid;
+  gap: 0.45rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.reviewer-evidence-flow span {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.reviewer-evidence-flow strong {
+  color: var(--blue);
+  font-size: 1.15rem;
+  line-height: 1;
 }
 
 .reviewer-checklist {
@@ -1649,6 +1687,11 @@
 
   .reviewer-steps-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .reviewer-evidence-flow {
+    align-items: start;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 
