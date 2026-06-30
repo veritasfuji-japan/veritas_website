@@ -2873,3 +2873,85 @@
   font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
   line-height: 1.7;
 }
+
+.architecture-overview {
+  padding: clamp(2.25rem, 6vw, 4.5rem) 0;
+  background: var(--paper-2);
+}
+.architecture-shell {
+  background: rgba(244, 239, 227, 0.86);
+}
+.architecture-copy .headline {
+  max-width: 18ch;
+}
+.architecture-flow {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.95rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--paper);
+}
+.architecture-flow li {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-size: clamp(0.78rem, 0.74rem + 0.18vw, 0.9rem);
+  line-height: 1.35;
+  text-align: center;
+}
+.architecture-flow span {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.42rem 0.55rem;
+  border: 1px solid var(--rule-soft);
+  background: var(--paper-2);
+}
+.architecture-flow strong {
+  color: var(--blue);
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1;
+}
+.architecture-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+.architecture-doc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+.architecture-doc-links a {
+  border-bottom: 1px solid var(--blue);
+  color: var(--blue-deep);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  padding-bottom: 0.1rem;
+}
+.architecture-doc-links a:hover {
+  color: var(--teal-deep);
+  border-bottom-color: var(--teal-deep);
+}
+@media (min-width: 760px) {
+  .architecture-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .architecture-shell {
+    grid-template-columns: minmax(0, 0.85fr) minmax(18rem, 0.65fr);
+    align-items: start;
+  }
+  .architecture-card-grid,
+  .architecture-doc-links {
+    grid-column: 1 / -1;
+  }
+  .architecture-card-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

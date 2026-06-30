@@ -5,6 +5,7 @@ import Hero from "./landing/Hero.jsx";
 import EnterpriseStart from "./landing/EnterpriseStart.jsx";
 import AmlKycPocConversion from "./landing/AmlKycPocConversion.jsx";
 import ControlFlowSnapshot from "./landing/ControlFlowSnapshot.jsx";
+import ArchitectureOverview from "./landing/ArchitectureOverview.jsx";
 import ReviewEvidenceSnapshot from "./landing/ReviewEvidenceSnapshot.jsx";
 import RouteGuide from "./landing/RouteGuide.jsx";
 import Idea from "./landing/Idea.jsx";
@@ -41,6 +42,7 @@ export default function VeritasLanding() {
           <Hero lang={lang} />
           <EnterpriseStart lang={lang} />
           <ControlFlowSnapshot lang={lang} />
+          <ArchitectureOverview lang={lang} />
           <AmlKycPocConversion lang={lang} />
           <ReviewEvidenceSnapshot lang={lang} />
           <RouteGuide lang={lang} />
