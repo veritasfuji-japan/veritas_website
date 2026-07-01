@@ -157,7 +157,7 @@ const reviewerDocLinks = {
   },
   failureCatalog: {
     label: "Failure Reason Catalog",
-    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/failure-reason-catalog.md",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/examples/reviewer-failure-reason-catalog-v1/reviewer-failure-reason-catalog.generated.example.md",
   },
 };
 
