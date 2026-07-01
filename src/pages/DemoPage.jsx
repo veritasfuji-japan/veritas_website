@@ -146,6 +146,121 @@ const evidenceSourceLinks = [
   },
 ];
 
+const reviewerDocLinks = {
+  overview: {
+    label: "Reviewer Evidence Overview",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/reviewer-evidence-assurance-overview.md",
+  },
+  packet: {
+    label: "Reviewer Packet",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/reviewer-evidence-packet.md",
+  },
+  failureCatalog: {
+    label: "Failure Reason Catalog",
+    href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/examples/reviewer-failure-reason-catalog-v1/reviewer-failure-reason-catalog.generated.example.md",
+  },
+};
+
+const walkthroughSteps = [
+  {
+    label: "AI / Agent Output",
+    purpose: { ja: "AIが提案した業務アクションを、まだ実行せずに捕捉します。", en: "Capture the business action proposed by the AI before any execution occurs." },
+    inputs: ["agentRequest", "action_class", "requested_scope"],
+    outputs: ["raw AI proposal", "governance input candidate"],
+    why: { ja: "AIの出力と企業を拘束する実行を分離するためです。", en: "It separates AI output from an enterprise-binding action." },
+    docs: ["overview"],
+  },
+  {
+    label: "Decision Candidate",
+    purpose: { ja: "AI提案を、検査可能な意思決定候補へ正規化します。", en: "Normalize the AI proposal into an inspectable decision candidate." },
+    inputs: ["raw AI proposal", "riskContext"],
+    outputs: ["decision_id", "reason_code candidate"],
+    why: { ja: "レビュアーが同じ粒度で判断を追跡できるようにします。", en: "Reviewers can trace the decision at a stable level of detail." },
+    docs: ["overview", "failureCatalog"],
+  },
+  {
+    label: "Governance Evaluation",
+    purpose: { ja: "権限、承認、ポリシー、bind coverageを実行前に確認します。", en: "Check authority, approval, policy, and bind coverage before execution." },
+    inputs: ["decision candidate", "policy requirements", "scenario checks"],
+    outputs: ["ALLOWED / ESCALATED / BLOCKED", "reason_code"],
+    why: { ja: "不十分な経路をfail-closedで止めるためです。", en: "Insufficient paths can fail closed instead of silently proceeding." },
+    docs: ["overview", "failureCatalog"],
+  },
+  {
+    label: "Authority Evidence",
+    purpose: { ja: "そのアクションを許可できる根拠とスコープを確認します。", en: "Verify the basis and scope for authorizing the action." },
+    inputs: ["authority source", "requested_scope"],
+    outputs: ["authority status", "scope match / gap"],
+    why: { ja: "権限のないAIアクションを防ぐためです。", en: "It prevents AI actions without sufficient authority." },
+    docs: ["overview", "packet"],
+  },
+  {
+    label: "Human Approval",
+    purpose: { ja: "必要な場合、人間の承認receiptをEvidence Chainに加えます。", en: "Add a human approval receipt to the Evidence Chain when required." },
+    inputs: ["review requirement", "approval receipt"],
+    outputs: ["accepted / required / not accepted"],
+    why: { ja: "人間が関与すべき判断をAI単独で進めないためです。", en: "Decisions requiring a human do not proceed on AI output alone." },
+    docs: ["packet"],
+  },
+  {
+    label: "Evidence Chain",
+    purpose: { ja: "判断、理由、承認、bind receiptを追跡可能な証跡として蓄積します。", en: "Accumulate the decision, rationale, approvals, and bind receipt as traceable evidence." },
+    inputs: ["decision_id", "reason_code", "approval status"],
+    outputs: ["audit_path", "evidence chain entries"],
+    why: { ja: "後続レビューで、何がなぜ許可または停止されたかを再確認するためです。", en: "Later review can reconstruct what was allowed or stopped and why." },
+    docs: ["overview", "packet"],
+  },
+  {
+    label: "Bind Boundary",
+    highlight: true,
+    purpose: { ja: "AI出力と実行コミットの境界を明確にします。", en: "Make the boundary between AI output and execution commit explicit." },
+    inputs: ["governance result", "bind coverage"],
+    outputs: ["bind_receipt_id", "proceed / hold / block boundary"],
+    why: { ja: "VERITASはAI出力を直接実行しません。実行はガバナンス検証が成功した後だけ発生します。", en: "VERITAS does not execute AI output directly. Execution occurs only after governance validation succeeds." },
+    docs: ["overview", "packet"],
+  },
+  {
+    label: "Execution Intent",
+    purpose: { ja: "許可済みスコープ内の実行意図を記録します。", en: "Record the execution intent inside the authorized scope." },
+    inputs: ["allowed decision", "requested_scope"],
+    outputs: ["execution_intent_id"],
+    why: { ja: "実行前の意図と許可範囲を結び付けるためです。", en: "It links pre-execution intent to the authorized boundary." },
+    docs: ["packet"],
+  },
+  {
+    label: "Outcome Receipt",
+    purpose: { ja: "実行可能な場合も結果receiptを証跡に残します。", en: "When execution can proceed, retain the outcome receipt as evidence." },
+    inputs: ["execution intent", "bind receipt"],
+    outputs: ["outcome receipt"],
+    why: { ja: "承認された意図と結果の対応をレビュー可能にするためです。", en: "Reviewers can compare the authorized intent with the outcome." },
+    docs: ["packet"],
+  },
+  {
+    label: "Reviewer Evidence Packet",
+    purpose: { ja: "レビュアー向けに判断結果、証跡、検証サマリをまとめます。", en: "Package decision outcomes, evidence, and verification summaries for reviewers." },
+    inputs: ["Evidence Chain", "checks", "reason_code"],
+    outputs: ["reviewer packet"],
+    why: { ja: "外部レビューで必要な情報を一箇所に集約するためです。", en: "External review gets a consolidated evidence view." },
+    docs: ["packet", "failureCatalog"],
+  },
+  {
+    label: "Validation Report",
+    purpose: { ja: "パケットと証跡が期待される構造に合うか検証します。", en: "Validate that the packet and evidence match the expected structure." },
+    inputs: ["reviewer packet", "failure catalog"],
+    outputs: ["validation report"],
+    why: { ja: "判断を説明するだけでなく、検証可能にするためです。", en: "The decision is not only explained; it is made verifiable." },
+    docs: ["overview", "failureCatalog"],
+  },
+];
+
+const evidenceProgression = [
+  "Decision",
+  "Approval",
+  "Evidence Chain",
+  "Reviewer Packet",
+  "Validation Report",
+];
+
 const technicalEvidenceKeys = [
   "reason_code",
   "decision_id",
@@ -374,6 +489,63 @@ const styles = {
     borderRadius: radii.surface,
     background: colors.surface,
   },
+  walkthroughSection: {
+    marginTop: "1.5rem",
+    padding: spacing.surface,
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surfaceRaised,
+  },
+  walkthroughLayout: {
+    display: "grid",
+    gridTemplateColumns: "minmax(13rem, 0.85fr) minmax(18rem, 1.35fr)",
+    gap: "1rem",
+    marginTop: "1rem",
+  },
+  walkthroughSteps: { display: "grid", gap: "0.45rem" },
+  walkthroughButton: (active, highlight) => ({
+    padding: "0.7rem 0.8rem",
+    border: `1px solid ${active ? colors.darkSurface : highlight ? colors.noticeRule : colors.rule}`,
+    borderRadius: radii.compact,
+    background: active ? colors.darkSurface : highlight ? colors.notice : colors.surface,
+    color: active ? colors.surface : colors.ink,
+    textAlign: "left",
+    cursor: "pointer",
+    fontWeight: active || highlight ? 800 : 700,
+  }),
+  walkthroughCard: (highlight) => ({
+    padding: spacing.surface,
+    border: `1px solid ${highlight ? colors.noticeRule : colors.rule}`,
+    borderRadius: radii.surface,
+    background: highlight ? colors.notice : colors.surface,
+  }),
+  walkthroughMeta: { display: "grid", gap: "0.75rem", marginTop: "1rem" },
+  chipList: { display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.4rem" },
+  chip: {
+    padding: "0.25rem 0.5rem",
+    border: `1px solid ${colors.ruleStrong}`,
+    borderRadius: "999px",
+    background: colors.surfaceRaised,
+    fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+    fontSize: "0.76rem",
+  },
+  docLinks: { display: "flex", flexWrap: "wrap", gap: "0.55rem", marginTop: "0.6rem" },
+  evidenceProgression: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.5rem",
+    alignItems: "center",
+    margin: "1rem 0 0",
+    padding: 0,
+    listStyle: "none",
+  },
+  evidenceProgressionItem: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    color: colors.inkSoft,
+    fontWeight: 800,
+  },
   positioningSection: {
     marginTop: "1.5rem",
     padding: "0.35rem 0.25rem 0.35rem 1rem",
@@ -393,6 +565,78 @@ function MetaItem({ label, value }) {
       <strong>{label}</strong>
       <div style={styles.mono}>{value}</div>
     </div>
+  );
+}
+
+function WalkthroughDetail({ activeStep, lang, scenario, t }) {
+  const step = walkthroughSteps[activeStep];
+  const currentEvidence = [
+    ["decision", scenario.decision],
+    ["reason_code", scenario.reasonCode],
+    ["decision_id", scenario.evidence.decision_id],
+    ["execution_intent_id", scenario.evidence.execution_intent_id],
+    ["bind_receipt_id", scenario.evidence.bind_receipt_id],
+  ];
+
+  return (
+    <article style={styles.walkthroughCard(step.highlight)}>
+      <p style={styles.eyebrow}>{`${t("ステップ", "Step")} ${activeStep + 1}`}</p>
+      <h3 style={styles.h3}>{step.label}</h3>
+      {step.highlight && (
+        <p style={styles.notice}>
+          <strong>{t("Bind Boundary:", "Bind Boundary:")}</strong>{" "}
+          {t(
+            "VERITASはAI出力を直接実行しません。実行はガバナンス検証が成功した後だけ発生します。",
+            "VERITAS does not execute AI output directly. Execution occurs only after governance validation succeeds."
+          )}
+        </p>
+      )}
+      <div style={styles.walkthroughMeta}>
+        <div>
+          <strong>{t("目的", "Purpose")}</strong>
+          <p>{resolveText(step.purpose, lang)}</p>
+        </div>
+        <div>
+          <strong>{t("入力", "Inputs")}</strong>
+          <div style={styles.chipList}>
+            {step.inputs.map((item) => <span key={item} style={styles.chip}>{item}</span>)}
+          </div>
+        </div>
+        <div>
+          <strong>{t("出力", "Outputs")}</strong>
+          <div style={styles.chipList}>
+            {step.outputs.map((item) => <span key={item} style={styles.chip}>{item}</span>)}
+          </div>
+        </div>
+        <div>
+          <strong>{t("存在理由", "Why it exists")}</strong>
+          <p>{resolveText(step.why, lang)}</p>
+        </div>
+        <div>
+          <strong>{t("現在のシナリオ証跡", "Current scenario evidence")}</strong>
+          <div style={styles.chipList}>
+            {currentEvidence.map(([label, value]) => (
+              <span key={label} style={styles.chip}>{`${label}: ${value}`}</span>
+            ))}
+          </div>
+        </div>
+        {step.docs.length > 0 && (
+          <div>
+            <strong>{t("関連ドキュメント", "Related documentation")}</strong>
+            <div style={styles.docLinks}>
+              {step.docs.map((docKey) => {
+                const doc = reviewerDocLinks[docKey];
+                return (
+                  <a key={doc.href} href={doc.href} target="_blank" rel="noreferrer noopener" style={styles.sourceLink}>
+                    {doc.label} <span aria-hidden>↗</span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </article>
   );
 }
 
@@ -426,6 +670,7 @@ function EvidenceSources({ t }) {
 
 export default function DemoPage() {
   const [selectedScenarioId, setSelectedScenarioId] = useState(scenarios[0].id);
+  const [activeWalkthroughStep, setActiveWalkthroughStep] = useState(0);
   const scenario = scenarios.find((item) => item.id === selectedScenarioId) || scenarios[0];
 
   return (
@@ -507,6 +752,46 @@ export default function DemoPage() {
                   </button>
                 );
               })}
+            </div>
+          </section>
+
+          <section style={styles.walkthroughSection} aria-labelledby="walkthrough-title">
+            <p style={styles.eyebrow}>{t("ウォークスルーモード", "Walkthrough mode")}</p>
+            <h2 id="walkthrough-title" style={styles.h2}>
+              {t("1つのAI判断がガバナンスパイプラインを進む流れ", "How one AI decision moves through the governance pipeline")}
+            </h2>
+            <p style={styles.valueLead}>
+              {t(
+                "各ステップを選択すると、目的、入力、出力、存在理由、関連ドキュメントを確認できます。データは現在選択中のMission Controlデモシナリオを再利用しています。",
+                "Select each step to inspect its purpose, inputs, outputs, rationale, and related documentation. The walkthrough reuses the currently selected Mission Control demo scenario data."
+              )}
+            </p>
+            <ol style={styles.evidenceProgression} aria-label={t("証跡の進行", "Evidence progression")}>
+              {evidenceProgression.map((item, index) => (
+                <li key={item} style={styles.evidenceProgressionItem}>
+                  <span>{item}</span>
+                  {index < evidenceProgression.length - 1 && <span aria-hidden="true">↓</span>}
+                </li>
+              ))}
+            </ol>
+            <div className="demo-walkthrough-layout" style={styles.walkthroughLayout}>
+              <div style={styles.walkthroughSteps} role="list" aria-label={t("ウォークスルーステップ", "Walkthrough steps")}>
+                {walkthroughSteps.map((step, index) => {
+                  const active = index === activeWalkthroughStep;
+                  return (
+                    <button
+                      key={step.label}
+                      type="button"
+                      style={styles.walkthroughButton(active, step.highlight)}
+                      onClick={() => setActiveWalkthroughStep(index)}
+                      aria-pressed={active}
+                    >
+                      {`${index + 1}. ${step.label}`}
+                    </button>
+                  );
+                })}
+              </div>
+              <WalkthroughDetail activeStep={activeWalkthroughStep} lang={lang} scenario={scenario} t={t} />
             </div>
           </section>
 
