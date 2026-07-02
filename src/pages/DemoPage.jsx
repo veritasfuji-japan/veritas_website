@@ -4,13 +4,15 @@ import PageShell from "../components/PageShell.jsx";
 const scenarios = [
   {
     id: "aml-kyc-authority-missing",
+    scenarioName: { ja: "AML / KYC Review", en: "AML / KYC Review" },
     title: { ja: "高リスクAML/KYC判断：Authority Evidence不足", en: "High-risk AML/KYC decision: missing Authority Evidence" },
-    shortLabel: { ja: "証跡不足でブロック", en: "Blocked: missing evidence" },
+    shortLabel: { ja: "AML/KYC", en: "AML/KYC" },
     agentRequest: {
       ja: "AIエージェントが、高リスク国に関係する顧客のKYC判断を自動承認しようとしています。",
       en: "An AI agent attempts to auto-approve a KYC decision involving high-risk-country exposure.",
     },
     actionClass: "regulated_aml_kyc_action",
+    riskType: "AML/KYC authority gap",
     riskContext: "HIGH_RISK_COUNTRY + ENHANCED_DUE_DILIGENCE_REQUIRED",
     requestedScope: "approve_customer_onboarding",
     decision: "BLOCKED",
@@ -44,26 +46,28 @@ const scenarios = [
     ],
   },
   {
-    id: "aml-kyc-manual-review",
-    title: { ja: "制裁リスト部分一致：人間レビューへエスカレーション", en: "Sanctions partial match: escalate to human review" },
-    shortLabel: { ja: "曖昧リスクで保留", en: "Held: ambiguous risk" },
+    id: "payment-sanctions-manual-review",
+    scenarioName: { ja: "Payment Approval", en: "Payment Approval" },
+    title: { ja: "支払承認：制裁リスト部分一致で人間レビューへ", en: "Payment approval: sanctions partial match escalated to human review" },
+    shortLabel: { ja: "支払承認", en: "Payment Approval" },
     agentRequest: {
-      ja: "AIエージェントが、制裁リストに部分一致した顧客の取引を進めようとしています。",
-      en: "An AI agent attempts to proceed with a customer transaction after a partial sanctions-list match.",
+      ja: "AIエージェントが、制裁リストに部分一致した顧客への支払いを進めようとしています。",
+      en: "An AI agent attempts to proceed with a customer payment after a partial sanctions-list match.",
     },
-    actionClass: "sanctions_screening_action",
+    actionClass: "payment_sanctions_screening_action",
+    riskType: "Sanctions payment risk",
     riskContext: "PARTIAL_SANCTIONS_MATCH + FALSE_POSITIVE_NOT_RESOLVED",
-    requestedScope: "release_transaction_hold",
+    requestedScope: "release_payment_hold",
     decision: "ESCALATED",
     decisionTone: "escalated",
     reasonCode: "HUMAN_REVIEW_REQUIRED",
     reason: {
-      ja: "制裁リスクが曖昧なため、AI単独では進めず、人間レビューに回します。",
-      en: "Sanctions risk is ambiguous, so VERITAS prevents silent proceed and routes to human review.",
+      ja: "制裁リスクが曖昧なため、AI単独では支払いを進めず、人間レビューに回します。",
+      en: "Sanctions risk is ambiguous, so VERITAS prevents silent payment release and routes to human review.",
     },
     businessImpact: {
-      ja: "AIは、制裁リスクが人間レビューを必要とする状況で、静かに処理を進めることができませんでした。",
-      en: "The AI could not silently proceed where sanctions risk required human review.",
+      ja: "AIは、制裁リスクが人間レビューを必要とする状況で、支払いを静かにリリースできませんでした。",
+      en: "The AI could not silently release a payment where sanctions risk required human review.",
     },
     checks: [
       { label: "Authority Evidence", status: "present", tone: "pass" },
@@ -72,29 +76,31 @@ const scenarios = [
       { label: "Bind Coverage", status: "held", tone: "warn" },
     ],
     evidence: {
-      decision_id: "dec_sanctions_2026_014",
-      execution_intent_id: "intent_sanctions_partial_match_014",
-      bind_receipt_id: "bind_rcpt_hold_014",
-      audit_path: "trustlog/aml-kyc/sanctions/partial-match/manual-review",
-      fixture: "pilot_sanctions_partial_match_no_proceed",
+      decision_id: "dec_payment_sanctions_2026_014",
+      execution_intent_id: "intent_payment_sanctions_partial_match_014",
+      bind_receipt_id: "bind_rcpt_payment_hold_014",
+      audit_path: "trustlog/payments/sanctions/partial-match/manual-review",
+      fixture: "demo_payment_sanctions_partial_match_hold",
     },
     reviewerSteps: [
       { ja: "部分一致の根拠とfalse positive判定の有無を確認する。", en: "Review the partial-match basis and whether false-positive resolution exists." },
-      { ja: "人間レビュー完了までtransaction releaseを許可しない。", en: "Do not release the transaction until human review is completed." },
+      { ja: "人間レビュー完了までpayment releaseを許可しない。", en: "Do not release the payment until human review is completed." },
       { ja: "レビュー結果をEvidence Chainに追加する。", en: "Append the review result to the Evidence Chain." },
     ],
   },
   {
-    id: "aml-kyc-sufficient-evidence",
-    title: { ja: "十分な証跡：条件付きで実行許可", en: "Sufficient evidence: allow execution with evidence" },
-    shortLabel: { ja: "証跡ありで許可", en: "Allowed: evidence present" },
+    id: "access-control-scoped-read-allow",
+    scenarioName: { ja: "Access Control", en: "Access Control" },
+    title: { ja: "アクセス制御：十分な証跡で条件付き許可", en: "Access control: sufficient evidence allows scoped execution" },
+    shortLabel: { ja: "アクセス制御", en: "Access Control" },
     agentRequest: {
-      ja: "AIエージェントが、必要な証跡・承認・ポリシー条件が揃った低リスク取引を進めようとしています。",
-      en: "An AI agent attempts to proceed with a lower-risk action where required evidence, approval, and policy conditions are present.",
+      ja: "AIエージェントが、必要な証跡・承認・ポリシー条件が揃った一時アクセスを付与しようとしています。",
+      en: "An AI agent attempts to grant temporary access where required evidence, approval, and policy conditions are present.",
     },
-    actionClass: "low_risk_aml_kyc_action",
+    actionClass: "scoped_access_control_action",
+    riskType: "Privileged access scope",
     riskContext: "LOW_RISK + REQUIRED_EVIDENCE_PRESENT",
-    requestedScope: "approve_low_risk_transaction",
+    requestedScope: "grant_time_limited_read_access",
     decision: "ALLOWED",
     decisionTone: "allowed",
     reasonCode: "POLICY_AND_EVIDENCE_SATISFIED",
@@ -103,8 +109,8 @@ const scenarios = [
       en: "Required evidence, approval, and policy conditions are satisfied, so VERITAS allows execution with an Evidence Chain.",
     },
     businessImpact: {
-      ja: "AIは、権限・承認・ポリシー・bind coverageが満たされた場合にのみ実行を許可されました。",
-      en: "The AI was allowed to proceed only because authority, approval, policy, and bind coverage were satisfied.",
+      ja: "AIは、権限・承認・ポリシー・bind coverageが満たされた範囲でのみアクセス付与を許可されました。",
+      en: "The AI was allowed to grant access only inside the scope where authority, approval, policy, and bind coverage were satisfied.",
     },
     checks: [
       { label: "Authority Evidence", status: "present", tone: "pass" },
@@ -113,16 +119,59 @@ const scenarios = [
       { label: "Bind Coverage", status: "covered", tone: "pass" },
     ],
     evidence: {
-      decision_id: "dec_aml_kyc_2026_027",
-      execution_intent_id: "intent_aml_kyc_low_risk_027",
-      bind_receipt_id: "bind_rcpt_allow_027",
-      audit_path: "trustlog/aml-kyc/low-risk/sufficient-evidence/proceed",
-      fixture: "pilot_sufficient_evidence_proceed",
+      decision_id: "dec_access_control_2026_027",
+      execution_intent_id: "intent_access_control_scoped_read_027",
+      bind_receipt_id: "bind_rcpt_access_allow_027",
+      audit_path: "trustlog/access-control/scoped-read/sufficient-evidence/proceed",
+      fixture: "demo_access_control_scoped_read_allow",
     },
     reviewerSteps: [
       { ja: "Evidence ChainのID・時刻・適用ポリシーを確認する。", en: "Inspect the Evidence Chain ID, timestamp, and applied policy." },
       { ja: "実行許可が定義済みスコープ内か確認する。", en: "Confirm that allowed execution remains inside the defined scope." },
       { ja: "後続監査用に判定結果とbind receiptを保存する。", en: "Store the decision result and bind receipt for later audit." },
+    ],
+  },
+  {
+    id: "contract-review-policy-hold",
+    scenarioName: { ja: "Contract Review", en: "Contract Review" },
+    title: { ja: "契約レビュー：未承認条項で署名前に保留", en: "Contract review: unapproved clause held before signature" },
+    shortLabel: { ja: "契約レビュー", en: "Contract Review" },
+    agentRequest: {
+      ja: "AIエージェントが、未承認の責任制限条項を含む契約ドラフトを署名に回そうとしています。",
+      en: "An AI agent attempts to route a contract draft with an unapproved liability clause for signature.",
+    },
+    actionClass: "contract_signature_routing_action",
+    riskType: "Contract authority and policy",
+    riskContext: "UNAPPROVED_CLAUSE + LEGAL_REVIEW_REQUIRED",
+    requestedScope: "route_contract_for_signature",
+    decision: "ESCALATED",
+    decisionTone: "escalated",
+    reasonCode: "LEGAL_REVIEW_REQUIRED",
+    reason: {
+      ja: "未承認条項が含まれるため、署名に進む前に法務レビューへ回します。",
+      en: "The draft contains an unapproved clause, so VERITAS routes it to legal review before signature.",
+    },
+    businessImpact: {
+      ja: "AIは、法務レビューなしに契約を署名プロセスへ進めることを許可されませんでした。",
+      en: "The AI was not allowed to move the contract into signature without legal review.",
+    },
+    checks: [
+      { label: "Authority Evidence", status: "present", tone: "pass" },
+      { label: "Human Approval Receipt", status: "legal required", tone: "warn" },
+      { label: "Policy Admissibility", status: "manual review", tone: "warn" },
+      { label: "Bind Coverage", status: "held", tone: "warn" },
+    ],
+    evidence: {
+      decision_id: "dec_contract_2026_033",
+      execution_intent_id: "intent_contract_signature_033",
+      bind_receipt_id: "bind_rcpt_hold_033",
+      audit_path: "trustlog/contracts/unapproved-clause/legal-review",
+      fixture: "demo_contract_review_policy_hold",
+    },
+    reviewerSteps: [
+      { ja: "未承認条項と該当する契約ポリシーを確認する。", en: "Review the unapproved clause and applicable contract policy." },
+      { ja: "法務承認receiptがEvidence Chainに追加されるまで署名ルートを保留する。", en: "Hold signature routing until the legal approval receipt is added to the Evidence Chain." },
+      { ja: "レビュー結果とbind receiptをレビュアー証跡に保存する。", en: "Store the review outcome and bind receipt in reviewer evidence." },
     ],
   },
 ];
@@ -357,6 +406,66 @@ const styles = {
     gridTemplateColumns: "repeat(auto-fit, minmax(14rem, 1fr))",
     gap: "0.65rem",
   },
+  comparisonSection: {
+    marginTop: "1.5rem",
+    padding: spacing.surface,
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surfaceRaised,
+  },
+  comparisonTableWrap: {
+    marginTop: "1rem",
+    overflowX: "auto",
+    WebkitOverflowScrolling: "touch",
+  },
+  comparisonTable: {
+    width: "100%",
+    minWidth: "58rem",
+    borderCollapse: "collapse",
+    fontSize: "0.88rem",
+  },
+  comparisonTh: {
+    padding: "0.7rem 0.6rem",
+    borderBottom: `2px solid ${colors.ruleStrong}`,
+    color: colors.ink,
+    textAlign: "left",
+    verticalAlign: "bottom",
+  },
+  comparisonTd: (active) => ({
+    padding: "0.7rem 0.6rem",
+    borderBottom: `1px solid ${colors.rule}`,
+    background: active ? colors.notice : "transparent",
+    color: colors.inkSoft,
+    verticalAlign: "top",
+  }),
+  comparisonCards: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(15rem, 1fr))",
+    gap: "0.8rem",
+    marginTop: "1rem",
+  },
+  comparisonCard: (active) => ({
+    padding: "1rem",
+    border: `1px solid ${active ? colors.noticeRule : colors.rule}`,
+    borderRadius: radii.compact,
+    background: active ? colors.notice : colors.surface,
+    textAlign: "left",
+    cursor: "pointer",
+    boxShadow: active ? "0 12px 24px rgba(80, 64, 35, 0.12)" : "none",
+  }),
+  comparisonCardTitle: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: "0.6rem",
+    alignItems: "baseline",
+    marginBottom: "0.55rem",
+  },
+  comparisonCardMeta: {
+    display: "grid",
+    gap: "0.35rem",
+    margin: "0.7rem 0 0",
+    fontSize: "0.86rem",
+  },
   demoGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(17rem, 1fr))",
@@ -568,6 +677,103 @@ function MetaItem({ label, value }) {
   );
 }
 
+function getCheckStatus(scenario, label) {
+  return scenario.checks.find((check) => check.label === label)?.status || "n/a";
+}
+
+function getDecisionStatusTone(decisionTone) {
+  if (decisionTone === "allowed") return "pass";
+  if (decisionTone === "blocked") return "fail";
+  return "warn";
+}
+
+function ScenarioComparison({ lang, selectedScenarioId, setSelectedScenarioId, t }) {
+  const columns = [
+    t("Scenario", "Scenario"),
+    t("AI / Agent Output", "AI / Agent Output"),
+    t("Risk Type", "Risk Type"),
+    t("Governance Result", "Governance Result"),
+    t("Authority Evidence", "Authority Evidence"),
+    t("Human Approval", "Human Approval"),
+    t("Bind Boundary Result", "Bind Boundary Result"),
+    t("Reviewer Evidence", "Reviewer Evidence"),
+  ];
+
+  return (
+    <section style={styles.comparisonSection} aria-labelledby="scenario-comparison-title">
+      <p style={styles.eyebrow}>{t("比較モード", "Comparison mode")}</p>
+      <h2 id="scenario-comparison-title" style={styles.h2}>
+        {t("Scenario Comparison", "Scenario Comparison")}
+      </h2>
+      <p style={styles.valueLead}>
+        {t(
+          "同じガバナンスモデルを、金融・アクセス・契約など複数の企業アクションに適用する例です。",
+          "Examples of the same governance model applied across financial, access, and contract enterprise actions."
+        )}
+      </p>
+      <p style={styles.notice}>
+        {t(
+          "これらのシナリオは同じガバナンスパターンを使います。AI出力はまずDecision Candidateとして扱われ、Bind Boundaryの前に評価され、レビュアー向け証跡にパッケージ化されます。",
+          "These scenarios use the same governance pattern: AI output is first treated as a Decision Candidate, evaluated before the Bind Boundary, and then packaged into reviewer-facing evidence."
+        )}
+      </p>
+      <div style={styles.comparisonTableWrap}>
+        <table className="demo-comparison-table" style={styles.comparisonTable}>
+          <thead>
+            <tr>
+              {columns.map((column) => (
+                <th key={column} style={styles.comparisonTh}>{column}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {scenarios.map((item) => {
+              const active = item.id === selectedScenarioId;
+              return (
+                <tr key={item.id}>
+                  <td style={styles.comparisonTd(active)}><strong>{resolveText(item.scenarioName, lang)}</strong></td>
+                  <td style={styles.comparisonTd(active)}>{resolveText(item.title, lang)}</td>
+                  <td style={styles.comparisonTd(active)}>{item.riskType}</td>
+                  <td style={styles.comparisonTd(active)}>{item.decision}</td>
+                  <td style={styles.comparisonTd(active)}>{getCheckStatus(item, "Authority Evidence")}</td>
+                  <td style={styles.comparisonTd(active)}>{getCheckStatus(item, "Human Approval Receipt")}</td>
+                  <td style={styles.comparisonTd(active)}>{getCheckStatus(item, "Bind Coverage")}</td>
+                  <td style={styles.comparisonTd(active)}>{item.evidence.audit_path}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div style={styles.comparisonCards}>
+        {scenarios.map((item) => {
+          const active = item.id === selectedScenarioId;
+          return (
+            <button
+              key={item.id}
+              type="button"
+              style={styles.comparisonCard(active)}
+              onClick={() => setSelectedScenarioId(item.id)}
+              aria-pressed={active}
+            >
+              <span style={styles.comparisonCardTitle}>
+                <strong>{resolveText(item.scenarioName, lang)}</strong>
+                <span style={styles.status(getDecisionStatusTone(item.decisionTone))}>{item.decision}</span>
+              </span>
+              <span>{resolveText(item.agentRequest, lang)}</span>
+              <span style={styles.comparisonCardMeta}>
+                <span><strong>{t("Reason code", "Reason code")}:</strong> {item.reasonCode}</span>
+                <span><strong>{t("Allowed / blocked", "Allowed / blocked")}:</strong> {resolveText(item.businessImpact, lang)}</span>
+                <span><strong>{t("Evidence generated", "Evidence generated")}:</strong> {item.evidence.bind_receipt_id}</span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function WalkthroughDetail({ activeStep, lang, scenario, t }) {
   const step = walkthroughSteps[activeStep];
   const currentEvidence = [
@@ -754,6 +960,13 @@ export default function DemoPage() {
               })}
             </div>
           </section>
+
+          <ScenarioComparison
+            lang={lang}
+            selectedScenarioId={selectedScenarioId}
+            setSelectedScenarioId={setSelectedScenarioId}
+            t={t}
+          />
 
           <section style={styles.walkthroughSection} aria-labelledby="walkthrough-title">
             <p style={styles.eyebrow}>{t("ウォークスルーモード", "Walkthrough mode")}</p>
