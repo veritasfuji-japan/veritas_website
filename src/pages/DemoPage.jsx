@@ -46,7 +46,7 @@ const scenarios = [
     ],
   },
   {
-    id: "aml-kyc-manual-review",
+    id: "payment-sanctions-manual-review",
     scenarioName: { ja: "Payment Approval", en: "Payment Approval" },
     title: { ja: "支払承認：制裁リスト部分一致で人間レビューへ", en: "Payment approval: sanctions partial match escalated to human review" },
     shortLabel: { ja: "支払承認", en: "Payment Approval" },
@@ -76,11 +76,11 @@ const scenarios = [
       { label: "Bind Coverage", status: "held", tone: "warn" },
     ],
     evidence: {
-      decision_id: "dec_sanctions_2026_014",
-      execution_intent_id: "intent_sanctions_partial_match_014",
-      bind_receipt_id: "bind_rcpt_hold_014",
-      audit_path: "trustlog/aml-kyc/sanctions/partial-match/manual-review",
-      fixture: "pilot_sanctions_partial_match_no_proceed",
+      decision_id: "dec_payment_sanctions_2026_014",
+      execution_intent_id: "intent_payment_sanctions_partial_match_014",
+      bind_receipt_id: "bind_rcpt_payment_hold_014",
+      audit_path: "trustlog/payments/sanctions/partial-match/manual-review",
+      fixture: "demo_payment_sanctions_partial_match_hold",
     },
     reviewerSteps: [
       { ja: "部分一致の根拠とfalse positive判定の有無を確認する。", en: "Review the partial-match basis and whether false-positive resolution exists." },
@@ -89,7 +89,7 @@ const scenarios = [
     ],
   },
   {
-    id: "aml-kyc-sufficient-evidence",
+    id: "access-control-scoped-read-allow",
     scenarioName: { ja: "Access Control", en: "Access Control" },
     title: { ja: "アクセス制御：十分な証跡で条件付き許可", en: "Access control: sufficient evidence allows scoped execution" },
     shortLabel: { ja: "アクセス制御", en: "Access Control" },
@@ -119,11 +119,11 @@ const scenarios = [
       { label: "Bind Coverage", status: "covered", tone: "pass" },
     ],
     evidence: {
-      decision_id: "dec_aml_kyc_2026_027",
-      execution_intent_id: "intent_aml_kyc_low_risk_027",
-      bind_receipt_id: "bind_rcpt_allow_027",
-      audit_path: "trustlog/aml-kyc/low-risk/sufficient-evidence/proceed",
-      fixture: "pilot_sufficient_evidence_proceed",
+      decision_id: "dec_access_control_2026_027",
+      execution_intent_id: "intent_access_control_scoped_read_027",
+      bind_receipt_id: "bind_rcpt_access_allow_027",
+      audit_path: "trustlog/access-control/scoped-read/sufficient-evidence/proceed",
+      fixture: "demo_access_control_scoped_read_allow",
     },
     reviewerSteps: [
       { ja: "Evidence ChainのID・時刻・適用ポリシーを確認する。", en: "Inspect the Evidence Chain ID, timestamp, and applied policy." },
