@@ -749,6 +749,108 @@ function getPacketReadiness(decision, t) {
   );
 }
 
+function getValidationStatus(decision) {
+  if (decision === "ALLOWED") return "VALIDATION_PASSED";
+  if (decision === "ESCALATED") return "VALIDATION_REQUIRES_REVIEW";
+  return "VALIDATION_BLOCKED";
+}
+
+function getValidationInterpretation(decision, t) {
+  if (decision === "BLOCKED") {
+    return t(
+      "BLOCKED: execution was prevented before the Bind Boundary. Missing or insufficient evidence remains visible in the reviewer packet so the gap can be corrected before any governed action proceeds.",
+      "BLOCKED: execution was prevented before the Bind Boundary. Missing or insufficient evidence remains visible in the reviewer packet so the gap can be corrected before any governed action proceeds."
+    );
+  }
+
+  if (decision === "ESCALATED") {
+    return t(
+      "ESCALATED: execution is held pending human/manual review. Reviewer action is required before the governed action can move beyond the hold state.",
+      "ESCALATED: execution is held pending human/manual review. Reviewer action is required before the governed action can move beyond the hold state."
+    );
+  }
+
+  return t(
+    "ALLOWED: authority, approval, policy, and bind coverage were satisfied. The execution intent is within the governed scope represented by the selected scenario.",
+    "ALLOWED: authority, approval, policy, and bind coverage were satisfied. The execution intent is within the governed scope represented by the selected scenario."
+  );
+}
+
+function getValidationRows(scenario, t) {
+  const bindBoundaryResult = getCheckStatus(scenario, "Bind Coverage");
+  let normalizedBindState = "ESCALATED";
+
+  if (bindBoundaryResult === "covered") {
+    normalizedBindState = "ALLOWED";
+  } else if (bindBoundaryResult === "blocked") {
+    normalizedBindState = "BLOCKED";
+  }
+
+  return [
+    {
+      label: "decision_id present",
+      passed: Boolean(scenario.evidence.decision_id),
+      detail: scenario.evidence.decision_id,
+    },
+    {
+      label: "execution_intent_id present",
+      passed: Boolean(scenario.evidence.execution_intent_id),
+      detail: scenario.evidence.execution_intent_id,
+    },
+    {
+      label: "bind_receipt_id present",
+      passed: Boolean(scenario.evidence.bind_receipt_id),
+      detail: scenario.evidence.bind_receipt_id,
+    },
+    {
+      label: "reason_code present",
+      passed: Boolean(scenario.reasonCode),
+      detail: scenario.reasonCode,
+    },
+    {
+      label: "audit_path present",
+      passed: Boolean(scenario.evidence.audit_path),
+      detail: scenario.evidence.audit_path,
+    },
+    {
+      label: "fixture present",
+      passed: Boolean(scenario.evidence.fixture),
+      detail: scenario.evidence.fixture,
+    },
+    {
+      label: "governance result present",
+      passed: Boolean(scenario.decision),
+      detail: scenario.decision,
+    },
+    {
+      label: "bind boundary result present",
+      passed: bindBoundaryResult !== "n/a",
+      detail: bindBoundaryResult,
+    },
+    {
+      label: "decision state matches bind boundary state",
+      passed: scenario.decision === normalizedBindState,
+      detail: t(
+        `${scenario.decision} ↔ ${bindBoundaryResult}`,
+        `${scenario.decision} ↔ ${bindBoundaryResult}`
+      ),
+    },
+    {
+      label: "reviewer evidence packet fields complete",
+      passed: [
+        scenario.evidence.decision_id,
+        scenario.evidence.execution_intent_id,
+        scenario.evidence.bind_receipt_id,
+        scenario.reasonCode,
+        scenario.evidence.audit_path,
+        scenario.evidence.fixture,
+        scenario.decision,
+      ].every(Boolean) && bindBoundaryResult !== "n/a",
+      detail: t("required demo fields populated", "required demo fields populated"),
+    },
+  ];
+}
+
 function ReviewerEvidencePacketPanel({ scenario, t }) {
   const packetRows = [
     ["decision_id", scenario.evidence.decision_id],
@@ -801,6 +903,72 @@ function ReviewerEvidencePacketPanel({ scenario, t }) {
         {t(
           "このパネルはPoC fixturesとレビュアー向けexample artifactsを使う静的デモです。本番導入、規制認証、第三者監査承認、またはライブ顧客利用を示すものではありません。",
           "This panel is a static demo using PoC fixtures and reviewer-facing example artifacts. It does not imply production deployment, regulatory certification, third-party audit approval, or live customer use."
+        )}
+      </p>
+    </section>
+  );
+}
+
+function ValidationReportPanel({ scenario, t }) {
+  const validationRows = getValidationRows(scenario, t);
+  const validationStatus = getValidationStatus(scenario.decision);
+  let validationTone = "warn";
+
+  if (validationStatus === "VALIDATION_PASSED") {
+    validationTone = "pass";
+  } else if (validationStatus === "VALIDATION_BLOCKED") {
+    validationTone = "fail";
+  }
+
+  return (
+    <section style={styles.packetPanel} aria-labelledby="validation-report-title">
+      <div style={styles.packetHeader}>
+        <div>
+          <p style={styles.eyebrow}>{t("検証サマリー", "Validation summary")}</p>
+          <h2 id="validation-report-title" style={styles.h2}>
+            {t("Validation Report", "Validation Report")}
+          </h2>
+        </div>
+        <span style={styles.status(validationTone)}>{validationStatus}</span>
+      </div>
+      <p style={styles.valueLead}>
+        {t(
+          "選択中のシナリオについて、レビュアー向け証跡パケットが完全性とガバナンス一貫性の観点でどう評価されるかを示します。",
+          "For the selected scenario, this shows how the reviewer-facing evidence packet is evaluated for completeness and governance consistency."
+        )}
+      </p>
+      <p style={styles.packetReadiness}>
+        <strong>{t("Scenario interpretation", "Scenario interpretation")}:</strong>{" "}
+        {getValidationInterpretation(scenario.decision, t)}
+      </p>
+      <div style={styles.comparisonTableWrap}>
+        <table className="demo-validation-table" style={styles.comparisonTable}>
+          <thead>
+            <tr>
+              <th style={styles.comparisonTh}>{t("Check", "Check")}</th>
+              <th style={styles.comparisonTh}>{t("Result", "Result")}</th>
+              <th style={styles.comparisonTh}>{t("Evidence", "Evidence")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {validationRows.map((row) => (
+              <tr key={row.label}>
+                <td style={styles.comparisonTd(false)}><strong>{row.label}</strong></td>
+                <td style={styles.comparisonTd(false)}>
+                  <span style={styles.status(row.passed ? "pass" : "fail")}>
+                    {row.passed ? "PASS" : "FAIL"}
+                  </span>
+                </td>
+                <td style={styles.comparisonTd(false)}>{row.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style={styles.sourceNote}>
+        {t(
+          "This validation summary is derived from static PoC fixtures for demonstration purposes. It does not represent production certification, regulatory approval, third-party audit approval, or live customer use.",
+          "This validation summary is derived from static PoC fixtures for demonstration purposes. It does not represent production certification, regulatory approval, third-party audit approval, or live customer use."
         )}
       </p>
     </section>
@@ -1089,6 +1257,8 @@ export default function DemoPage() {
           />
 
           <ReviewerEvidencePacketPanel scenario={scenario} t={t} />
+
+          <ValidationReportPanel scenario={scenario} t={t} />
 
           <section style={styles.walkthroughSection} aria-labelledby="walkthrough-title">
             <p style={styles.eyebrow}>{t("ウォークスルーモード", "Walkthrough mode")}</p>
