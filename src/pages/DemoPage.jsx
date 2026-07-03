@@ -591,6 +591,47 @@ const styles = {
     overflowWrap: "anywhere",
   },
   sourceNote: { marginTop: "1rem", color: colors.muted, fontSize: "0.92rem" },
+  packetPanel: {
+    marginTop: "1.5rem",
+    padding: spacing.surface,
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surface,
+    boxShadow: "0 18px 40px rgba(80, 64, 35, 0.08)",
+  },
+  packetHeader: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    gap: "0.8rem",
+  },
+  packetReadiness: {
+    margin: "1rem 0 0",
+    padding: "0.8rem 0.9rem",
+    border: `1px solid ${colors.ruleStrong}`,
+    borderRadius: radii.compact,
+    background: colors.notice,
+    color: colors.inkSoft,
+  },
+  packetGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(14rem, 1fr))",
+    gap: "0.7rem 1rem",
+    marginTop: "1rem",
+  },
+  primaryCta: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "0.3rem",
+    width: "fit-content",
+    padding: "0.7rem 0.9rem",
+    borderRadius: "999px",
+    background: colors.darkSurface,
+    color: colors.surface,
+    fontWeight: 800,
+    textDecoration: "none",
+  },
   reviewerSection: {
     marginTop: "1.35rem",
     padding: spacing.surface,
@@ -685,6 +726,85 @@ function getDecisionStatusTone(decisionTone) {
   if (decisionTone === "allowed") return "pass";
   if (decisionTone === "blocked") return "fail";
   return "warn";
+}
+
+function getPacketReadiness(decision, t) {
+  if (decision === "BLOCKED") {
+    return t(
+      "BLOCKED → Packet explains missing or insufficient evidence",
+      "BLOCKED → Packet explains missing or insufficient evidence"
+    );
+  }
+
+  if (decision === "ESCALATED") {
+    return t(
+      "ESCALATED → Packet explains required human/manual review",
+      "ESCALATED → Packet explains required human/manual review"
+    );
+  }
+
+  return t(
+    "ALLOWED → Packet explains satisfied authority, approval, policy, and bind coverage",
+    "ALLOWED → Packet explains satisfied authority, approval, policy, and bind coverage"
+  );
+}
+
+function ReviewerEvidencePacketPanel({ scenario, t }) {
+  const packetRows = [
+    ["decision_id", scenario.evidence.decision_id],
+    ["execution_intent_id", scenario.evidence.execution_intent_id],
+    ["bind_receipt_id", scenario.evidence.bind_receipt_id],
+    ["reason_code", scenario.reasonCode],
+    ["audit_path", scenario.evidence.audit_path],
+    ["fixture", scenario.evidence.fixture],
+    ["governance result", scenario.decision],
+    ["bind boundary result", getCheckStatus(scenario, "Bind Coverage")],
+  ];
+
+  return (
+    <section style={styles.packetPanel} aria-labelledby="reviewer-evidence-packet-title">
+      <div style={styles.packetHeader}>
+        <div>
+          <p style={styles.eyebrow}>{t("レビュアー証跡", "Reviewer Evidence")}</p>
+          <h2 id="reviewer-evidence-packet-title" style={styles.h2}>
+            {t("Reviewer Evidence Packet", "Reviewer Evidence Packet")}
+          </h2>
+        </div>
+        <span style={styles.status(getDecisionStatusTone(scenario.decisionTone))}>{scenario.decision}</span>
+      </div>
+      <p style={styles.valueLead}>
+        {t(
+          "Reviewer Evidence Packetは、判断が許可・エスカレーション・ブロックされた理由と、Bind Boundaryの前に利用可能だった証跡を説明するレビュアー向けartifactです。",
+          "Reviewer Evidence Packet represents the reviewer-facing artifact that explains why a decision was allowed, escalated, or blocked, and which evidence was available before the Bind Boundary."
+        )}
+      </p>
+      <p style={styles.packetReadiness}>
+        <strong>{t("Packet readiness", "Packet readiness")}:</strong> {getPacketReadiness(scenario.decision, t)}
+      </p>
+      <div style={styles.packetGrid}>
+        {packetRows.map(([label, value]) => (
+          <MetaItem key={label} label={label} value={value} />
+        ))}
+      </div>
+      <div style={styles.docLinks}>
+        <a href={reviewerDocLinks.packet.href} target="_blank" rel="noreferrer noopener" style={styles.primaryCta}>
+          {t("Open Reviewer Evidence Packet", "Open Reviewer Evidence Packet")} <span aria-hidden>↗</span>
+        </a>
+        <a href={reviewerDocLinks.overview.href} target="_blank" rel="noreferrer noopener" style={styles.sourceLink}>
+          {reviewerDocLinks.overview.label} <span aria-hidden>↗</span>
+        </a>
+        <a href={reviewerDocLinks.failureCatalog.href} target="_blank" rel="noreferrer noopener" style={styles.sourceLink}>
+          {reviewerDocLinks.failureCatalog.label} <span aria-hidden>↗</span>
+        </a>
+      </div>
+      <p style={styles.sourceNote}>
+        {t(
+          "このパネルはPoC fixturesとレビュアー向けexample artifactsを使う静的デモです。本番導入、規制認証、第三者監査承認、またはライブ顧客利用を示すものではありません。",
+          "This panel is a static demo using PoC fixtures and reviewer-facing example artifacts. It does not imply production deployment, regulatory certification, third-party audit approval, or live customer use."
+        )}
+      </p>
+    </section>
+  );
 }
 
 function ScenarioComparison({ lang, selectedScenarioId, setSelectedScenarioId, t }) {
@@ -967,6 +1087,8 @@ export default function DemoPage() {
             setSelectedScenarioId={setSelectedScenarioId}
             t={t}
           />
+
+          <ReviewerEvidencePacketPanel scenario={scenario} t={t} />
 
           <section style={styles.walkthroughSection} aria-labelledby="walkthrough-title">
             <p style={styles.eyebrow}>{t("ウォークスルーモード", "Walkthrough mode")}</p>
