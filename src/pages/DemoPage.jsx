@@ -302,6 +302,49 @@ const walkthroughSteps = [
   },
 ];
 
+const reviewerJourneySteps = [
+  {
+    label: { ja: "シナリオを選択", en: "Select a scenario" },
+    href: "#scenario-switcher-title",
+    body: {
+      ja: "レビューしたいAI判断パターンを選び、以降の証跡ビューを切り替えます。",
+      en: "Choose the AI decision pattern you want to review and use it to drive the evidence views below.",
+    },
+  },
+  {
+    label: { ja: "ガバナンス結果を比較", en: "Compare governance outcomes" },
+    href: "#scenario-comparison-title",
+    body: {
+      ja: "各シナリオが許可、保留、ブロックのどれに進むかを横並びで確認します。",
+      en: "See side-by-side whether each scenario is allowed, held for review, or blocked.",
+    },
+  },
+  {
+    label: { ja: "Reviewer Evidence Packetを確認", en: "Inspect the Reviewer Evidence Packet" },
+    href: "#reviewer-evidence-packet-title",
+    body: {
+      ja: "判断理由、証跡ID、Bind Boundaryの結果がレビュアー向けにどうまとまるかを確認します。",
+      en: "Review how rationale, evidence IDs, and the Bind Boundary result are packaged for reviewers.",
+    },
+  },
+  {
+    label: { ja: "Validation Reportを見る", en: "Review the Validation Report" },
+    href: "#validation-report-title",
+    body: {
+      ja: "証跡パケットの必須フィールドとガバナンス一貫性のサマリーを確認します。",
+      en: "Check the required packet fields and governance-consistency summary.",
+    },
+  },
+  {
+    label: { ja: "実行ガバナンスパイプラインをたどる", en: "Walk through the execution governance pipeline" },
+    href: "#walkthrough-title",
+    body: {
+      ja: "AI出力がDecision Candidateから証跡化された判断へ進む流れをステップごとに追います。",
+      en: "Follow how an AI output moves from Decision Candidate to an evidence-backed decision.",
+    },
+  },
+];
+
 const evidenceProgression = [
   "Decision",
   "Approval",
@@ -377,6 +420,64 @@ const styles = {
     fontSize: "1.08rem",
     lineHeight: 1.75,
     color: colors.inkSoft,
+  },
+  reviewerJourney: {
+    marginTop: "1.3rem",
+    padding: spacing.surface,
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surfaceRaised,
+    boxShadow: "0 18px 40px rgba(80, 64, 35, 0.08)",
+  },
+  reviewerJourneyHeader: {
+    display: "grid",
+    gap: "0.45rem",
+    maxWidth: "62rem",
+  },
+  reviewerJourneyGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(12.5rem, 1fr))",
+    gap: "0.75rem",
+    marginTop: "1rem",
+  },
+  reviewerJourneyCard: {
+    display: "grid",
+    gap: "0.5rem",
+    alignContent: "start",
+    padding: "0.95rem",
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.compact,
+    background: colors.surface,
+    color: colors.inkSoft,
+    textDecoration: "none",
+  },
+  reviewerJourneyNumber: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "1.85rem",
+    height: "1.85rem",
+    borderRadius: "999px",
+    background: colors.darkSurface,
+    color: colors.surface,
+    fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+    fontSize: "0.8rem",
+    fontWeight: 800,
+  },
+  reviewerJourneyTitle: {
+    color: colors.ink,
+    fontWeight: 800,
+    lineHeight: 1.3,
+  },
+  reviewerJourneyBody: {
+    margin: 0,
+    fontSize: "0.9rem",
+    lineHeight: 1.55,
+  },
+  reviewerJourneyLink: {
+    color: "#1D4F91",
+    fontSize: "0.85rem",
+    fontWeight: 800,
   },
   scenarioSwitcher: {
     marginTop: "1.6rem",
@@ -1134,6 +1235,37 @@ function WalkthroughDetail({ activeStep, lang, scenario, t }) {
   );
 }
 
+function ReviewerJourney({ lang, t }) {
+  return (
+    <section style={styles.reviewerJourney} aria-labelledby="reviewer-journey-title">
+      <div style={styles.reviewerJourneyHeader}>
+        <p style={styles.eyebrow}>{t("レビュアージャーニー", "Reviewer Journey")}</p>
+        <h2 id="reviewer-journey-title" style={styles.h2}>
+          {t("おすすめのレビュー順序", "Recommended review path")}
+        </h2>
+        <p style={styles.valueLead}>
+          {t(
+            "まずシナリオを選択し、VERITASがAI出力をガバナンスされた判断、レビュアー向け証跡、検証サマリーへ変換する流れを追ってください。",
+            "Start by selecting a scenario, then follow how VERITAS turns an AI output into a governed decision, reviewer-facing evidence, and a validation summary."
+          )}
+        </p>
+      </div>
+      <div style={styles.reviewerJourneyGrid}>
+        {reviewerJourneySteps.map((step, index) => (
+          <a key={step.href} href={step.href} style={styles.reviewerJourneyCard}>
+            <span style={styles.reviewerJourneyNumber}>{index + 1}</span>
+            <span style={styles.reviewerJourneyTitle}>{resolveText(step.label, lang)}</span>
+            <p style={styles.reviewerJourneyBody}>{resolveText(step.body, lang)}</p>
+            <span style={styles.reviewerJourneyLink}>
+              {t("セクションへ移動", "Jump to section")} <span aria-hidden="true">↓</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function EvidenceSources({ t }) {
   return (
     <section style={styles.sourceCard} aria-label={t("PoCソースリンク", "PoC source links")}>
@@ -1202,6 +1334,8 @@ export default function DemoPage() {
               "This is a public simulation demo based on VERITAS OS PoC fixtures and reviewer evidence structure. It does not represent a production financial deployment, regulatory certification, or third-party audit approval."
             )}
           </section>
+
+          <ReviewerJourney lang={lang} t={t} />
 
           <section style={styles.scenarioSwitcher} aria-labelledby="scenario-switcher-title">
             <div style={styles.scenarioSwitcherHeader}>
