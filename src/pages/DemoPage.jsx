@@ -307,7 +307,7 @@ const reviewerJourneySteps = [
     label: { ja: "シナリオを選択", en: "Select a scenario" },
     href: "#scenario-switcher-title",
     body: {
-      ja: "レビューしたいAI判断パターンを選び、以降の証跡ビューを切り替えます。",
+      ja: "確認したいAI判断パターンを選び、以降の証跡ビューに反映します。",
       en: "Choose the AI decision pattern you want to review and use it to drive the evidence views below.",
     },
   },
@@ -315,23 +315,23 @@ const reviewerJourneySteps = [
     label: { ja: "ガバナンス結果を比較", en: "Compare governance outcomes" },
     href: "#scenario-comparison-title",
     body: {
-      ja: "各シナリオが許可、保留、ブロックのどれに進むかを横並びで確認します。",
+      ja: "各シナリオが許可、レビュー待ち、ブロックのどれに分岐するかを横並びで確認します。",
       en: "See side-by-side whether each scenario is allowed, held for review, or blocked.",
     },
   },
   {
-    label: { ja: "Reviewer Evidence Packetを確認", en: "Inspect the Reviewer Evidence Packet" },
+    label: { ja: "Reviewer Evidence Packet を確認", en: "Inspect the Reviewer Evidence Packet" },
     href: "#reviewer-evidence-packet-title",
     body: {
-      ja: "判断理由、証跡ID、Bind Boundaryの結果がレビュアー向けにどうまとまるかを確認します。",
+      ja: "判断理由、証跡ID、Bind Boundary の結果が、レビュアー向けにどう整理されるかを確認します。",
       en: "Review how rationale, evidence IDs, and the Bind Boundary result are packaged for reviewers.",
     },
   },
   {
-    label: { ja: "Validation Reportを見る", en: "Review the Validation Report" },
+    label: { ja: "Validation Report を確認", en: "Review the Validation Report" },
     href: "#validation-report-title",
     body: {
-      ja: "証跡パケットの必須フィールドとガバナンス一貫性のサマリーを確認します。",
+      ja: "証跡パケットの必須項目と、ガバナンス上の整合性サマリーを確認します。",
       en: "Check the required packet fields and governance-consistency summary.",
     },
   },
@@ -339,7 +339,7 @@ const reviewerJourneySteps = [
     label: { ja: "実行ガバナンスパイプラインをたどる", en: "Walk through the execution governance pipeline" },
     href: "#walkthrough-title",
     body: {
-      ja: "AI出力がDecision Candidateから証跡化された判断へ進む流れをステップごとに追います。",
+      ja: "AI出力が Decision Candidate から証跡付きの判断へ進む流れを、ステップごとに確認します。",
       en: "Follow how an AI output moves from Decision Candidate to an evidence-backed decision.",
     },
   },
@@ -832,20 +832,20 @@ function getDecisionStatusTone(decisionTone) {
 function getPacketReadiness(decision, t) {
   if (decision === "BLOCKED") {
     return t(
-      "BLOCKED → Packet explains missing or insufficient evidence",
+      "BLOCKED → 不足または不十分な証跡を示します",
       "BLOCKED → Packet explains missing or insufficient evidence"
     );
   }
 
   if (decision === "ESCALATED") {
     return t(
-      "ESCALATED → Packet explains required human/manual review",
+      "ESCALATED → 人間または手動レビューが必要であることを示します",
       "ESCALATED → Packet explains required human/manual review"
     );
   }
 
   return t(
-    "ALLOWED → Packet explains satisfied authority, approval, policy, and bind coverage",
+    "ALLOWED → 権限・承認・ポリシー・Bind Coverage が満たされていることを示します",
     "ALLOWED → Packet explains satisfied authority, approval, policy, and bind coverage"
   );
 }
@@ -859,20 +859,20 @@ function getValidationStatus(decision) {
 function getValidationInterpretation(decision, t) {
   if (decision === "BLOCKED") {
     return t(
-      "BLOCKED: execution was prevented before the Bind Boundary. Missing or insufficient evidence remains visible in the reviewer packet so the gap can be corrected before any governed action proceeds.",
+      "BLOCKED: 実行前に Bind Boundary で止められました。不足または不十分な証跡が見える状態で残るため、ガバナンス対象アクションへ進む前にギャップを確認できます。",
       "BLOCKED: execution was prevented before the Bind Boundary. Missing or insufficient evidence remains visible in the reviewer packet so the gap can be corrected before any governed action proceeds."
     );
   }
 
   if (decision === "ESCALATED") {
     return t(
-      "ESCALATED: execution is held pending human/manual review. Reviewer action is required before the governed action can move beyond the hold state.",
+      "ESCALATED: 人間または手動レビュー待ちで保留されています。レビューが完了するまで、ガバナンス対象アクションは実行へ進みません。",
       "ESCALATED: execution is held pending human/manual review. Reviewer action is required before the governed action can move beyond the hold state."
     );
   }
 
   return t(
-    "ALLOWED: authority, approval, policy, and bind coverage were satisfied. The execution intent is within the governed scope represented by the selected scenario.",
+    "ALLOWED: 権限、承認、ポリシー、Bind Coverage が満たされています。実行意図は、選択中シナリオで定義されたガバナンス対象スコープ内にあります。",
     "ALLOWED: authority, approval, policy, and bind coverage were satisfied. The execution intent is within the governed scope represented by the selected scenario."
   );
 }
@@ -889,47 +889,47 @@ function getValidationRows(scenario, t) {
 
   return [
     {
-      label: "decision_id present",
+      label: t("decision_id が存在", "decision_id present"),
       passed: Boolean(scenario.evidence.decision_id),
       detail: scenario.evidence.decision_id,
     },
     {
-      label: "execution_intent_id present",
+      label: t("execution_intent_id が存在", "execution_intent_id present"),
       passed: Boolean(scenario.evidence.execution_intent_id),
       detail: scenario.evidence.execution_intent_id,
     },
     {
-      label: "bind_receipt_id present",
+      label: t("bind_receipt_id が存在", "bind_receipt_id present"),
       passed: Boolean(scenario.evidence.bind_receipt_id),
       detail: scenario.evidence.bind_receipt_id,
     },
     {
-      label: "reason_code present",
+      label: t("reason_code が存在", "reason_code present"),
       passed: Boolean(scenario.reasonCode),
       detail: scenario.reasonCode,
     },
     {
-      label: "audit_path present",
+      label: t("audit_path が存在", "audit_path present"),
       passed: Boolean(scenario.evidence.audit_path),
       detail: scenario.evidence.audit_path,
     },
     {
-      label: "fixture present",
+      label: t("fixture が存在", "fixture present"),
       passed: Boolean(scenario.evidence.fixture),
       detail: scenario.evidence.fixture,
     },
     {
-      label: "governance result present",
+      label: t("ガバナンス判定が存在", "governance result present"),
       passed: Boolean(scenario.decision),
       detail: scenario.decision,
     },
     {
-      label: "bind boundary result present",
+      label: t("Bind Boundary 結果が存在", "bind boundary result present"),
       passed: bindBoundaryResult !== "n/a",
       detail: bindBoundaryResult,
     },
     {
-      label: "decision state matches bind boundary state",
+      label: t("判断状態と Bind Boundary 状態が整合", "decision state matches bind boundary state"),
       passed: scenario.decision === normalizedBindState,
       detail: t(
         `${scenario.decision} ↔ ${bindBoundaryResult}`,
@@ -937,7 +937,7 @@ function getValidationRows(scenario, t) {
       ),
     },
     {
-      label: "reviewer evidence packet fields complete",
+      label: t("Reviewer Evidence Packet の必須項目が揃っている", "reviewer evidence packet fields complete"),
       passed: [
         scenario.evidence.decision_id,
         scenario.evidence.execution_intent_id,
@@ -947,7 +947,7 @@ function getValidationRows(scenario, t) {
         scenario.evidence.fixture,
         scenario.decision,
       ].every(Boolean) && bindBoundaryResult !== "n/a",
-      detail: t("required demo fields populated", "required demo fields populated"),
+      detail: t("デモ必須項目が入力済み", "required demo fields populated"),
     },
   ];
 }
@@ -1041,6 +1041,12 @@ function ValidationReportPanel({ scenario, t }) {
       <p style={styles.packetReadiness}>
         <strong>{t("Scenario interpretation", "Scenario interpretation")}:</strong>{" "}
         {getValidationInterpretation(scenario.decision, t)}
+      </p>
+      <p style={styles.sourceNote}>
+        {t(
+          "PASS = 必須項目または整合性条件を満たしています。FAIL = 必須項目または整合性条件を満たしていません。",
+          "PASS means required fields or consistency conditions are satisfied. FAIL means they are not satisfied."
+        )}
       </p>
       <div style={styles.comparisonTableWrap}>
         <table className="demo-validation-table" style={styles.comparisonTable}>
@@ -1245,7 +1251,7 @@ function ReviewerJourney({ lang, t }) {
         </h2>
         <p style={styles.valueLead}>
           {t(
-            "まずシナリオを選択し、VERITASがAI出力をガバナンスされた判断、レビュアー向け証跡、検証サマリーへ変換する流れを追ってください。",
+            "まずシナリオを選択し、VERITAS が AI 出力をガバナンス対象の判断、レビュアー向け証跡、検証サマリーへ整理する流れを確認してください。",
             "Start by selecting a scenario, then follow how VERITAS turns an AI output into a governed decision, reviewer-facing evidence, and a validation summary."
           )}
         </p>
