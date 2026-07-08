@@ -960,8 +960,8 @@ function ReviewerEvidencePacketPanel({ scenario, t }) {
     ["reason_code", scenario.reasonCode],
     ["audit_path", scenario.evidence.audit_path],
     ["fixture", scenario.evidence.fixture],
-    ["governance result", scenario.decision],
-    ["bind boundary result", getCheckStatus(scenario, "Bind Coverage")],
+    [t("ガバナンス判定", "governance result"), scenario.decision],
+    [t("Bind Boundary 結果", "bind boundary result"), getCheckStatus(scenario, "Bind Coverage")],
   ];
 
   return (
@@ -982,7 +982,7 @@ function ReviewerEvidencePacketPanel({ scenario, t }) {
         )}
       </p>
       <p style={styles.packetReadiness}>
-        <strong>{t("Packet readiness", "Packet readiness")}:</strong> {getPacketReadiness(scenario.decision, t)}
+        <strong>{t("証跡パケットの状態", "Packet readiness")}:</strong> {getPacketReadiness(scenario.decision, t)}
       </p>
       <div style={styles.packetGrid}>
         {packetRows.map(([label, value]) => (
@@ -991,7 +991,7 @@ function ReviewerEvidencePacketPanel({ scenario, t }) {
       </div>
       <div style={styles.docLinks}>
         <a href={reviewerDocLinks.packet.href} target="_blank" rel="noreferrer noopener" style={styles.primaryCta}>
-          {t("Open Reviewer Evidence Packet", "Open Reviewer Evidence Packet")} <span aria-hidden>↗</span>
+          {t("Reviewer Evidence Packet を開く", "Open Reviewer Evidence Packet")} <span aria-hidden>↗</span>
         </a>
         <a href={reviewerDocLinks.overview.href} target="_blank" rel="noreferrer noopener" style={styles.sourceLink}>
           {reviewerDocLinks.overview.label} <span aria-hidden>↗</span>
@@ -1039,7 +1039,7 @@ function ValidationReportPanel({ scenario, t }) {
         )}
       </p>
       <p style={styles.packetReadiness}>
-        <strong>{t("Scenario interpretation", "Scenario interpretation")}:</strong>{" "}
+        <strong>{t("シナリオ解釈", "Scenario interpretation")}:</strong>{" "}
         {getValidationInterpretation(scenario.decision, t)}
       </p>
       <p style={styles.sourceNote}>
@@ -1052,9 +1052,9 @@ function ValidationReportPanel({ scenario, t }) {
         <table className="demo-validation-table" style={styles.comparisonTable}>
           <thead>
             <tr>
-              <th style={styles.comparisonTh}>{t("Check", "Check")}</th>
-              <th style={styles.comparisonTh}>{t("Result", "Result")}</th>
-              <th style={styles.comparisonTh}>{t("Evidence", "Evidence")}</th>
+              <th style={styles.comparisonTh}>{t("チェック項目", "Check")}</th>
+              <th style={styles.comparisonTh}>{t("結果", "Result")}</th>
+              <th style={styles.comparisonTh}>{t("証跡", "Evidence")}</th>
             </tr>
           </thead>
           <tbody>
