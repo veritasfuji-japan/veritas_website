@@ -302,6 +302,27 @@ const walkthroughSteps = [
   },
 ];
 
+
+const topCtas = [
+  {
+    label: { ja: "Mission Control Demo を開始", en: "Start Mission Control Demo" },
+    href: "#scenario-switcher-title",
+    primary: true,
+  },
+  {
+    label: { ja: "Reviewer Evidence Packet を確認", en: "Review Evidence Packet" },
+    href: "#reviewer-evidence-packet-title",
+  },
+  {
+    label: { ja: "Validation Report を確認", en: "View Validation Report" },
+    href: "#validation-report-title",
+  },
+  {
+    label: { ja: "Architecture Overview を読む", en: "Read Architecture Overview" },
+    href: "/how-it-works",
+  },
+];
+
 const reviewerJourneySteps = [
   {
     label: { ja: "シナリオを選択", en: "Select a scenario" },
@@ -421,6 +442,42 @@ const styles = {
     lineHeight: 1.75,
     color: colors.inkSoft,
   },
+
+  topCtaGroup: {
+    marginTop: "1rem",
+    padding: "0.9rem",
+    border: `1px solid ${colors.rule}`,
+    borderRadius: radii.surface,
+    background: colors.surfaceRaised,
+    boxShadow: "0 14px 30px rgba(80, 64, 35, 0.07)",
+  },
+  topCtaIntro: {
+    margin: "0 0 0.65rem",
+    color: colors.muted,
+    fontSize: "0.9rem",
+    lineHeight: 1.5,
+  },
+  topCtaList: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.55rem",
+  },
+  topCtaLink: (primary) => ({
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "2.65rem",
+    padding: "0.68rem 0.85rem",
+    border: `1px solid ${primary ? colors.darkSurface : colors.ruleStrong}`,
+    borderRadius: "999px",
+    background: primary ? colors.darkSurface : colors.surface,
+    color: primary ? colors.surface : colors.ink,
+    fontWeight: 800,
+    fontSize: "0.92rem",
+    lineHeight: 1.2,
+    textDecoration: "none",
+    boxShadow: primary ? "0 10px 22px rgba(21, 22, 26, 0.16)" : "none",
+  }),
   reviewerJourney: {
     marginTop: "1.3rem",
     padding: spacing.surface,
@@ -808,6 +865,26 @@ const styles = {
 function resolveText(value, lang) {
   if (typeof value === "string") return value;
   return lang === "ja" ? value.ja : value.en;
+}
+
+function TopCtaGuide({ t, lang }) {
+  return (
+    <nav style={styles.topCtaGroup} aria-label={t("Mission Control Demo の主要アクション", "Mission Control Demo primary actions")}>
+      <p style={styles.topCtaIntro}>
+        {t(
+          "初めての方は、目的に合わせて次の表示へ直接移動できます。",
+          "First-time visitors can jump directly to the view that matches their review goal."
+        )}
+      </p>
+      <div style={styles.topCtaList}>
+        {topCtas.map((cta) => (
+          <a key={cta.href} href={cta.href} style={styles.topCtaLink(cta.primary)}>
+            {resolveText(cta.label, lang)}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
 }
 
 function MetaItem({ label, value }) {
@@ -1332,6 +1409,8 @@ export default function DemoPage() {
               )}
             </p>
           </section>
+
+          <TopCtaGuide t={t} lang={lang} />
 
           <section style={styles.notice}>
             <strong>{t("注意:", "Note:")}</strong>{" "}
