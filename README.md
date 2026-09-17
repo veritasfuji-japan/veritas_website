@@ -110,11 +110,6 @@ The landing page summarizes it; `/reviewers` shows the full scope.
   it does not establish external mirror/anchor exactly-once delivery.
 - External-clock evidence has a separate synthetic fixture proof and does not
   replace runtime clocks or establish live provider trust.
-- NeoMundi RGC v0.2 verifier/intake support does not claim completion of a real
-  observation PoC or create execution authority.
-- CAGE Phase 5B records `BLOCKED_ON_CAGE_RESPONSE_FAIL_CLOSED_CONTRACT` at its
-  pinned upstream source. A green evidence run can reproduce that blocker;
-  it is not a completed Phase 5 safety claim.
 
 Snapshot statements describe source and proof scope, not a live CI status badge.
 Each proof run must be checked against its own source SHA. Do not infer that a

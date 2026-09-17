@@ -61,10 +61,10 @@ const faqSections = [
         },
       },
       {
-        question: { ja: "外部連携や外部時刻の検証は完了していますか？", en: "Are external integrations and clock trust complete?" },
+        question: { ja: "外部時刻の信頼は確立されていますか？", en: "Is external clock trust established?" },
         answer: {
-          ja: "範囲ごとに異なります。NeoMundiは署名付き計測の検証器と実観測の受入手順を実装していますが、実観測PoCの完了は主張していません。CAGE Phase 5Bは、固定した上流ソースの壊れたJSON・null判定の応答契約に未解決事項があります。外部時刻は独立した合成fixtureの検証段階であり、ライブ時刻の信頼や実行時時計の置換を意味しません。",
-          en: "Scope matters. NeoMundi has a signed-measurement verifier and real-observation intake workflow, without a claim of completed real-observation PoC. CAGE Phase 5B records a response-contract blocker for malformed JSON and null verdicts at its pinned upstream source. External-clock evidence has a separate synthetic fixture proof; it does not establish live clock trust or replace runtime clocks.",
+          ja: "外部時刻は独立した合成fixtureの検証段階です。ライブ時刻プロバイダーの信頼や実行時時計の置換を意味せず、固定済みの限定E2Eとは別の証明経路として扱います。",
+          en: "External-clock evidence has a separate synthetic fixture proof. It does not establish live clock-provider trust or replace runtime clocks, and remains separate from the frozen controlled E2E proof.",
         },
       },
       {

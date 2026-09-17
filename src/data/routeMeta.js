@@ -76,9 +76,9 @@ const routeMetadata = [
     jaTitle: "VERITAS OS Reviewers — 外部レビューの入口",
     enTitle: "VERITAS OS Reviewers — External Review Entry Point",
     jaDescription:
-      "VERITAS OSの実装時点と根拠を確認。限定E2E、TrustLog一次保存、外部時刻、NeoMundi・CAGE連携の検証範囲と未解決事項を示します。",
+      "VERITAS OSの実装時点と根拠を確認。限定E2E、TrustLog一次保存、外部時刻の検証範囲と未解決事項を示します。",
     enDescription:
-      "Review source-pinned implementation evidence and limits for controlled E2E, TrustLog publication, external clock evidence, and NeoMundi / CAGE interoperability.",
+      "Review source-pinned implementation evidence and limits for controlled E2E, TrustLog publication, and external clock evidence.",
   },
   {
     path: "/contact",

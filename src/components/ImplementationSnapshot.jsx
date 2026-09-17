@@ -16,7 +16,7 @@ export default function ImplementationSnapshot({ lang = "ja", compact = false })
       </p>
       <p>{snapshot.summary[locale]}</p>
       {compact ? (
-        <p><a className="btn btn-secondary" href="/reviewers">{t("証明範囲・連携状況を見る", "Review proof scope and integration status")}</a></p>
+        <p><a className="btn btn-secondary" href="/reviewers">{t("実装と証明範囲を見る", "Review implementation and proof scope")}</a></p>
       ) : (
         <div className="implementation-grid">
           {snapshot.capabilities.map((item) => (

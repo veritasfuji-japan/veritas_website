@@ -90,46 +90,6 @@
         "en": "It does not establish live clock-provider trust or replace runtime clocks. This is separate from the frozen E2E proof."
       },
       "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/veritas_os/governance/external_clock_fixture_proof.py"
-    },
-    {
-      "id": "neomundi",
-      "title": {
-        "ja": "NeoMundi RGC v0.2計測証拠",
-        "en": "NeoMundi RGC v0.2 measurement evidence"
-      },
-      "status": {
-        "ja": "検証器・受入手順を実装",
-        "en": "Verifier and intake workflow implemented"
-      },
-      "body": {
-        "ja": "署名付き計測、公開JWKS、別途提供された鍵の出所記録、受入manifestを照合し、VERITAS側の信頼ポリシーで計測証拠を検証します。",
-        "en": "Binds a signed observation, public JWKS, separately supplied key-provenance receipt, and intake manifest before verifying measurement evidence under VERITAS-controlled trust policy."
-      },
-      "limit": {
-        "ja": "実観測PoCの完了を主張しません。計測証拠は実行許可ではなく、受入manifestや鍵指紋の一致だけでは受渡経路の真正性を証明しません。",
-        "en": "This does not claim completion of a real-observation PoC. Measurement is not execution permission; intake metadata and key fingerprints alone do not authenticate the handoff channel."
-      },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/docs/en/architecture/neomundi-rgc-v02-real-observation-poc.md"
-    },
-    {
-      "id": "cage",
-      "title": {
-        "ja": "CAGE Provider03相互運用",
-        "en": "CAGE Provider03 interoperability"
-      },
-      "status": {
-        "ja": "Phase 5B：応答契約に未解決事項",
-        "en": "Phase 5B: response contract blocker"
-      },
-      "body": {
-        "ja": "Phase 5Aのloopback HTTP接続に続き、Phase 5BでAPPROVED / ESCALATE / REJECTEDと異常系を検証。壊れたJSONやnull判定での上流例外を記録しています。",
-        "en": "Following the Phase 5A loopback HTTP proof, Phase 5B exercises APPROVED / ESCALATE / REJECTED and failure cases, recording upstream exceptions for malformed JSON and null verdicts."
-      },
-      "limit": {
-        "ja": "固定したCAGEソースではBLOCKED_ON_CAGE_RESPONSE_FAIL_CLOSED_CONTRACT。検証実行の成功はPhase 5全体の完了を意味せず、APPROVEDも実行権限を作りません。",
-        "en": "At the pinned CAGE source: BLOCKED_ON_CAGE_RESPONSE_FAIL_CLOSED_CONTRACT. A successful evidence run does not mean full Phase 5 completion; APPROVED creates no execution authority."
-      },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/docs/en/validation/veritas-cage-phase5b-fail-closed-matrix.md"
     }
   ]
 }
