@@ -92,3 +92,37 @@ These checks keep public routes, metadata, proof URLs, fixture IDs, and public c
 ## Important Note
 
 Public metrics and claims shown on the website must stay aligned with the `veritas_os` repository evidence.
+
+
+## Implementation snapshot (2026-09-17)
+
+Public implementation copy was reviewed against `veritas_os/main` at
+`99618839e1183eec617602bc8add42cd5f5f9ebf` (merged PR #2253).
+`src/data/implementationSnapshot.json` records the reviewed source, date,
+bilingual capability descriptions, limitations, and immutable evidence links.
+The landing page summarizes it; `/reviewers` shows the full scope.
+
+- Controlled Decision-to-Effect E2E includes native v2 authorization, PostgreSQL
+  single-use consumption, current rechecks, credential resolution, real TLS in
+  the controlled environment, read-only reconciliation, receipts, and recovery.
+  The historical STOP is superseded only for that controlled sandbox scope.
+- TrustLog primary logical uniqueness belongs to the explicit v1 publication API;
+  it does not establish external mirror/anchor exactly-once delivery.
+- External-clock evidence has a separate synthetic fixture proof and does not
+  replace runtime clocks or establish live provider trust.
+- NeoMundi RGC v0.2 verifier/intake support does not claim completion of a real
+  observation PoC or create execution authority.
+- CAGE Phase 5B records `BLOCKED_ON_CAGE_RESPONSE_FAIL_CLOSED_CONTRACT` at its
+  pinned upstream source. A green evidence run can reproduce that blocker;
+  it is not a completed Phase 5 safety claim.
+
+Snapshot statements describe source and proof scope, not a live CI status badge.
+Each proof run must be checked against its own source SHA. Do not infer that a
+historical passing run validates every later main commit. The public `/demo`
+remains a static simulation and does not execute this sandbox path.
+
+When refreshing the snapshot, inspect implementation, scoped proof documents,
+and CI evidence together, update both languages and the source/date, and rerun
+the integrity checks above. `check:proof-urls` also checks snapshot evidence links.
+The former unqualified 87% coverage teaser is replaced with the two defined
+controlled E2E cases; no new coverage measurement is claimed.

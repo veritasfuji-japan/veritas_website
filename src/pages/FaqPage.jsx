@@ -47,6 +47,27 @@ const faqSections = [
     items: [
       ...keyAnswers.slice(0, 2),
       {
+        question: { ja: "現在、どこまで実装・検証されていますか？", en: "What is implemented and what is proven?" },
+        answer: {
+          ja: "2026年9月17日に確認したmainには、判断からnative v2認可・一回限りの消費・実行直前再確認・TLS送信・読み取り照合・BindReceipt / Outcome・復旧までの限定sandbox経路があります。E2Eの過去のSTOP記録はこの限定範囲で解消済みです。各実行の成果物はソースSHAと合わせて確認し、顧客本番環境での証明と区別してください。詳細と固定した根拠リンクは外部レビューページに掲載しています。",
+          en: "The main reviewed on September 17, 2026 includes the controlled sandbox path from decision through native v2 authorization, single-use consumption, current rechecks, TLS dispatch, reconciliation, receipts, and recovery. The historical E2E STOP is superseded for this controlled scope. Check each run's artifacts against its source SHA; this is distinct from customer production validation. The reviewer page provides pinned sources and limits.",
+        },
+      },
+      {
+        question: { ja: "実行の応答が失われたら、再送しますか？", en: "Is an action resent when its response is lost?" },
+        answer: {
+          ja: "限定sandbox経路では、EFFECT_UNKNOWNを保持し、作用を再送せず読み取り照合します。404や照合先の障害を「未実行」と解釈しません。未解決または確認済みの同一業務イベントは、新しい認可を発行しても再実行をブロックします。",
+          en: "The controlled sandbox preserves EFFECT_UNKNOWN and uses read-only reconciliation without resending the effect. A 404 or lookup outage is not treated as non-execution. A new authorization cannot bypass the block on the same unresolved or confirmed business event.",
+        },
+      },
+      {
+        question: { ja: "外部連携や外部時刻の検証は完了していますか？", en: "Are external integrations and clock trust complete?" },
+        answer: {
+          ja: "範囲ごとに異なります。NeoMundiは署名付き計測の検証器と実観測の受入手順を実装していますが、実観測PoCの完了は主張していません。CAGE Phase 5Bは、固定した上流ソースの壊れたJSON・null判定の応答契約に未解決事項があります。外部時刻は独立した合成fixtureの検証段階であり、ライブ時刻の信頼や実行時時計の置換を意味しません。",
+          en: "Scope matters. NeoMundi has a signed-measurement verifier and real-observation intake workflow, without a claim of completed real-observation PoC. CAGE Phase 5B records a response-contract blocker for malformed JSON and null verdicts at its pinned upstream source. External-clock evidence has a separate synthetic fixture proof; it does not establish live clock trust or replace runtime clocks.",
+        },
+      },
+      {
         question: { ja: "既存のAIガードレールと何が違いますか？", en: "How is this different from ordinary AI guardrails?" },
         answer: {
           ja: "一般的なガードレールは危険な出力を減らすことに重点があります。VERITAS OSは、出力後の実行前段階で、証跡、権限、ポリシー、承認範囲、failure reasonを確認し、allow / hold / review / block に分岐させます。",
@@ -359,3 +380,4 @@ export default function FaqPage() {
     </PageShell>
   );
 }
+

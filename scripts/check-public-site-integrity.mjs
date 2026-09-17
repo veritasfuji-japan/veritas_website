@@ -266,7 +266,10 @@ function isPlaceholderUrl(url) {
 }
 
 function checkProofUrlShape() {
-  const claims = JSON.parse(readText("src/data/claims.json")).claims ?? [];
+  const claims = [
+    ...(JSON.parse(readText("src/data/claims.json")).claims ?? []),
+    ...JSON.parse(readText("src/data/implementationSnapshot.json")).capabilities,
+  ];
   for (const claim of claims) {
     const url = claim.proof_url;
     if (!url || typeof url !== "string" || url.trim() === "") {
@@ -444,3 +447,4 @@ if (findings.length > 0) {
 }
 
 console.log("Public site integrity check passed.");
+

@@ -1,0 +1,135 @@
+{
+  "reviewed_at": "2026-09-17",
+  "source_commit": "99618839e1183eec617602bc8add42cd5f5f9ebf",
+  "source_url": "https://github.com/veritasfuji-japan/veritas_os/commit/99618839e1183eec617602bc8add42cd5f5f9ebf",
+  "summary": {
+    "ja": "制御されたTLS・PostgreSQL環境で、判断から実行結果の照合・証跡までを再現する経路を実装。認可の発行だけでは実行できず、実行直前の再確認と結果の独立した読み取り照合を行います。",
+    "en": "The repository implements a reproducible decision-to-effect path in a controlled TLS/PostgreSQL environment. Authorization issuance alone does not permit execution: current conditions are rechecked before dispatch, and persisted results are reconciled through a separate read-only path."
+  },
+  "boundary": {
+    "ja": "この証明は合成データを使う限定環境が対象です。顧客環境での本番検証、独立運用された外部基盤の信頼性、規制承認・第三者認証を示すものではありません。各CI成果物は、その実行時のソースSHAと合わせて確認してください。",
+    "en": "This proof covers a controlled environment with synthetic data. It does not establish customer production validation, trust in independently operated external infrastructure, regulatory approval, or third-party certification. Review each CI artifact together with its exact source SHA."
+  },
+  "capabilities": [
+    {
+      "id": "controlled-execution",
+      "title": {
+        "ja": "判断から実行結果までの限定E2E",
+        "en": "Controlled Decision-to-Effect E2E"
+      },
+      "status": {
+        "ja": "限定証明の範囲を固定",
+        "en": "Controlled proof scope frozen"
+      },
+      "body": {
+        "ja": "/v1/decideから判断証跡の検証、native v2認可、PostgreSQLでの一回限りの消費、最新条件の再確認、資格情報の取得、TLS送信、イベント保存、読み取り照合、BindReceipt / Outcomeまでを接続。",
+        "en": "Connects /v1/decide, verified decision evidence, native v2 authorization, PostgreSQL single-use consumption, current rechecks, credential resolution, TLS dispatch, event persistence, read-only reconciliation, and BindReceipt / Outcome."
+      },
+      "limit": {
+        "ja": "対象は固定されたsandboxイベント。過去のSTOP記録はこの限定範囲で解消済みであり、すべての外部作用を証明したわけではありません。",
+        "en": "Limited to the pinned sandbox event. The historical STOP is superseded for this controlled scope; it does not prove all external-effect paths."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/docs/en/architecture/controlled-execution-proof-architecture-freeze-v1.md"
+    },
+    {
+      "id": "effect-unknown",
+      "title": {
+        "ja": "結果不明とクラッシュ復旧",
+        "en": "Unknown results and crash recovery"
+      },
+      "status": {
+        "ja": "sandbox経路に実装",
+        "en": "Implemented in the sandbox path"
+      },
+      "body": {
+        "ja": "応答消失や照合先の障害ではEFFECT_UNKNOWNを維持。保存済みの結果を読み取り照合し、確認後に証跡を公開します。復旧処理は外部作用を再送しません。",
+        "en": "Lost responses and lookup outages preserve EFFECT_UNKNOWN. Read-only reconciliation confirms persisted results before receipt publication. Recovery never resends the external effect."
+      },
+      "limit": {
+        "ja": "HTTP成功応答や404だけでは、作用の発生・不発生を確定しません。未解決または確認済みの同一業務イベントの再実行をブロックします。",
+        "en": "An HTTP acknowledgement or 404 alone does not establish effect or absence. Re-execution of the same unresolved or confirmed business event is blocked."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/docs/en/architecture/native-v2-sandbox-event-spec-v1.md"
+    },
+    {
+      "id": "trustlog-publication",
+      "title": {
+        "ja": "TrustLogの一次保存の重複防止",
+        "en": "TrustLog primary publication uniqueness"
+      },
+      "status": {
+        "ja": "PostgreSQLでの検証経路",
+        "en": "PostgreSQL proof path"
+      },
+      "body": {
+        "ja": "明示的なv1公開APIで、同一の論理ID・同一内容は既存行に収束し、同一IDで内容が異なる場合は拒否。並行呼び出し、応答消失後の再試行、接続再作成を検証します。",
+        "en": "The explicit v1 publication API resolves identical logical identity/payload calls to one durable row and rejects changed content under the same identity. Proof cases cover concurrency, retry after response loss, and pool recreation."
+      },
+      "limit": {
+        "ja": "既存append全体への保証ではなく、ミラーや外部アンカーへのexactly-once配送、実行権限、外部作用の証明を意味しません。",
+        "en": "This does not cover every legacy append, exactly-once mirror or anchor delivery, execution authority, or proof of external effect."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/docs/en/validation/trustlog-primary-publication-postgresql-proof.md"
+    },
+    {
+      "id": "external-clock",
+      "title": {
+        "ja": "外部時刻の証拠境界",
+        "en": "External clock evidence boundary"
+      },
+      "status": {
+        "ja": "合成fixtureによる検証",
+        "en": "Synthetic fixture proof"
+      },
+      "body": {
+        "ja": "チャレンジとの対応、再利用防止、許容誤差、単調時計での往復時間、独立した信頼ポリシーを検査する境界を実装。",
+        "en": "Implements checks for challenge binding, replay prevention, uncertainty bounds, monotonic round-trip time, and an independent trust policy."
+      },
+      "limit": {
+        "ja": "ライブ時刻プロバイダーの信頼を確立するものではなく、実行時時計を置き換えません。固定済みE2Eとは別の証明経路です。",
+        "en": "It does not establish live clock-provider trust or replace runtime clocks. This is separate from the frozen E2E proof."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/veritas_os/governance/external_clock_fixture_proof.py"
+    },
+    {
+      "id": "neomundi",
+      "title": {
+        "ja": "NeoMundi RGC v0.2計測証拠",
+        "en": "NeoMundi RGC v0.2 measurement evidence"
+      },
+      "status": {
+        "ja": "検証器・受入手順を実装",
+        "en": "Verifier and intake workflow implemented"
+      },
+      "body": {
+        "ja": "署名付き計測、公開JWKS、別途提供された鍵の出所記録、受入manifestを照合し、VERITAS側の信頼ポリシーで計測証拠を検証します。",
+        "en": "Binds a signed observation, public JWKS, separately supplied key-provenance receipt, and intake manifest before verifying measurement evidence under VERITAS-controlled trust policy."
+      },
+      "limit": {
+        "ja": "実観測PoCの完了を主張しません。計測証拠は実行許可ではなく、受入manifestや鍵指紋の一致だけでは受渡経路の真正性を証明しません。",
+        "en": "This does not claim completion of a real-observation PoC. Measurement is not execution permission; intake metadata and key fingerprints alone do not authenticate the handoff channel."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/docs/en/architecture/neomundi-rgc-v02-real-observation-poc.md"
+    },
+    {
+      "id": "cage",
+      "title": {
+        "ja": "CAGE Provider03相互運用",
+        "en": "CAGE Provider03 interoperability"
+      },
+      "status": {
+        "ja": "Phase 5B：応答契約に未解決事項",
+        "en": "Phase 5B: response contract blocker"
+      },
+      "body": {
+        "ja": "Phase 5Aのloopback HTTP接続に続き、Phase 5BでAPPROVED / ESCALATE / REJECTEDと異常系を検証。壊れたJSONやnull判定での上流例外を記録しています。",
+        "en": "Following the Phase 5A loopback HTTP proof, Phase 5B exercises APPROVED / ESCALATE / REJECTED and failure cases, recording upstream exceptions for malformed JSON and null verdicts."
+      },
+      "limit": {
+        "ja": "固定したCAGEソースではBLOCKED_ON_CAGE_RESPONSE_FAIL_CLOSED_CONTRACT。検証実行の成功はPhase 5全体の完了を意味せず、APPROVEDも実行権限を作りません。",
+        "en": "At the pinned CAGE source: BLOCKED_ON_CAGE_RESPONSE_FAIL_CLOSED_CONTRACT. A successful evidence run does not mean full Phase 5 completion; APPROVED creates no execution authority."
+      },
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/docs/en/validation/veritas-cage-phase5b-fail-closed-matrix.md"
+    }
+  ]
+}

@@ -120,10 +120,10 @@ const glossarySections = [
         anchor: "outcome-receipt",
         name: makeText("Outcome Receipt", "Outcome Receipt"),
         definition: makeText(
-          "governed execution attempt の結果を記録する local/offline 証跡。final outcome、commit/block/rollback状態、observed effects などを扱う。",
-          "A local/offline evidence artifact recording governed execution results, including final outcome, commit/block/rollback state, and observed effects.",
+          "統制された実行結果の事後証跡。限定sandboxでは、読み取り照合したイベントと元の判断・実行意図をBindReceiptに結びつける。新たな実行権限は作らない。",
+          "Retrospective execution evidence. In the controlled sandbox it links the reconciled event and original decision/intent through the BindReceipt; it creates no new execution authority.",
         ),
-        status: ["Implemented", "Local-offline"],
+        status: ["Implemented", "Reviewer-facing"],
       },
       {
         anchor: "evidence-chain-manifest",
@@ -898,3 +898,4 @@ export default function GlossaryPage() {
     </PageShell>
   );
 }
+

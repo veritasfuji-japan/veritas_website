@@ -38,8 +38,8 @@ export default function Hero({ lang }) {
   );
 
   const lead = t(
-    "意思決定の承認と実行commitの境界を分離するコントロールプレーン。AIエージェントの判断を、実行前にレビュー可能・追跡可能・再現可能・監査可能な形で検証します。",
-    "A control plane that separates decision approval from execution commitment. VERITAS OS makes AI-agent decisions reviewable, traceable, replayable, and auditable before execution."
+    "AIの判断と実行権限を分離するコントロールプレーン。権限・ポリシー・人間承認を実行直前に再確認し、限定sandboxでは実行結果の照合と証跡までを接続します。",
+    "A control plane that separates AI decisions from execution authority. It rechecks authority, policy, and human approval before execution, with outcome reconciliation and evidence in a controlled sandbox path."
   );
 
   const cta = (
@@ -147,3 +147,4 @@ export default function Hero({ lang }) {
     </section>
   );
 }
+

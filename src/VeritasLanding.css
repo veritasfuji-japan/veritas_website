@@ -2961,3 +2961,19 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* Source-pinned implementation scope, shared by the landing and reviewer pages. */
+.implementation-snapshot { margin: 0 0 2rem; padding: clamp(1.25rem, 3vw, 2.5rem); border: 1px solid #c9c2ae; border-radius: 12px; background: #faf6eb; color: #15161a; }
+.implementation-snapshot h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.3; margin: .5rem 0 1rem; }
+.implementation-snapshot p { font-size: 1rem; line-height: 1.8; }
+.implementation-snapshot a { color: #1b3a8f; text-underline-offset: .2em; }
+.implementation-source { overflow-wrap: anywhere; }
+.implementation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.implementation-card { padding: 1.25rem; border: 1px solid #d7d0bd; border-radius: 8px; background: #fffdf7; min-width: 0; overflow-wrap: anywhere; }
+.implementation-card h3 { margin: .5rem 0; font-size: 1.2rem; line-height: 1.5; }
+.implementation-card .implementation-status { font-size: .875rem; font-weight: 600; color: #6b4716; }
+.implementation-limit { border-top: 1px solid #ddd5c1; padding-top: .75rem; }
+.implementation-boundary { border-left: 3px solid #a47126; padding-left: 1rem; margin-top: 1.5rem; }
+.evidenceNumberCardTeaser > p:not(.evidenceNumberValue):not(.evidenceNumberLabel) { font-size: .875rem; line-height: 1.7; }
+@media (max-width: 680px) { .implementation-grid { grid-template-columns: 1fr; } }

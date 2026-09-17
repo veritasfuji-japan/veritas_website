@@ -1,3 +1,4 @@
+import ImplementationSnapshot from "../components/ImplementationSnapshot.jsx";
 import PageShell from "../components/PageShell.jsx";
 
 const CORE_REPOSITORY_URL = "https://github.com/veritasfuji-japan/veritas_os";
@@ -193,6 +194,7 @@ export default function ReviewersPage() {
 
         return (
           <>
+            <ImplementationSnapshot lang={lang} />
             <section className="reviewer-hero-panel" aria-label={t("外部レビューの概要", "External review overview")}>
               <p>
                 {t(
@@ -324,3 +326,4 @@ export default function ReviewersPage() {
     </PageShell>
   );
 }
+

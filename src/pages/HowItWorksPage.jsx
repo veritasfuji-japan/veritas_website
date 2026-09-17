@@ -8,20 +8,20 @@ const heroActions = [
 
 const steps = {
   ja: [
-    ["AI decision", "AIエージェントが業務判断や次のアクション候補を生成する。"],
-    ["Policy / evidence check", "必要なpolicy、authority evidence、入力、証跡を確認する。"],
-    ["FUJI gate", "不足・不正・危険・証跡不足の経路を fail-closed で止める。"],
-    ["TrustLog", "判断、証跡、ゲート結果、失敗理由を記録する。"],
-    ["Bind boundary", "承認と現実世界への commit を分離し、実行可能範囲を確認する。"],
-    ["Outcome", "allow / hold / review / block のいずれかに分岐する。"],
+    ["Decision / verified artifact", "/v1/decideの結果を検証し、選択したsandbox動作に正確な実行意図を結びつける。判断結果だけでは外部作用を許可しない。"],
+    ["Native v2 / single-use consumption", "権限・ポリシー・必要な人間承認に基づく認可を発行し、実行試行前にPostgreSQLで一回限り消費する。"],
+    ["Current rechecks / credentials", "実行直前の権限・承認・ポリシー・リスクを再確認し、固定した動作・送信先・資格情報の範囲を照合する。"],
+    ["TLS effect / EFFECT_UNKNOWN", "送信意図を永続化し、証明書を検証したTLSで一度だけ送信。HTTP成功応答だけでは作用確定にしない。"],
+    ["Read-only reconciliation", "別の読み取り経路で保存済みイベントを照合し、証拠を保存する。404や照合障害は作用がなかった証明にならない。"],
+    ["BindReceipt / Outcome / recovery", "照合済みの結果を元の判断・意図に結ぶ事後証跡として公開。復旧処理は外部作用を再送せず、新たな実行権限も作らない。"],
   ],
   en: [
-    ["AI decision", "An AI agent generates a business decision or next-action candidate."],
-    ["Policy / evidence check", "Required policy, authority evidence, input, and records are checked."],
-    ["FUJI gate", "Missing, invalid, risky, or under-evidenced paths fail closed."],
-    ["TrustLog", "The decision, evidence, gate result, and failure reason are recorded."],
-    ["Bind boundary", "Approval is separated from real-world commit, then scope is checked."],
-    ["Outcome", "The path routes to allow / hold / review / block."],
+    ["Decision / verified artifact", "Verify /v1/decide output and bind an exact execution intent to the selected sandbox action. A decision alone does not permit an external effect."],
+    ["Native v2 / single-use consumption", "Issue authorization based on authority, policy, and required human approval; consume it once in PostgreSQL before the execution attempt."],
+    ["Current rechecks / credentials", "Recheck current authority, approval, policy, and risk; match the exact action, endpoint, and credential scope before effect."],
+    ["TLS effect / EFFECT_UNKNOWN", "Persist dispatch intent, then send once over certificate-validated TLS. An HTTP success response alone does not confirm effect."],
+    ["Read-only reconciliation", "Use a separate read-only path to verify the persisted event and archive evidence. A 404 or lookup outage is not proof of no effect."],
+    ["BindReceipt / Outcome / recovery", "Publish retrospective evidence linking the reconciled result to the original decision and intent. Recovery never resends the effect or creates new authority."],
   ],
 };
 
@@ -32,7 +32,7 @@ const layers = {
     ["FUJI gate", "不足・不正・危険・証跡不足を fail-closed で止める判断点。"],
     ["TrustLog", "判断と証跡を後から確認できるようにする記録層。"],
     ["Bind boundary", "判断承認と実行commitを分離する境界。"],
-    ["Outcome", "allow / hold / review / block として次の扱いを決める結果。"],
+    ["Outcome Receipt", "観測・照合された実行結果の事後証跡。判断結果や新たな実行許可とは異なる。"],
   ],
   en: [
     ["Policy", "Criteria for what should be allowed or stopped."],
@@ -40,19 +40,19 @@ const layers = {
     ["FUJI gate", "A fail-closed checkpoint for missing, invalid, risky, or under-evidenced paths."],
     ["TrustLog", "A record layer for reviewing decisions and evidence later."],
     ["Bind boundary", "The boundary that separates decision approval from execution commit."],
-    ["Outcome", "The result that determines allow / hold / review / block handling."],
+    ["Outcome Receipt", "Retrospective evidence of observed/reconciled execution results; distinct from a governance decision or new permission."],
   ],
 };
 
 const outcomes = {
   ja: [
-    ["Allow / Proceed", "必要条件を満たし、次へ進める判断。ただし無制限の実行許可ではない。"],
+    ["Allow / Proceed", "次の評価段階に進める判断。外部実行には別途、認可の消費と実行直前のbind検査が必要。"],
     ["Hold", "証跡や情報が不足しているため、一時的に止める判断。"],
     ["Review", "人間または外部レビュアーの確認が必要な判断。"],
     ["Block", "条件、証跡、ポリシー、権限、安全性の観点から進めるべきではない判断。"],
   ],
   en: [
-    ["Allow / Proceed", "Required conditions are satisfied enough to move forward. This is not unlimited permission."],
+    ["Allow / Proceed", "A governance decision permits the next evaluation step. External execution still requires authorization consumption and current bind checks."],
     ["Hold", "The process pauses because evidence or information is incomplete."],
     ["Review", "Human or external review is required before moving forward."],
     ["Block", "The action should not proceed because conditions, evidence, policy, authority, or safety requirements are not satisfied."],
@@ -123,8 +123,8 @@ export default function HowItWorksPage() {
             <p className="hiw-kicker">{t("一文でいうと", "In one sentence")}</p>
             <h2 id="mechanism-heading">
               {t(
-                "AI判断をそのまま実行へ渡さず、policy・authority evidence・FUJI gate・TrustLog・bind boundary を通して、allow / hold / review / block に分岐させます。",
-                "VERITAS does not pass AI decisions directly to execution. It routes them through policy, authority evidence, FUJI gate, TrustLog, and bind boundary checks before producing allow / hold / review / block.",
+                "AIの判断と実行権限を分離し、実行直前の条件を再確認します。限定sandboxでは、作用の読み取り照合から事後証跡・復旧までを接続しています。",
+                "VERITAS separates AI decisions from execution authority and rechecks current conditions before effect. The controlled sandbox connects read-only reconciliation to retrospective receipts and recovery.",
               )}
             </h2>
           </section>
@@ -132,8 +132,9 @@ export default function HowItWorksPage() {
           <section className="hiw-section" aria-labelledby="flow-heading">
             <div className="hiw-section-heading">
               <p className="hiw-kicker">Control flow</p>
-              <h2 id="flow-heading">{t("制御フロー", "Visual control flow")}</h2>
+              <h2 id="flow-heading">{t("限定sandboxでの実装フロー", "Controlled sandbox implementation flow")}</h2>
             </div>
+            <p className="hiw-section-copy">{t("以下は合成イベントを使うTLS・PostgreSQL環境での証明範囲です。本番検証や外部UTC時刻の信頼、TrustLogの外部配送保証を含みません。", "This proof scope uses synthetic events in a controlled TLS/PostgreSQL environment. It does not include production validation, external UTC clock trust, or TrustLog external-delivery guarantees.")}</p>
             <div className="hiw-flow" aria-label={t("VERITAS OS の制御フロー", "VERITAS OS control flow")}>
               {steps[lang].map(([label, body], index) => {
                 const isOutcome = index === steps[lang].length - 1;
@@ -245,3 +246,4 @@ export default function HowItWorksPage() {
     </PageShell>
   );
 }
+

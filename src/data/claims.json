@@ -1,22 +1,22 @@
 {
-  "updated_at": "2026-05-04",
+  "updated_at": "2026-09-17",
   "source_repository": "https://github.com/veritasfuji-japan/veritas_os",
   "claims": [
     {
-      "id": "coverage",
-      "value": "87%",
+      "id": "controlled_e2e_cases",
+      "value": "2",
       "label": {
-        "ja": "テストカバレッジ",
-        "en": "test coverage"
+        "ja": "限定E2Eの検証ケース",
+        "en": "controlled E2E proof cases"
       },
       "description": {
-        "ja": "リポジトリ上のカバレッジ証跡に基づく値。",
-        "en": "Based on coverage evidence in the repository."
+        "ja": "正常系と、応答消失・照合障害を組み合わせた異常系。合成sandboxイベントを使用。",
+        "en": "Normal and lost-response/lookup-outage cases using synthetic sandbox events."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/ja/validation/coverage-report.md",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/.github/workflows/reproducible-decision-to-effect-e2e.yml",
       "caution": {
-        "ja": "第三者認証や規制承認を意味しません。",
-        "en": "This does not imply third-party certification or regulatory approval."
+        "ja": "定義された検証範囲であり、顧客本番環境の実証ではありません。",
+        "en": "Defined proof scope, not evidence of customer production deployment."
       }
     },
     {
@@ -30,7 +30,7 @@
         "ja": "aml_kyc_pilot_cases.json に基づくPoCシナリオ数。",
         "en": "Number of PoC scenarios based on aml_kyc_pilot_cases.json."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/veritas_os/sample_data/governance/aml_kyc_pilot_cases.json",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/veritas_os/sample_data/governance/aml_kyc_pilot_cases.json",
       "caution": {
         "ja": "本番利用可能性を単独で証明するものではありません。",
         "en": "This does not independently prove production readiness."
@@ -40,14 +40,14 @@
       "id": "bind_governed_paths",
       "value": "5",
       "label": {
-        "ja": "bind-governed effect paths",
-        "en": "bind-governed effect paths"
+        "ja": "文書化された運用変更パス（最小集合）",
+        "en": "documented operator paths (minimum set)"
       },
       "description": {
         "ja": "文書化された operator-governed effect paths に基づく統制対象パス数。",
         "en": "Number of documented operator-governed effect paths."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/validation/current-implementation-matrix.md",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/docs/en/validation/current-implementation-matrix.md",
       "caution": {
         "ja": "網羅的な業界標準対応を意味しません。",
         "en": "This does not imply exhaustive industry-standard coverage."
@@ -64,11 +64,12 @@
         "ja": "英語版・日本語版の関連研究資料。",
         "en": "Related research materials in English and Japanese."
       },
-      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/main/README.md",
+      "proof_url": "https://github.com/veritasfuji-japan/veritas_os/blob/99618839e1183eec617602bc8add42cd5f5f9ebf/README.md",
       "caution": {
         "ja": "査読済み認証や規制承認を意味しません。",
         "en": "This does not imply peer-reviewed certification or regulatory approval."
       }
     }
-  ]
+  ],
+  "source_commit": "99618839e1183eec617602bc8add42cd5f5f9ebf"
 }
