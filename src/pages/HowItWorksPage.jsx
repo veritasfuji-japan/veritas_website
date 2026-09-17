@@ -8,20 +8,20 @@ const heroActions = [
 
 const steps = {
   ja: [
-    ["AI decision", "AIエージェントが業務判断や次のアクション候補を生成する。"],
-    ["Policy / evidence check", "必要なpolicy、authority evidence、入力、証跡を確認する。"],
-    ["FUJI gate", "不足・不正・危険・証跡不足の経路を fail-closed で止める。"],
-    ["TrustLog", "判断、証跡、ゲート結果、失敗理由を記録する。"],
-    ["Bind boundary", "承認と現実世界への commit を分離し、実行可能範囲を確認する。"],
-    ["Outcome", "allow / hold / review / block のいずれかに分岐する。"],
+    ["Decision / intent", "判断証跡を検証し、選択したサンドボックス操作を正確なExecution Intentへ決定論的に変換する。"],
+    ["Authorization / consumption", "権限・ポリシー・人間承認の根拠を結び、native v2認可を発行。PostgreSQL上で単回消費する。"],
+    ["Current rechecks", "実行前に最新の権限・承認・リスク等を再確認し、操作・送信先・資格情報を固定する。"],
+    ["Durable dispatch / effect", "送信意図を永続化してから証明書検証付きTLSで送信し、合成イベントをサンドボックスへ保存する。"],
+    ["Read-only reconciliation", "結果不明はEFFECT_UNKNOWNとして保持。確認なしに再送せず、独立した読み取り専用経路で保存結果を照合する。"],
+    ["BindReceipt / Outcome / recovery", "判断から実行結果までを事後証跡で結び、障害復旧時も外部作用を再送しない。"],
   ],
   en: [
-    ["AI decision", "An AI agent generates a business decision or next-action candidate."],
-    ["Policy / evidence check", "Required policy, authority evidence, input, and records are checked."],
-    ["FUJI gate", "Missing, invalid, risky, or under-evidenced paths fail closed."],
-    ["TrustLog", "The decision, evidence, gate result, and failure reason are recorded."],
-    ["Bind boundary", "Approval is separated from real-world commit, then scope is checked."],
-    ["Outcome", "The path routes to allow / hold / review / block."],
+    ["Decision / intent", "Verify decision evidence and deterministically promote the selected sandbox action to an exact Execution Intent."],
+    ["Authorization / consumption", "Bind authority, policy, and human approval evidence; issue native v2 authorization and consume it once in PostgreSQL."],
+    ["Current rechecks", "Recheck current authority, approval, risk, and other conditions before effect; bind the exact action, endpoint, and credentials."],
+    ["Durable dispatch / effect", "Persist dispatch intent before certificate-validated TLS transport stores a synthetic event in the sandbox."],
+    ["Read-only reconciliation", "Preserve uncertain results as EFFECT_UNKNOWN. Do not blindly redispatch; independently reconcile persisted state through a read-only path."],
+    ["BindReceipt / Outcome / recovery", "Link the decision to the result with retrospective evidence. Crash recovery never resends the external effect."],
   ],
 };
 
@@ -32,7 +32,7 @@ const layers = {
     ["FUJI gate", "不足・不正・危険・証跡不足を fail-closed で止める判断点。"],
     ["TrustLog", "判断と証跡を後から確認できるようにする記録層。"],
     ["Bind boundary", "判断承認と実行commitを分離する境界。"],
-    ["Outcome", "allow / hold / review / block として次の扱いを決める結果。"],
+    ["Outcome", "統制された実行試行の結果を記録する事後証跡。判断時のallow / hold / review / blockとは別で、実行権限を生まない。"],
   ],
   en: [
     ["Policy", "Criteria for what should be allowed or stopped."],
@@ -40,7 +40,7 @@ const layers = {
     ["FUJI gate", "A fail-closed checkpoint for missing, invalid, risky, or under-evidenced paths."],
     ["TrustLog", "A record layer for reviewing decisions and evidence later."],
     ["Bind boundary", "The boundary that separates decision approval from execution commit."],
-    ["Outcome", "The result that determines allow / hold / review / block handling."],
+    ["Outcome", "Retrospective evidence of a governed execution attempt, separate from allow / hold / review / block decision routing. It creates no execution authority."],
   ],
 };
 
@@ -123,8 +123,8 @@ export default function HowItWorksPage() {
             <p className="hiw-kicker">{t("一文でいうと", "In one sentence")}</p>
             <h2 id="mechanism-heading">
               {t(
-                "AI判断をそのまま実行へ渡さず、policy・authority evidence・FUJI gate・TrustLog・bind boundary を通して、allow / hold / review / block に分岐させます。",
-                "VERITAS does not pass AI decisions directly to execution. It routes them through policy, authority evidence, FUJI gate, TrustLog, and bind boundary checks before producing allow / hold / review / block.",
+                "認可の発行は実行許可ではありません。以下は、最新条件の再確認、限定サンドボックスでの実行、結果照合までを含む実装済み証明経路の要約です。",
+                "Authorization issuance is not execution permission. The following summarizes the implemented controlled sandbox proof path, including fresh rechecks, execution, and reconciliation.",
               )}
             </h2>
           </section>

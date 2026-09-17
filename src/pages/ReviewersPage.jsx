@@ -1,3 +1,4 @@
+import ImplementationStatus from "../components/ImplementationStatus.jsx";
 import PageShell from "../components/PageShell.jsx";
 
 const CORE_REPOSITORY_URL = "https://github.com/veritasfuji-japan/veritas_os";
@@ -208,6 +209,8 @@ export default function ReviewersPage() {
                 <ExternalLink href="/demo">{t("デモを見る", "View Demo")}</ExternalLink>
               </div>
             </section>
+
+            <ImplementationStatus lang={lang} />
 
             <section className="reviewer-section reviewer-audience-section">
               <SectionHeading eyebrow="01" title={t("このページの対象", "Who this is for")} />

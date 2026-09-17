@@ -20,10 +20,12 @@ const FLOW_STEPS = [
   "Decision Candidate",
   "Governance Evaluation",
   "Authority / Human Approval",
-  "Evidence Chain",
-  "Bind Boundary",
-  "Execution Intent",
-  "Outcome Receipt",
+  "Verified Execution Intent",
+  "Native v2 Authorization / Single-use Consumption",
+  "Current Rechecks / Bind Boundary",
+  "Controlled Sandbox Effect",
+  "Read-only Reconciliation",
+  "BindReceipt / Outcome",
   "Reviewer Evidence Packet",
   "Validation Report",
 ];
@@ -65,8 +67,8 @@ export default function ArchitectureOverview({ lang }) {
             </h2>
             <p className={`body ${isJa ? "lead-ja" : ""}`}>
               {t(
-                "VERITAS treats AI output as a decision candidate first. Before an action crosses the bind boundary, it is evaluated against governance, authority, evidence, approval, and reviewer-verifiable evidence requirements.",
-                "VERITAS treats AI output as a decision candidate first. Before an action crosses the bind boundary, it is evaluated against governance, authority, evidence, approval, and reviewer-verifiable evidence requirements."
+                "AI出力は判断候補として扱います。以下は限定サンドボックスの実行証明を要約した流れです。判断・認可・実行を分離し、実行直前の再確認から結果照合、事後証跡までを接続します。",
+                "AI output starts as a decision candidate. This is a summary of the controlled sandbox execution proof: decision, authorization, and execution remain separate, with fresh pre-effect checks, reconciliation, and retrospective evidence."
               )}
             </p>
           </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ImplementationStatus from "./components/ImplementationStatus.jsx";
 import NumbersFromClaims from "./components/NumbersFromClaims.jsx";
 import TopBar from "./landing/TopBar.jsx";
 import Hero from "./landing/Hero.jsx";
@@ -42,6 +43,7 @@ export default function VeritasLanding() {
           <Hero lang={lang} />
           <EnterpriseStart lang={lang} />
           <ControlFlowSnapshot lang={lang} />
+          <div className="container"><ImplementationStatus lang={lang} compact /></div>
           <ArchitectureOverview lang={lang} />
           <AmlKycPocConversion lang={lang} />
           <ReviewEvidenceSnapshot lang={lang} />

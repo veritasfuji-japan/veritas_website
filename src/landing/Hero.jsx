@@ -109,7 +109,7 @@ export default function Hero({ lang }) {
         <div className="hero-desktop">
           <div>
             <div className="hero-eyebrow reveal">
-              <span className="marker">{t("公開草案 · v2.0 Beta", "Public Draft · v2.0 Beta")}</span>
+              <span className="marker">{t("限定サンドボックス実装 · v2.0", "Controlled sandbox implementation · v2.0")}</span>
             </div>
             <h1 className="display reveal" style={{ animationDelay: "0.1s" }}>
               {isJa ? titleJaDesktop : titleEnDesktop}

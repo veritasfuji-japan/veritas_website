@@ -76,9 +76,9 @@ const routeMetadata = [
     jaTitle: "VERITAS OS Reviewers — 外部レビューの入口",
     enTitle: "VERITAS OS Reviewers — External Review Entry Point",
     jaDescription:
-      "外部レビュアーがVERITAS OSの主張、証跡、PoC構造、非主張を確認するための入口ページです。",
+      "VERITAS OSの限定サンドボックス実行証明、native v2認可、結果照合、外部計測・CAGE検証の実装範囲と根拠を確認できます。",
     enDescription:
-      "An entry point for external reviewers to examine VERITAS OS claims, evidence, PoC structure, and stated non-claims.",
+      "Review implementation scope and evidence for controlled sandbox execution, native v2 authorization, reconciliation, external measurement, and CAGE fixtures.",
   },
   {
     path: "/contact",

@@ -120,8 +120,8 @@ const glossarySections = [
         anchor: "outcome-receipt",
         name: makeText("Outcome Receipt", "Outcome Receipt"),
         definition: makeText(
-          "governed execution attempt の結果を記録する local/offline 証跡。final outcome、commit/block/rollback状態、observed effects などを扱う。",
-          "A local/offline evidence artifact recording governed execution results, including final outcome, commit/block/rollback state, and observed effects.",
+          "統制された実行試行の結果を記録する事後証跡。local/offlineのサンプルに加え、限定サンドボックスでは独立した結果照合を経て発行する。新たな実行権限は生まない。",
+          "Retrospective evidence of a governed execution attempt. Alongside local/offline samples, the controlled sandbox publishes outcomes after independent reconciliation. It creates no new execution authority.",
         ),
         status: ["Implemented", "Local-offline"],
       },

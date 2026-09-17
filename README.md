@@ -92,3 +92,19 @@ These checks keep public routes, metadata, proof URLs, fixture IDs, and public c
 ## Important Note
 
 Public metrics and claims shown on the website must stay aligned with the `veritas_os` repository evidence.
+
+## Implementation alignment snapshot
+
+Reviewed on 2026-09-17 against `veritas_os/main` at
+`1c7a95ffedd4f500d12b0e0ad40babd8d6fd1f30` (product PR #2248).
+The home and reviewer pages share `ImplementationStatus.jsx`; evidence links
+are pinned to that source snapshot. Recheck source and proof artifacts before
+advancing the snapshot. Implementation availability does not imply a passing
+execution-proof run on every later commit.
+
+The controlled TLS/PostgreSQL sandbox proof is separate from customer production
+validation, external measurement adapters, CAGE synthetic fixtures, live-adapter
+readiness, external UTC clock trust, and TrustLog delivery guarantees. The
+87% coverage figure is explicitly historical (2026-03-24), not a measurement of
+this source commit. Six pilot fixtures and seven CAGE regulated-action fixtures
+are different fixture sets. The public `/demo` remains a static simulation.

@@ -59,6 +59,8 @@ export default function NumbersFromClaims({ lang = "ja" }) {
             <article key={claim.id} className="evidenceNumberCard evidenceNumberCardTeaser">
               <p className="evidenceNumberValue">{claim.value || ""}</p>
               <p className="evidenceNumberLabel">{getLocalized(claim.label, lang)}</p>
+              <p>{getLocalized(claim.description, lang)}</p>
+              <a href={claim.proof_url} target="_blank" rel="noreferrer noopener">{isJa ? "根拠を見る" : "View source"}</a>
             </article>
           ))}
         </div>

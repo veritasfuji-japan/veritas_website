@@ -2961,3 +2961,14 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Source-bound implementation scope, shared by the home and reviewer pages. */
+.implementation-status { padding: 3rem 0; }
+.implementation-status .headline { margin: 0.75rem 0 1rem; }
+.implementation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.implementation-grid .snapshot-mini-card { min-width: 0; }
+.implementation-grid p { font-size: 1rem; line-height: 1.75; overflow-wrap: anywhere; }
+.implementation-grid a, .implementation-source { font-size: 0.875rem; line-height: 1.6; }
+.implementation-status a { overflow-wrap: anywhere; }
+.implementation-boundary { border-left: 3px solid #2456c7; padding-left: 1rem; margin-bottom: 1.5rem; }
+@media (max-width: 720px) { .implementation-grid { grid-template-columns: 1fr; } }

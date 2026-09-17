@@ -15,7 +15,7 @@ export default function BindFlow() {
       {[
         { x: 20, label: "decision", sub: "/v1/decide", color: "#1B3A8F" },
         { x: 220, label: "execution_intent", sub: "admissibility check", color: "#A47126", live: true },
-        { x: 420, label: "bind_receipt", sub: "TrustLog · Ed25519", color: "#3F5A3A" },
+        { x: 420, label: "bind_receipt", sub: "retrospective evidence", color: "#3F5A3A" },
       ].map((n, i) => (
         <g key={n.label} transform={`translate(${n.x}, 55)`}>
           <rect x="0" y="0" width="160" height="100" rx="2" fill="#FAF6EB" stroke={n.color} strokeWidth="1.5" />

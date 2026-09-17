@@ -109,6 +109,20 @@ const faqSections = [
       },
       keyAnswers[2],
       {
+        question: { ja: "現在どこまで実行を検証できますか？", en: "What execution scope can be verified today?" },
+        answer: {
+          ja: "限定サンドボックスには、判断からnative v2認可、PostgreSQLでの単回消費、最新条件の再確認、TLS送信、合成イベント保存、読み取り専用照合、BindReceipt / Outcome、障害復旧までをつなぐ証明経路があります。合否は対象ソースSHAに対応する専用CI証跡で確認します。顧客環境での本番実証ではありません。",
+          en: "The controlled sandbox has a proof path from decision through native v2 authorization, PostgreSQL single-use consumption, fresh rechecks, TLS dispatch, synthetic event persistence, read-only reconciliation, BindReceipt / Outcome, and crash recovery. Verify results against dedicated CI evidence for the exact source SHA. This is not customer production validation.",
+        },
+      },
+      {
+        question: { ja: "実行結果が分からない場合は？", en: "What happens when the execution result is unknown?" },
+        answer: {
+          ja: "限定サンドボックスではEFFECT_UNKNOWNを失敗と同一視しません。照合先の404や応答不能も「作用なし」の証明にはならず、確認なしの再送を禁止します。読み取り専用照合で状態を確かめ、未解決または確認済みの同一業務イベントの再実行を止めます。",
+          en: "In the controlled sandbox, EFFECT_UNKNOWN is not failure. A missing/404 or unavailable lookup does not prove no effect. Blind redispatch is prohibited; read-only reconciliation checks the state, and the same business event remains blocked while unresolved or confirmed.",
+        },
+      },
+      {
         question: { ja: "PoCでは何を確認すべきですか？", en: "What should a PoC evaluate?" },
         answer: {
           ja: "PoCでは、証跡の十分性、権限境界、ポリシー分岐、failure reason、レビュー導線を確認するのが適切です。実データや本番接続の有無よりも、実行前に止められるかを評価します。",
