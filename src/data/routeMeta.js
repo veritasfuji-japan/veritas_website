@@ -31,9 +31,9 @@ const routeMetadata = [
     jaTitle: "VERITAS OS — 仕組みと判断フロー",
     enTitle: "VERITAS OS — How the Decision Flow Works",
     jaDescription:
-      "AIエージェントの実行意図を、権限、証跡、ポリシー、bind境界に照らして確認するVERITAS OSの基本フローを説明します。",
+      "判断、native v2認可、一回限りの消費、実行直前確認、限定sandboxでのTLS送信・照合・事後証跡の流れと検証範囲を説明します。",
     enDescription:
-      "A plain overview of the VERITAS OS flow for checking AI-agent execution intent against authority, evidence, policy, and bind boundaries.",
+      "Follow the controlled sandbox path from decision and native v2 authorization through single-use consumption, current checks, TLS dispatch, reconciliation, and receipts.",
   },
   {
     path: "/aml-kyc-poc",
@@ -76,9 +76,9 @@ const routeMetadata = [
     jaTitle: "VERITAS OS Reviewers — 外部レビューの入口",
     enTitle: "VERITAS OS Reviewers — External Review Entry Point",
     jaDescription:
-      "外部レビュアーがVERITAS OSの主張、証跡、PoC構造、非主張を確認するための入口ページです。",
+      "VERITAS OSの実装時点と根拠を確認。限定E2E、TrustLog一次保存、外部時刻の検証範囲と未解決事項を示します。",
     enDescription:
-      "An entry point for external reviewers to examine VERITAS OS claims, evidence, PoC structure, and stated non-claims.",
+      "Review source-pinned implementation evidence and limits for controlled E2E, TrustLog publication, and external clock evidence.",
   },
   {
     path: "/contact",
@@ -114,3 +114,4 @@ export function getRouteMeta(pathname) {
 }
 
 export default routeMetadata;
+

@@ -9,7 +9,10 @@ const repoRoot = path.resolve(path.dirname(__filename), "..");
 const claimsPath = path.join(repoRoot, "src", "data", "claims.json");
 
 function loadClaims() {
-  return JSON.parse(fs.readFileSync(claimsPath, "utf8")).claims ?? [];
+  const claims = JSON.parse(fs.readFileSync(claimsPath, "utf8")).claims ?? [];
+  const snapshotPath = path.join(repoRoot, "src", "data", "implementationSnapshot.json");
+  const snapshot = JSON.parse(fs.readFileSync(snapshotPath, "utf8"));
+  return [...claims, ...snapshot.capabilities];
 }
 
 async function requestProofUrl(url, method) {
@@ -76,3 +79,4 @@ if (failures.length > 0) {
 }
 
 console.log("Proof URL guardrail passed.");
+

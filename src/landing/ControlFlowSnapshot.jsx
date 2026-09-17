@@ -4,12 +4,12 @@ export default function ControlFlowSnapshot({ lang }) {
   const t = makeT(lang);
   const isJa = lang === "ja";
   const steps = [
-    "AI decision",
-    "policy / evidence check",
-    "FUJI gate",
-    "TrustLog",
-    "bind boundary",
-    "allow / hold / review / block",
+    t("AI判断・証跡検証", "Decision / evidence verification"),
+    t("native v2認可・一回限りの消費", "Native v2 / single-use consumption"),
+    t("最新条件・資格情報の確認", "Current rechecks / credentials"),
+    t("固定sandboxへのTLS送信", "Pinned sandbox TLS dispatch"),
+    t("結果不明の保持・読み取り照合", "EFFECT_UNKNOWN / reconciliation"),
+    t("BindReceipt・Outcome・復旧", "BindReceipt / Outcome / recovery"),
   ];
 
   return (
@@ -23,8 +23,8 @@ export default function ControlFlowSnapshot({ lang }) {
             </h2>
             <p className={`body ${isJa ? "lead-ja" : ""}`}>
               {t(
-                "VERITAS OS は、AI判断をそのまま実行へ渡さず、証跡・権限・ポリシー・失敗理由を確認してから次の扱いを決めます。",
-                "VERITAS OS does not pass AI decisions directly to execution. It checks evidence, authority, policy, and failure reasons before routing the outcome."
+                "限定sandboxでの実装経路です。認可発行後も、実行直前に権限・ポリシー・承認・リスクを再確認します。応答が失われた場合は結果不明を保持し、外部作用を再送せずに照合します。",
+                "This is the controlled sandbox implementation path. Authority, policy, approval, and risk are rechecked after issuance and before effect. Lost responses preserve uncertainty; reconciliation does not resend the effect."
               )}
             </p>
             <a href="/how-it-works" className="btn btn-secondary snapshot-cta">
@@ -44,3 +44,4 @@ export default function ControlFlowSnapshot({ lang }) {
     </section>
   );
 }
+

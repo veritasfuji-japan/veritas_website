@@ -16,16 +16,14 @@ const REVIEWER_EVIDENCE_DOCS = [
 ];
 
 const FLOW_STEPS = [
-  "AI / Agent Output",
-  "Decision Candidate",
-  "Governance Evaluation",
-  "Authority / Human Approval",
-  "Evidence Chain",
-  "Bind Boundary",
-  "Execution Intent",
-  "Outcome Receipt",
-  "Reviewer Evidence Packet",
-  "Validation Report",
+  "Decision Candidate / verified artifact",
+  "Governance / Authority / Human Approval",
+  "Exact Execution Intent / Native v2 Authorization",
+  "Single-use Consumption / Current Rechecks",
+  "Credential Resolution / Durable Dispatch Intent",
+  "Controlled TLS Effect / EFFECT_UNKNOWN",
+  "Read-only Reconciliation / Evidence Archive",
+  "BindReceipt / Outcome / Recovery",
 ];
 
 export default function ArchitectureOverview({ lang }) {
@@ -65,8 +63,8 @@ export default function ArchitectureOverview({ lang }) {
             </h2>
             <p className={`body ${isJa ? "lead-ja" : ""}`}>
               {t(
-                "VERITAS treats AI output as a decision candidate first. Before an action crosses the bind boundary, it is evaluated against governance, authority, evidence, approval, and reviewer-verifiable evidence requirements.",
-                "VERITAS treats AI output as a decision candidate first. Before an action crosses the bind boundary, it is evaluated against governance, authority, evidence, approval, and reviewer-verifiable evidence requirements."
+                "AI出力を候補として検証し、正確な実行意図に認可を結びつけます。以下は限定sandboxでの実装経路です。判断結果、実行許可、作用の確認、事後証跡を分けて扱います。",
+                "The controlled sandbox path binds authorization to an exact execution intent. Decision results, execution permission, effect confirmation, and retrospective evidence remain distinct."
               )}
             </p>
           </div>
@@ -101,3 +99,4 @@ export default function ArchitectureOverview({ lang }) {
     </section>
   );
 }
+

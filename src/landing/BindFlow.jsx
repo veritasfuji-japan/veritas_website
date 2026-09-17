@@ -15,7 +15,7 @@ export default function BindFlow() {
       {[
         { x: 20, label: "decision", sub: "/v1/decide", color: "#1B3A8F" },
         { x: 220, label: "execution_intent", sub: "admissibility check", color: "#A47126", live: true },
-        { x: 420, label: "bind_receipt", sub: "TrustLog · Ed25519", color: "#3F5A3A" },
+        { x: 420, label: "bind_receipt", sub: "reconciled outcome", color: "#3F5A3A" },
       ].map((n, i) => (
         <g key={n.label} transform={`translate(${n.x}, 55)`}>
           <rect x="0" y="0" width="160" height="100" rx="2" fill="#FAF6EB" stroke={n.color} strokeWidth="1.5" />
@@ -31,7 +31,7 @@ export default function BindFlow() {
         </g>
       ))}
       <text x="300" y="200" textAnchor="middle" fontSize="11" fontFamily="IBM Plex Mono" fill="#5A5C62">
-        h_t = SHA256(h_{"{t-1}"} ‖ r_t)
+        controlled sandbox · evidence lineage
       </text>
       <text x="300" y="222" textAnchor="middle" fontSize="11" fontStyle="italic" fontFamily="Fraunces" fill="#A47126">
         approval ≠ commitment
@@ -39,3 +39,4 @@ export default function BindFlow() {
     </svg>
   );
 }
+

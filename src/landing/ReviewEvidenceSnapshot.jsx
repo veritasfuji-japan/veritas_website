@@ -1,3 +1,4 @@
+import ImplementationSnapshot from "../components/ImplementationSnapshot.jsx";
 import { makeT } from "./landingText.js";
 
 export default function ReviewEvidenceSnapshot({ lang }) {
@@ -21,6 +22,7 @@ export default function ReviewEvidenceSnapshot({ lang }) {
   return (
     <section className="review-evidence-snapshot">
       <div className="container">
+        <ImplementationSnapshot lang={lang} compact />
         <div className="snapshot-shell">
           <div className="snapshot-copy">
             <p className="marker">{t("リポジトリ証跡", "Repository evidence")}</p>
@@ -56,3 +58,4 @@ export default function ReviewEvidenceSnapshot({ lang }) {
     </section>
   );
 }
+
