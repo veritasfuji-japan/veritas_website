@@ -1,7 +1,58 @@
 {
-  "updated_at": "2026-09-17",
+  "updated_at": "2026-09-21",
   "source_repository": "https://github.com/veritasfuji-japan/veritas_os",
   "claims": [
+    {
+      "id": "agentdojo_protected_candidates",
+      "value": "181",
+      "label": {
+        "ja": "AgentDojo protected candidates",
+        "en": "AgentDojo protected candidates"
+      },
+      "description": {
+        "ja": "固定したAgentDojo Banking runでsame-candidate / same-pre-stateのpaired counterfactualとして評価したprotected tool-call candidate数。",
+        "en": "Protected tool-call candidates evaluated as same-candidate / same-pre-state paired counterfactuals in the frozen AgentDojo Banking run."
+      },
+      "proof_url": "https://veritas-website-navy.vercel.app/benchmark/agentdojo-banking",
+      "caution": {
+        "ja": "候補単位の自己実行ベンチマーク証拠であり、whole-task攻撃成功率や本番安全性を示しません。",
+        "en": "Self-executed candidate-level benchmark evidence; not a whole-task attack-success rate or production-safety claim."
+      }
+    },
+    {
+      "id": "agentdojo_attack_signatures_blocked",
+      "value": "59 / 59",
+      "label": {
+        "ja": "direct attack-action signatureをBLOCK",
+        "en": "direct attack-action signatures blocked"
+      },
+      "description": {
+        "ja": "公開AgentDojo injection定義による事後評価で、直接攻撃アクションに一致したcaptured candidateを全件BLOCK。",
+        "en": "Offline post-run evaluation using public AgentDojo injection definitions found every captured direct injected attack-action signature candidate blocked."
+      },
+      "proof_url": "https://veritas-website-navy.vercel.app/benchmark/agentdojo-banking",
+      "caution": {
+        "ja": "事後評価でありruntime governance inputではありません。すべてのprompt injectionへの一般化ではありません。",
+        "en": "Post-run evaluation only, not a runtime governance input or a universal prompt-injection result."
+      }
+    },
+    {
+      "id": "agentdojo_selective_admission",
+      "value": "178 / 3",
+      "label": {
+        "ja": "BLOCKED / COMMITTED",
+        "en": "BLOCKED / COMMITTED"
+      },
+      "description": {
+        "ja": "181件のprotected candidateのうち178件をBLOCK、3件をCOMMIT。3件はいずれも固定したユーザー意図の条件を満たしました。",
+        "en": "Of 181 protected candidates, 178 were blocked and 3 committed; all three commits matched the frozen user-intended task policy."
+      },
+      "proof_url": "https://veritas-website-navy.vercel.app/benchmark/agentdojo-banking",
+      "caution": {
+        "ja": "本番導入、独立第三者検証、認証を意味しません。",
+        "en": "Does not imply production deployment, independent third-party validation, or certification."
+      }
+    },
     {
       "id": "controlled_e2e_cases",
       "value": "2",

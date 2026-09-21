@@ -8,7 +8,7 @@ function getLocalized(field, lang) {
   return field[lang] || field.en || "";
 }
 
-const preferredClaimIds = ["controlled_e2e_cases", "aml_kyc_scenarios", "bind_governed_paths"];
+const preferredClaimIds = ["agentdojo_protected_candidates", "agentdojo_attack_signatures_blocked", "agentdojo_selective_admission"];
 const fallbackLabels = ["coverage", "scenario", "bind"];
 
 function selectTeaserClaims(claims) {

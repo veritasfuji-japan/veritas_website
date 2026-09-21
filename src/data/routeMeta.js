@@ -81,6 +81,15 @@ const routeMetadata = [
       "Review source-pinned implementation evidence and limits for controlled E2E, TrustLog publication, and external clock evidence.",
   },
   {
+    path: "/benchmark/agentdojo-banking",
+    jaTitle: "VERITAS OS × AgentDojo Banking — 限定的な候補単位ベンチマーク証拠",
+    enTitle: "VERITAS OS × AgentDojo Banking — Bounded Candidate-Level Benchmark Evidence",
+    jaDescription:
+      "固定したAgentDojo Bankingベンチマークで、VERITASが181件のprotected candidateをsame-candidate / same-pre-stateで評価した限定的な候補単位の証拠を公開します。",
+    enDescription:
+      "Bounded candidate-level evidence from a frozen AgentDojo Banking run where VERITAS evaluated 181 protected candidates with same-candidate / same-pre-state paired counterfactuals.",
+  },
+  {
     path: "/contact",
     jaTitle: "VERITAS OS お問い合わせ — PoC評価・レビュー相談",
     enTitle: "VERITAS OS Contact — PoC Evaluation and Review Inquiry",
