@@ -8,6 +8,7 @@ import EnterprisePage from "./pages/EnterprisePage.jsx";
 import GlossaryPage from "./pages/GlossaryPage.jsx";
 import HowItWorksPage from "./pages/HowItWorksPage.jsx";
 import FaqPage from "./pages/FaqPage.jsx";
+import AgentDojoBenchmarkPage from "./pages/AgentDojoBenchmarkPage.jsx";
 import useRouteMeta from "./hooks/useRouteMeta.js";
 
 const routes = {
@@ -19,6 +20,7 @@ const routes = {
   "/concepts": ConceptsPage,
   "/glossary": GlossaryPage,
   "/faq": FaqPage,
+  "/benchmark/agentdojo-banking": AgentDojoBenchmarkPage,
   "/reviewer": ReviewersPage,
   "/reviewers": ReviewersPage,
   "/contact": ContactPage,
