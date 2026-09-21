@@ -1,0 +1,50 @@
+{
+  "evidence_id": "TASK-023",
+  "title": "VERITAS OS × AgentDojo Banking bounded candidate-level benchmark evidence",
+  "published_at": "2026-09-21",
+  "evidence_scope": "SELF_EXECUTED_THIRD_PARTY_AUTHORED_BENCHMARK_CANDIDATE_LEVEL_COUNTERFACTUAL",
+  "frozen_inputs": {
+    "agentdojo_release": "v0.1.35",
+    "agentdojo_commit": "a75aba7631d3ca5fb7ab938965c97ead2f9ff84b",
+    "benchmark_version": "v1.2.2",
+    "suite": "banking",
+    "attack": "tool_knowledge",
+    "model": "gpt-4o-mini-2024-07-18",
+    "veritas_treatment_commit": "fb622db8e196bbe5e70cd362e4379ccd89a1ee18"
+  },
+  "scored_run": {
+    "primary_cases_completed": 160,
+    "primary_cases_expected": 160,
+    "protected_candidates": 181,
+    "paired_arm_records": 362,
+    "same_candidate_pairs": "181/181",
+    "same_pre_state_pairs": "181/181",
+    "veritas_blocked": 178,
+    "veritas_committed": 3,
+    "committed_candidate_interpretation": "All 3 matched frozen user-intended task policy",
+    "direct_injected_attack_action_signature_candidates": 59,
+    "direct_injected_attack_action_signature_blocked": "59/59",
+    "direct_injected_attack_action_signature_committed": "0/59",
+    "native_agentdojo_injection_goal_success": "44/144"
+  },
+  "integrity": {
+    "artifact_sha256": "f8c621b829b446ef458f44b0e79f5436b1db26e10fd39297c0fd97233d9e597a",
+    "native_case_results_sha256": "e3e18183604eee5d25fc242781aa677b94fd6358b61e558cea533e4b419ea6a8",
+    "candidate_results_sha256": "25abb308db8f0d5ef2bd2f7b9d3796d101972555664faa5bf6319078b88c767d",
+    "summary_record_sha256": "c7f73f8f5fa3b0bc0779a932e9b7a861878c09ef4946f69a1a5a483347d56405",
+    "run_manifest_record_sha256": "fb754c27bdaf5ad44479f793ebc62ea8fe35a8e7a3f0740bf23cc1ff85627bdd"
+  },
+  "public_sources": {
+    "agentdojo": "https://github.com/ethz-spylab/agentdojo/tree/a75aba7631d3ca5fb7ab938965c97ead2f9ff84b",
+    "veritas_treatment": "https://github.com/veritasfuji-japan/veritas_os/tree/fb622db8e196bbe5e70cd362e4379ccd89a1ee18"
+  },
+  "claim_boundary": [
+    "Candidate-level same-candidate/same-pre-state paired counterfactual evidence only",
+    "Not a treatment-side whole-task attack-success rate",
+    "Not production banking validation",
+    "Not certification or regulatory approval",
+    "Not independent third-party validation",
+    "Not a universal prompt-injection or agent-safety guarantee",
+    "No statistical generalization beyond this frozen scored run"
+  ]
+}
