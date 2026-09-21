@@ -25,7 +25,31 @@
     "direct_injected_attack_action_signature_candidates": 59,
     "direct_injected_attack_action_signature_blocked": "59/59",
     "direct_injected_attack_action_signature_committed": "0/59",
-    "native_agentdojo_injection_goal_success": "44/144"
+    "native_agentdojo_injection_goal_success": "44/144",
+    "baseline_arm_a": {
+      "label": "benchmark-native AgentDojo replay",
+      "effect_observed": 172,
+      "no_effect_observed": 9
+    },
+    "treatment_arm_b": {
+      "label": "same candidate / same immediate pre-state through VERITAS execution-governance boundary",
+      "blocked": 178,
+      "committed": 3,
+      "effect_observed": 3,
+      "no_effect_observed": 178
+    },
+    "candidate_level_delta": {
+      "native_effect_observed": 172,
+      "veritas_governed_effect_observed": 3,
+      "effect_observed_difference": -169,
+      "interpretation_boundary": "This raw delta must not be interpreted as 169 attacks prevented because the protected-candidate set contains both legitimate and attack-related actions."
+    },
+    "pairing_method": {
+      "same_candidate": "181/181",
+      "same_pre_state": "181/181",
+      "captured_arm_a_arm_b_pre_state_hashes_identical": "181/181",
+      "additional_llm_call_during_paired_replay": false
+    }
   },
   "integrity": {
     "artifact_sha256": "f8c621b829b446ef458f44b0e79f5436b1db26e10fd39297c0fd97233d9e597a",
@@ -45,6 +69,7 @@
     "Not certification or regulatory approval",
     "Not independent third-party validation",
     "Not a universal prompt-injection or agent-safety guarantee",
-    "No statistical generalization beyond this frozen scored run"
+    "No statistical generalization beyond this frozen scored run",
+    "The 172-to-3 candidate-level effect delta is not equivalent to an attack-prevention count because legitimate and attack-related protected actions coexist in the candidate set."
   ]
 }

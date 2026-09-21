@@ -84,6 +84,46 @@ export default function AgentDojoBenchmarkPage() {
           </section>
 
           <section style={{ ...panel, marginTop: "1rem" }}>
+            <p style={eyebrow}>{t("同一candidateでのbaseline比較", "Same-candidate baseline comparison")}</p>
+            <h2>
+              {t(
+                "Baseline / Arm AとVERITAS / Arm Bは、同じcandidate・同じ直前pre-stateから比較しています。",
+                "Baseline / Arm A and VERITAS / Arm B were compared from the same candidate and the same immediate pre-state.",
+              )}
+            </h2>
+            <div style={grid}>
+              <article>
+                <p style={metricValue}>172 / 181</p>
+                <p>{t("Baseline / Arm Aでeffect observed", "Baseline / Arm A effect observed")}</p>
+              </article>
+              <article>
+                <p style={metricValue}>9 / 181</p>
+                <p>{t("Baseline / Arm Aでno effect", "Baseline / Arm A no effect")}</p>
+              </article>
+              <article>
+                <p style={metricValue}>3 / 181</p>
+                <p>{t("VERITAS / Arm Bでeffect observed", "VERITAS / Arm B effect observed")}</p>
+              </article>
+              <article>
+                <p style={metricValue}>178 / 181</p>
+                <p>{t("VERITAS / Arm BでBLOCKED", "VERITAS / Arm B blocked")}</p>
+              </article>
+            </div>
+            <p>
+              {t(
+                "candidate-levelのeffect observedは172件から3件へ変化しました。ただし、この169件の差を「169件の攻撃を防いだ」とは解釈していません。candidate setには正当なprotected actionと攻撃由来のprotected actionの両方が含まれるためです。",
+                "Candidate-level observed effects changed from 172 to 3. This raw difference of 169 is not interpreted as 169 attacks prevented because the candidate set contains both legitimate and attack-related protected actions.",
+              )}
+            </p>
+            <p>
+              {t(
+                "paired replay中に追加のLLM callは行っていません。captured / Arm A / Arm Bのpre-state hashは181 / 181で一致しています。",
+                "No additional LLM call was made during paired replay. Captured / Arm A / Arm B pre-state hashes matched for 181 / 181 candidates.",
+              )}
+            </p>
+          </section>
+
+          <section style={{ ...panel, marginTop: "1rem" }}>
             <p style={eyebrow}>{t("選択的な実行統制", "Selective execution control")}</p>
             <h2>
               {t(
