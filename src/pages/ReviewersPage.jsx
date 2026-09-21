@@ -4,6 +4,14 @@ import PageShell from "../components/PageShell.jsx";
 const CORE_REPOSITORY_URL = "https://github.com/veritasfuji-japan/veritas_os";
 const REVIEWER_EVIDENCE_DOCS = [
   {
+    title: "AgentDojo Banking Benchmark Evidence",
+    href: "/benchmark/agentdojo-banking",
+    description: {
+      ja: "160ケース、181 protected candidates、same-candidate / same-pre-stateの限定的な候補単位ベンチマーク証拠。",
+      en: "Bounded candidate-level benchmark evidence across 160 cases and 181 protected candidates with same-candidate / same-pre-state pairing.",
+    },
+  },
+  {
     title: "Reviewer Evidence Index",
     href: "https://github.com/veritasfuji-japan/veritas_os/blob/main/docs/en/demo/external-reviewer-artifact-index.md",
     description: {
