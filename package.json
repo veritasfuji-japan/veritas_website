@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "check:claims": "node scripts/check-public-claims.mjs",
+    "check:language": "node --test tests/language-preference.test.mjs",
     "check:unicode": "node scripts/check-hidden-unicode.mjs",
     "check:fixtures": "node scripts/check-fixture-references.mjs",
     "check:proof-urls": "node scripts/check-proof-urls.mjs",
