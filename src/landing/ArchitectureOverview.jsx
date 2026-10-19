@@ -39,24 +39,24 @@ export default function ArchitectureOverview({ lang }) {
   const isJa = lang === "ja";
   const cards = [
     {
-      title: "Decision Candidate",
-      body: t("実行前の構造化された decision object。", "Structured pre-execution decision object."),
+      title: t("操作候補", "Decision Candidate"),
+      body: t("AIが提案した操作を、実行前に確認するための構造化データ。", "Structured pre-execution decision object."),
     },
     {
-      title: "Governance Evaluation",
-      body: t("ポリシー、authority、evidence、approval の検査。", "Policy, authority, evidence, and approval checks."),
+      title: t("権限とルールの審査", "Governance Evaluation"),
+      body: t("適用するルール、実行権限、証拠、人の承認を確認します。", "Policy, authority, evidence, and approval checks."),
     },
     {
-      title: "Bind Boundary",
-      body: t("現実世界への effect の前に置く最終実行前制御点。", "Final pre-execution control point before real-world effect."),
+      title: t("実行直前の制御点", "Bind Boundary"),
+      body: t("外部システムに作用する前に、実行条件を確認する最終制御点。", "Final pre-execution control point before real-world effect."),
     },
     {
-      title: "Evidence Chain",
-      body: t("ハッシュ連結された evidence と verification artifact。", "Hash-linked evidence and verification artifacts."),
+      title: t("証拠のつながり", "Evidence Chain"),
+      body: t("ハッシュで関連付けた証拠と検証用の記録を保持します。", "Hash-linked evidence and verification artifacts."),
     },
     {
-      title: "Reviewer Evidence",
-      body: t("レビュアー向け packet と validation report。", "Reviewer-facing packet and validation report."),
+      title: t("外部レビュー用資料", "Reviewer Evidence"),
+      body: t("第三者が確認できる証拠資料と検証報告を案内します。", "Reviewer-facing packet and validation report."),
     },
   ];
 
@@ -91,7 +91,7 @@ export default function ArchitectureOverview({ lang }) {
 
           <details style={{ marginTop: "1.25rem" }}>
             <summary style={{ cursor: "pointer", fontWeight: 700, padding: "0.75rem 0" }}>
-              {t("技術者向け：詳細な8段階の実行経路を見る", "Technical detail: show the eight-stage execution path")}
+              {t("技術者向け：詳細8段階", "Technical detail: show the eight-stage execution path")}
             </summary>
             <p className="body">
               {t("以下は限定sandboxでの実装経路であり、すべての外部システムや本番環境での実証を意味しません。", "This describes a controlled sandbox path, not validation across all external systems or customer production environments.")}
@@ -115,10 +115,13 @@ export default function ArchitectureOverview({ lang }) {
             ))}
           </div>
 
-          <div className="architecture-doc-links" aria-label="Reviewer Evidence documentation links">
+          <div className="architecture-doc-links" aria-label={t("外部レビュー用の証拠資料リンク", "Reviewer evidence documentation links")}>
             {REVIEWER_EVIDENCE_DOCS.map((doc) => (
               <a key={doc.href} href={doc.href} target="_blank" rel="noreferrer noopener">
-                {doc.title}
+                {isJa ? t(
+                  doc.title === "Reviewer Evidence Index" ? "証拠資料一覧" : doc.title === "Reviewer Evidence Assurance Overview" ? "証拠の保証範囲" : "レビュー用証拠パケット",
+                  doc.title
+                ) : doc.title}
               </a>
             ))}
           </div>
