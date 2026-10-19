@@ -8,49 +8,49 @@ export default function Hero({ lang }) {
 
   const titleJa = (
     <>
-      <span>AIの判断を</span>
-      <span className="brand-gradient-text hero-gradient-word">世界に出る前に</span>
-      <span>統制する</span>
+      <span>AIの操作を</span>
+      <span className="brand-gradient-text hero-gradient-word">実行する前に</span>
+      <span>確認する</span>
     </>
   );
   const titleEn = (
     <>
-      <span>Govern AI decisions</span>
+      <span>Check AI agent actions</span>
       <span>
         <span className="brand-gradient-text hero-gradient-word">before</span>
       </span>
-      <span>they touch the real world</span>
+      <span>they happen</span>
     </>
   );
   const titleJaDesktop = (
     <>
-      AI の判断を<br />
-      <em className="brand-gradient-text hero-gradient-word">世界に出る前に</em><br />
-      統制する
+      AI の操作を<br />
+      <em className="brand-gradient-text hero-gradient-word">実行する前に</em><br />
+      確認する
     </>
   );
   const titleEnDesktop = (
     <>
-      Govern AI decisions<br />
+      Check AI agent actions<br />
       <em className="brand-gradient-text hero-gradient-word">before</em><br />
-      they touch the real world
+      they happen
     </>
   );
 
   const lead = t(
-    "AIの判断と実行権限を分離するコントロールプレーン。権限・ポリシー・人間承認を実行直前に再確認し、限定sandboxでは実行結果の照合と証跡までを接続します。",
-    "A control plane that separates AI decisions from execution authority. It rechecks authority, policy, and human approval before execution, with outcome reconciliation and evidence in a controlled sandbox path."
+    "AIが送金やアクセス権の変更などを実行する前に、誰が許可したか、ルールに合っているか、必要な証拠があるかを確認する仕組みです。条件が足りなければ止めるか、人の確認に回します。現在の実証は限定された検証環境が中心です。",
+    "Before an AI agent makes a payment or changes access, VERITAS is designed to check who authorized it, whether it follows the rules, and whether evidence is present. Missing conditions can hold the action for human review. Current evidence comes primarily from bounded test environments."
   );
 
   const cta = (
     <>
       <div className="hero-cta-main">
         <a href="/demo" className="btn btn-primary">
-          {t("デモを見る", "View Demo")}
+          {t("動きの例を見る", "Explore an Example")}
           <span aria-hidden>→</span>
         </a>
         <a href="/enterprise" className="btn btn-secondary">
-          {t("企業課題を見る", "View Enterprise Problem")}
+          {t("企業向けの説明", "For Enterprises")}
         </a>
       </div>
       <div className="hero-text-links">
@@ -68,10 +68,10 @@ export default function Hero({ lang }) {
 
   const meta = (
     <>
-      <span className="hero-meta-item">Evidence chain</span>
-      <span className="hero-meta-item">Fail-closed gates</span>
-      <span className="hero-meta-item">Reviewer-facing artifacts</span>
-      <span className="hero-meta-item">Bind-boundary control</span>
+      <span className="hero-meta-item">{t("誰が許可したか", "Who authorized it")}</span>
+      <span className="hero-meta-item">{t("ルールに合うか", "Does it follow the rules")}</span>
+      <span className="hero-meta-item">{t("証拠があるか", "Is the evidence present")}</span>
+      <span className="hero-meta-item">{t("不足なら止める", "Hold when conditions are missing")}</span>
     </>
   );
 

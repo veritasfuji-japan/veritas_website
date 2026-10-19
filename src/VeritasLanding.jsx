@@ -3,6 +3,7 @@ import NumbersFromClaims from "./components/NumbersFromClaims.jsx";
 import TopBar from "./landing/TopBar.jsx";
 import Hero from "./landing/Hero.jsx";
 import EnterpriseStart from "./landing/EnterpriseStart.jsx";
+import PlainLanguageGuide from "./landing/PlainLanguageGuide.jsx";
 import AmlKycPocConversion from "./landing/AmlKycPocConversion.jsx";
 import ControlFlowSnapshot from "./landing/ControlFlowSnapshot.jsx";
 import ArchitectureOverview from "./landing/ArchitectureOverview.jsx";
@@ -41,6 +42,7 @@ export default function VeritasLanding() {
         <main>
           <Hero lang={lang} />
           <EnterpriseStart lang={lang} />
+          <PlainLanguageGuide lang={lang} />
           <ControlFlowSnapshot lang={lang} />
           <ArchitectureOverview lang={lang} />
           <AmlKycPocConversion lang={lang} />

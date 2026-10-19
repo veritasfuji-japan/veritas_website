@@ -264,7 +264,9 @@ export default function ReviewersPage() {
                   <article className="reviewer-review-card" key={doc.href}>
                     <h3>{doc.title}</h3>
                     <p>{lang === "ja" ? doc.description.ja : doc.description.en}</p>
-                    <ExternalLink href={doc.href}>{t("GitHubで開く", "Open on GitHub")}</ExternalLink>
+                    <ExternalLink href={doc.href}>
+                      {doc.href.startsWith("/") ? t("サイトで見る", "Open evidence page") : t("GitHubで開く", "Open on GitHub")}
+                    </ExternalLink>
                   </article>
                 ))}
               </div>
