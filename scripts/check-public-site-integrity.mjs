@@ -26,6 +26,7 @@ const canonicalRoutes = [
   "/glossary",
   "/faq",
   "/reviewers",
+  "/benchmark/agentdojo-banking",
   "/contact",
 ];
 
