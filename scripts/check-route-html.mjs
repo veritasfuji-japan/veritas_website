@@ -15,6 +15,7 @@ const routeFiles = [
   "glossary/index.html",
   "faq/index.html",
   "reviewers/index.html",
+  "benchmark/agentdojo-banking/index.html",
   "contact/index.html",
 ];
 
