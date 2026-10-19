@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import useSiteLanguage from "./hooks/useSiteLanguage.js";
 import NumbersFromClaims from "./components/NumbersFromClaims.jsx";
 import TopBar from "./landing/TopBar.jsx";
 import Hero from "./landing/Hero.jsx";
@@ -15,12 +16,8 @@ import FooterArea from "./landing/FooterArea.jsx";
 import "./VeritasLanding.css";
 
 export default function VeritasLanding() {
-  const [lang, setLang] = useState("ja");
+  const [lang, setLang] = useSiteLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    document.documentElement.lang = lang === "ja" ? "ja" : "en";
-  }, [lang]);
 
   useEffect(() => {
     const handler = () => {
