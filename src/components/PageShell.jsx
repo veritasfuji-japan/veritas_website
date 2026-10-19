@@ -174,13 +174,14 @@ export default function PageShell({ label, title, subtitle, children, ctas = [] 
             <h2 style={{ fontFamily: "'Fraunces', 'Times New Roman', serif", fontSize: "clamp(1.3rem, 1.05rem + 1vw, 1.9rem)", marginBottom: "0.5rem" }}>{t("次へ", "Next")}</h2>
             {ctas.map((cta) => {
               const resolvedCtaLabel = resolveText(cta.label, lang);
+              const resolvedCtaHref = resolveText(cta.href, lang);
               return (
                 <a
-                  key={cta.href}
-                  href={cta.href}
+                  key={resolvedCtaHref}
+                  href={resolvedCtaHref}
                   style={linkButtonStyles}
-                  target={cta.href.startsWith("http") ? "_blank" : undefined}
-                  rel={cta.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                  target={resolvedCtaHref.startsWith("http") ? "_blank" : undefined}
+                  rel={resolvedCtaHref.startsWith("http") ? "noreferrer noopener" : undefined}
                 >
                   {resolvedCtaLabel}
                 </a>
