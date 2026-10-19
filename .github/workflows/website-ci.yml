@@ -29,6 +29,9 @@ jobs:
       - name: Run public claims guardrail
         run: npm run check:claims
 
+      - name: Run language preference tests
+        run: npm run check:language
+
       - name: Run hidden Unicode guardrail
         run: npm run check:unicode
 
