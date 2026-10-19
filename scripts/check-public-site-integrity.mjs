@@ -356,6 +356,35 @@ function checkFooterAndNavigationSafety() {
   }
 }
 
+function checkPocPublicCopyBoundary() {
+  const pocPage = readText("src/pages/AmlKycPocPage.jsx");
+  const readme = readText("README.md");
+
+  const obsoleteCopy = [
+    ["src/pages/AmlKycPocPage.jsx", pocPage, 'AML/KYC 1日 PoC'],
+    ["src/pages/AmlKycPocPage.jsx", pocPage, 'AML/KYC 1-Day PoC'],
+    ["src/pages/AmlKycPocPage.jsx", pocPage, "<strong>What it proves:</strong>"],
+    ["src/pages/AmlKycPocPage.jsx", pocPage, "<strong>Expected outcome:</strong>"],
+    ["README.md", readme, "AML/KYC 1-day PoC overview"],
+  ];
+
+  for (const [file, content, phrase] of obsoleteCopy) {
+    if (content.includes(phrase)) {
+      addFinding("poc copy consistency", `${file} retains ambiguous or untranslated copy: ${phrase}`);
+    }
+  }
+
+  for (const marker of [
+    't("想定する判定：", "Expected outcome:")',
+    't("この例で確かめること：", "What this example checks:")',
+    't("テストデータID：", "Fixture ID:")',
+  ]) {
+    if (!pocPage.includes(marker)) {
+      addFinding("poc copy consistency", `PoC scenario labels missing bilingual marker: ${marker}`);
+    }
+  }
+}
+
 function checkMailtoSafety() {
   const mailtoPattern = /mailto:[^"'\s)]+/gi;
   const contactContent = readText("src/pages/ContactPage.jsx");
@@ -432,6 +461,7 @@ checkPlaceholderLinks();
 checkFixtureReferences();
 checkProofUrlShape();
 checkFooterAndNavigationSafety();
+checkPocPublicCopyBoundary();
 checkMailtoSafety();
 
 runCommand("npm", ["run", "check:claims"]);
