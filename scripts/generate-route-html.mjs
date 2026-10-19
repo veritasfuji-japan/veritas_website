@@ -23,6 +23,7 @@ const publicRoutes = [
   "/glossary",
   "/faq",
   "/reviewers",
+  "/benchmark/agentdojo-banking",
   "/contact",
 ];
 
