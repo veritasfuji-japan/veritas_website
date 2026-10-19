@@ -2,8 +2,17 @@ import PageShell from "../components/PageShell.jsx";
 
 const coreRepositoryUrl = "https://github.com/veritasfuji-japan/veritas_os";
 
-const emailSubject = encodeURIComponent("VERITAS OS inquiry");
-const emailBody = encodeURIComponent(`Hello VERITAS OS team,
+const mailBody = {
+  ja: `VERITAS OS ご担当者様
+
+所属（任意）：
+評価したいAIの操作：
+どのような条件で停止・承認が必要か：
+相談内容：
+
+※初回メールには機密情報、個人情報、顧客データ、規制対象データを含めないでください。
+`,
+  en: `Hello VERITAS OS team,
 
 Organization (optional):
 One AI action I want to evaluate:
@@ -11,14 +20,18 @@ When that action should be held or require approval:
 Message:
 
 Please do not include confidential information, personal data, customer data, or regulated data in this first message.
-`);
+`,
+};
 
-const emailLink = `mailto:veritas.fuji@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-const pocEmailSubject = encodeURIComponent("VERITAS OS - Scoped PoC Inquiry");
-const pocEmailLink = `mailto:veritas.fuji@gmail.com?subject=${pocEmailSubject}&body=${emailBody}`;
+const makeEmailLink = (lang, poc = false) => {
+  const subject = lang === "ja"
+    ? (poc ? "VERITAS OS - PoC評価のご相談" : "VERITAS OS - お問い合わせ")
+    : (poc ? "VERITAS OS - Scoped PoC Inquiry" : "VERITAS OS inquiry");
+  return `mailto:veritas.fuji@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody[lang])}`;
+};
 
 const heroActions = [
-  { label: ["メールを送る", "Send email"], href: emailLink, primary: true },
+  { label: ["メールを送る", "Send email"], email: true, primary: true },
   { label: ["デモを見る", "View Demo"], href: "/demo" },
   { label: ["AML/KYC PoCを見る", "View AML/KYC PoC"], href: "/aml-kyc-poc" },
 ];
@@ -139,10 +152,10 @@ const secondaryButtonStyle = {
   color: "#1C2A2E",
 };
 
-const renderAction = (action, t) => (
+const renderAction = (action, t, lang) => (
   <a
-    key={action.href}
-    href={action.href}
+    key={action.href || "email"}
+    href={action.email ? makeEmailLink(lang) : action.href}
     className={action.primary ? "contact-action contact-action-primary" : "contact-action"}
     style={action.primary ? primaryButtonStyle : secondaryButtonStyle}
     target={action.external ? "_blank" : undefined}
@@ -163,14 +176,14 @@ export default function ContactPage() {
         en: "Use this page for first contact about VERITAS OS review, PoC, technical evaluation, research collaboration, or external assessment.",
       }}
       ctas={[
-        { label: { ja: "メールを送る", en: "Send email" }, href: emailLink },
+        { label: { ja: "メールを送る", en: "Send email" }, href: { ja: makeEmailLink("ja"), en: makeEmailLink("en") } },
         { label: { ja: "デモを見る", en: "View Demo" }, href: "/demo" },
         { label: { ja: "AML/KYC PoCを見る", en: "View AML/KYC PoC" }, href: "/aml-kyc-poc" },
         { label: { ja: "レビュアー入口を見る", en: "View Reviewer Entrypoint" }, href: "/reviewers" },
         { label: { ja: "コアリポジトリを開く", en: "Open Core Repository" }, href: coreRepositoryUrl },
       ]}
     >
-      {(t) => (
+      {(t, lang) => (
         <div className="contact-page">
           <div className="contact-hero-note">
             {t(
@@ -179,7 +192,7 @@ export default function ContactPage() {
             )}
           </div>
           <div className="contact-hero-actions">
-            {heroActions.map((action) => renderAction(action, t))}
+            {heroActions.map((action) => renderAction(action, t, lang))}
           </div>
 
           <section className="contact-primary-card" aria-labelledby="contact-primary-heading">
@@ -196,7 +209,7 @@ export default function ContactPage() {
               </p>
             </div>
             <a
-              href={emailLink}
+              href={makeEmailLink(lang)}
               className="contact-primary-email"
               style={primaryButtonStyle}
             >
@@ -225,7 +238,7 @@ export default function ContactPage() {
                 </p>
               </div>
               <a
-                href={pocEmailLink}
+                href={makeEmailLink(lang, true)}
                 className="contact-primary-email"
                 style={primaryButtonStyle}
               >
