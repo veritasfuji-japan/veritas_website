@@ -13,6 +13,39 @@ const headingStyle = {
   color: "#0b3d5b",
 };
 
+const quickStartGridStyle = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 14rem), 1fr))",
+  gap: "0.75rem",
+  marginTop: "0.9rem",
+};
+
+const quickStartCardStyle = {
+  border: "1px solid #DAD5C8",
+  borderRadius: "14px",
+  background: "#fff",
+  padding: "1rem",
+};
+
+const quickStart = [
+  {
+    title: ["1. 確認したい操作を決める", "1. Choose one action to check"],
+    body: ["例：AIが高リスクの口座開設を承認してよいか。", "Example: May an AI agent approve a high-risk account opening?"],
+  },
+  {
+    title: ["2. 何を確認するか決める", "2. Define the checks"],
+    body: ["誰の許可が必要で、どんなルールや証拠が要るかを整理します。", "Identify whose approval is needed and which rules and evidence apply."],
+  },
+  {
+    title: ["3. 作り物のデータで試す", "3. Test with synthetic data"],
+    body: ["条件が足りないときに止まるか、条件がそろったときに進めるかを確かめます。", "Check what is held when conditions are missing and what may proceed when they are met."],
+  },
+  {
+    title: ["4. 結果と課題を共有する", "4. Review results and gaps"],
+    body: ["操作の判定理由、残る記録、実際の環境で未検証の部分をまとめます。", "Summarize decisions, audit evidence, and remaining untested integration gaps."],
+  },
+];
+
 export default function AmlKycPocPage() {
   return (
     <PageShell
@@ -23,13 +56,42 @@ export default function AmlKycPocPage() {
         en: "Validate that AI agents do not proceed with regulated actions when evidence, authority, or human approval is missing.",
       }}
       ctas={[
-        { label: { ja: "AML/KYC PoCを見る", en: "View AML/KYC PoC" }, href: "/aml-kyc-poc" },
+        { label: { ja: "評価について相談する", en: "Discuss an evaluation" }, href: "/contact" },
         { label: { ja: "相談する", en: "Contact" }, href: "/contact" },
         { label: { ja: "ホームへ戻る", en: "Back to Home" }, href: "/" },
       ]}
     >
       {(t) => (
         <>
+          <section style={{ ...sectionStyle, borderRadius: "18px", background: "#FAF6EB", padding: "clamp(1rem, 3vw, 1.5rem)" }}>
+            <p style={{ color: "#25566C", fontWeight: 700, marginTop: 0 }}>{t("初めての方向け", "Start here")}</p>
+            <h2 style={headingStyle}>
+              {t("AIの重要な操作を、安全に試して確かめる。", "Start by testing one important AI action.")}
+            </h2>
+            <p>
+              {t(
+                "いきなり本番に接続するのではなく、まず1つの操作を選び、必要な許可と証拠を決め、作り物のデータで動きを確認する評価方法です。",
+                "This is an evaluation approach, not a direct connection to a live system: select one action, define the required approval and evidence, and check behavior with synthetic data."
+              )}
+            </p>
+            <div style={quickStartGridStyle}>
+              {quickStart.map((step) => (
+                <article key={step.title[1]} style={quickStartCardStyle}>
+                  <h3 style={{ margin: "0 0 0.4rem", color: "#163747", fontSize: "1rem" }}>{t(...step.title)}</h3>
+                  <p style={{ margin: 0 }}>{t(...step.body)}</p>
+                </article>
+              ))}
+            </div>
+            <p style={{ color: "#4A4D54", marginTop: "1rem", fontSize: "0.95rem" }}>
+              {t(
+                "ここで示すのは評価の進め方です。日程・料金・対象業務・成果物は事前相談で決めます。実際の顧客環境での安全性は、別途検証が必要です。",
+                "This is a proposed evaluation process. Timing, fees, scope and deliverables are agreed before any engagement. Safety in customer production systems requires separate validation."
+              )}
+            </p>
+            <a href="/contact" style={{ display: "inline-block", padding: "0.75rem 1rem", background: "#15161A", borderRadius: "999px", color: "#fff", textDecoration: "none", fontWeight: 700 }}>
+              {t("1つの操作から相談する →", "Discuss one action to evaluate →")}
+            </a>
+          </section>
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t("対象者", "Who this PoC is for")}</h2>
             <ul>
@@ -40,11 +102,12 @@ export default function AmlKycPocPage() {
           </section>
 
           <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t("実施期間オプション", "Duration options")}</h2>
+            <h2 style={headingStyle}>{t("相談できる評価期間の例", "Possible evaluation durations")}</h2>
             <ul>
               <li>{t("1日技術検証", "1-day technical validation")}</li>
               <li>{t("1〜2週間の拡張評価", "1–2 week extended evaluation")}</li>
             </ul>
+            <p>{t("実施可能な期間の確約ではありません。範囲と日程は相談して決めます。", "These are examples, not commitments on availability or delivery. Timing and scope are agreed case by case.")}</p>
           </section>
 
           <section style={sectionStyle}>
@@ -69,7 +132,8 @@ export default function AmlKycPocPage() {
           </section>
 
           <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t("提供物", "Deliverables")}</h2>
+            <h2 style={headingStyle}>{t("想定する成果物", "Possible deliverables")}</h2>
+            <p>{t("評価範囲を合意した場合に作成する資料の例です。すべてを必ず提供するという意味ではありません。", "Examples of materials to agree on for a scoped evaluation; these are not guaranteed deliverables for every engagement.")}</p>
             <ul>
               <li>{t("PoCレポート", "PoC report")}</li>
               <li>{t("シナリオ結果", "Scenario results")}</li>
