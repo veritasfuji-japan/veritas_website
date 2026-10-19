@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import useSiteLanguage from "../hooks/useSiteLanguage.js";
 
 const shellStyles = {
   minHeight: "100vh",
@@ -91,16 +91,12 @@ const resolveText = (value, lang) => {
 };
 
 export default function PageShell({ label, title, subtitle, children, ctas = [] }) {
-  const [lang, setLang] = useState("ja");
+  const [lang, setLang] = useSiteLanguage();
   const t = (ja, en) => (lang === "ja" ? ja : en);
 
   const resolvedLabel = resolveText(label, lang);
   const resolvedTitle = resolveText(title, lang);
   const resolvedSubtitle = resolveText(subtitle, lang);
-
-  useEffect(() => {
-    document.documentElement.lang = lang;
-  }, [lang]);
 
   const coreNavigationItems = [
     { label: t("ホーム", "Home"), href: "/" },
@@ -165,8 +161,8 @@ export default function PageShell({ label, title, subtitle, children, ctas = [] 
             </details>
           </nav>
           <div style={languageToggleStyles} aria-label="Language toggle">
-            <button type="button" style={languageButtonStyles(lang === "ja")} onClick={() => setLang("ja")}>JA</button>
-            <button type="button" style={languageButtonStyles(lang === "en")} onClick={() => setLang("en")}>EN</button>
+            <button type="button" aria-pressed={lang === "ja"} style={languageButtonStyles(lang === "ja")} onClick={() => setLang("ja")}>JA</button>
+            <button type="button" aria-pressed={lang === "en"} style={languageButtonStyles(lang === "en")} onClick={() => setLang("en")}>EN</button>
           </div>
         </header>
         <p style={{ fontFamily: "'IBM Plex Mono', ui-monospace, monospace", letterSpacing: "0.08em", color: "#5A5C62" }}>{resolvedLabel}</p>
