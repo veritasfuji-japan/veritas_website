@@ -31,9 +31,9 @@ export default function EnterpriseStart({ lang }) {
     <section className="enterprise-start">
       <div className="container">
         <div className="enterprise-start-wrap">
-          <div className="marker">{t("AIを仕事で使うときの問題", "The challenge of AI at work")}</div>
+          <div className="marker">{t("仕事でAIを使うとき", "Using AI at work")}</div>
           <h2 className="headline enterprise-start-headline">
-            {t("企業が止まる場所", "Where enterprises get stuck")}
+            {t("大切な操作は、実行する前に確認したい。", "Important actions need checks before execution.")}
           </h2>
           <p className={`body enterprise-start-body ${isJa ? "lead-ja" : ""}`}>
             {t(
@@ -50,7 +50,7 @@ export default function EnterpriseStart({ lang }) {
             ))}
           </div>
           <a href="/enterprise" className="btn btn-secondary enterprise-start-action">
-            {t("企業課題を見る", "View Enterprise Problem")}
+            {t("企業向けの説明を見る", "Read the enterprise overview")}
           </a>
         </div>
       </div>
