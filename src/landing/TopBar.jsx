@@ -29,7 +29,7 @@ export default function TopBar({ lang, setLang, menuOpen, setMenuOpen }) {
           ))}
         </nav>
         <div className="top-actions">
-          <button className="lang-toggle" onClick={() => setLang(lang === "ja" ? "en" : "ja")} aria-label="Toggle language">
+          <button type="button" className="lang-toggle" onClick={() => setLang(lang === "ja" ? "en" : "ja")} aria-label={lang === "ja" ? "Switch to English" : "日本語に切り替え"}>
             {lang === "ja" ? "JA / EN" : "EN / JA"}
           </button>
           <a className="top-link" href="https://github.com/veritasfuji-japan/veritas_os" target="_blank" rel="noreferrer noopener">
