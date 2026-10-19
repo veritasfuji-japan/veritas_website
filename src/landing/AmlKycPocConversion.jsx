@@ -3,9 +3,9 @@ import { makeT } from "./landingText.js";
 export default function AmlKycPocConversion({ lang }) {
   const t = makeT(lang);
   const signals = [
-    "6 evaluation scenarios",
-    "proceed / hold / review / block",
-    "evidence gap + audit trace",
+    [ "6つの例題", "6 example scenarios" ],
+    [ "許可・保留・確認・停止", "Allow / hold / review / block" ],
+    [ "判定理由と記録", "Reasons and audit trace" ],
   ];
 
   return (
@@ -14,18 +14,18 @@ export default function AmlKycPocConversion({ lang }) {
         <div className="poc-conversion-wrap">
           <div className="poc-conversion-copy">
             <div className="marker">AML/KYC POC</div>
-            <h2 className="headline poc-conversion-title">AML/KYC 1-Day PoC</h2>
+            <h2 className="headline poc-conversion-title">{t("AML/KYC の動きを6つの例で確かめる", "Explore 6 AML/KYC evaluation cases")}</h2>
             <p className="body poc-conversion-message">
               {t(
-                "証跡・権限・人間承認が不足している規制対象アクションについて、AIエージェントが誤って実行へ進まないことを fixture-backed に検証します。",
-                "A fixture-backed evaluation path for checking whether AI agents can be stopped before execution when evidence, authority, or human approval is missing."
+                "AIが口座開設などを判断するとき、必要な許可や証拠がなければ止まるか。作り物のデータを使った6つの例で確認します。",
+                "Use six synthetic examples to check when an AI action should proceed, pause, or be reviewed by a person."
               )}
             </p>
           </div>
 
           <div className="poc-signal-grid" aria-label={t("PoCで確認する短い要点", "Short PoC highlights")}>
-            {signals.map((signal) => (
-              <div key={signal} className="poc-signal-card">{signal}</div>
+            {signals.map(([ja, en]) => (
+              <div key={en} className="poc-signal-card">{t(ja, en)}</div>
             ))}
           </div>
 
