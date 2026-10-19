@@ -4,6 +4,14 @@ import PageShell from "../components/PageShell.jsx";
 const CORE_REPOSITORY_URL = "https://github.com/veritasfuji-japan/veritas_os";
 const REVIEWER_EVIDENCE_DOCS = [
   {
+    title: "October 19 Offline SDK Transport Research — PR #469",
+    href: "https://github.com/veritasfuji-japan/rcc-revas-veritas-benchmark/pull/469",
+    description: {
+      ja: "2026年10月19日マージ。SDKのローカル模擬応答を、権限の一回限りの消費・暗号化保存・処理継続までオフライン検証。実AI送信0件・実銀行操作0件。実モデルの有用性は未採点、本番送信はNO-GO。",
+      en: "Merged October 19, 2026. Offline SDK scripted-response capture with one-time local consumption, encrypted custody, and continuation. Zero real provider posts or bank effects; genuine model utility unscored and live dispatch NO-GO.",
+    },
+  },
+  {
     title: "AgentDojo Banking Benchmark Evidence",
     href: "/benchmark/agentdojo-banking",
     description: {
