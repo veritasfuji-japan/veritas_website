@@ -5,21 +5,16 @@ const coreRepositoryUrl = "https://github.com/veritasfuji-japan/veritas_os";
 const emailSubject = encodeURIComponent("VERITAS OS inquiry");
 const emailBody = encodeURIComponent(`Hello VERITAS OS team,
 
-Affiliation / Organization:
-Inquiry type:
-Area of interest:
-Workflow or scenario to evaluate:
-AI action you want to allow, hold, review, or block:
-Current approval / review process:
+Organization (optional):
+One AI action I want to evaluate:
+When that action should be held or require approval:
 Message:
 
-Notes:
-
-* Please do not include confidential information, personal data, customer data, or regulated data in this first message.
+Please do not include confidential information, personal data, customer data, or regulated data in this first message.
 `);
 
 const emailLink = `mailto:veritas.fuji@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-const pocEmailSubject = encodeURIComponent("VERITAS OS 1-Day PoC Evaluation");
+const pocEmailSubject = encodeURIComponent("VERITAS OS - Scoped PoC Inquiry");
 const pocEmailLink = `mailto:veritas.fuji@gmail.com?subject=${pocEmailSubject}&body=${emailBody}`;
 
 const heroActions = [
@@ -50,8 +45,8 @@ const contactTopics = [
   {
     title: "AML/KYC PoC",
     copy: [
-      "1-Day PoC の範囲、評価シナリオ、証跡確認について。",
-      "Scope, evaluation scenarios, and evidence review for the 1-Day PoC.",
+      "1つのAI操作を対象とした評価方法、判定結果、証跡について。",
+      "A scoped evaluation of one AI action, its outcome, and its evidence.",
     ],
   },
   {
@@ -191,12 +186,12 @@ export default function ContactPage() {
             <div>
               <p className="contact-kicker">Primary contact</p>
               <h2 id="contact-primary-heading" style={sectionHeadingStyle}>
-                {t("まずはメールで連絡", "Start by email")}
+                {t("相談は短いメールから", "Start with a short email")}
               </h2>
               <p style={sectionIntroStyle}>
                 {t(
-                  "初回メールでは、所属、関心領域、確認したい内容を短く送ってください。すべての情報を揃える必要はありません。",
-                  "For the first message, briefly include your affiliation, area of interest, and what you would like to evaluate. You do not need to prepare everything.",
+                  "まずは、AIに実行させたい操作と、どんなときに止めたいかだけでも大丈夫です。専門用語は不要です。",
+                  "Just describe an AI action you want to evaluate and when it should be stopped. No technical terminology required.",
                 )}
               </p>
             </div>
@@ -214,7 +209,7 @@ export default function ContactPage() {
               <div>
                 <p className="contact-kicker">PoC evaluation inquiry</p>
                 <h2 id="contact-poc-heading" style={sectionHeadingStyle}>
-                  {t("1つのAI判断経路からPoC相談を始める", "Start with one AI decision path")}
+                  {t("まず1つのAI操作を選んで相談する", "Start with one AI action")}
                 </h2>
                 <p style={sectionIntroStyle}>
                   {t(
