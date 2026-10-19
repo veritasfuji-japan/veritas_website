@@ -97,8 +97,8 @@ export default function PlainLanguageGuide({ lang }) {
               <h3 style={{ marginTop: 0, color: "#163747" }}>{t("いま研究中のこと", "Current research — not yet proven")}</h3>
               <p style={body}>
                 {t(
-                  "10月のRCC/REVAS PR #469では、AIへの模擬応答を暗号化して保管し、処理を続ける流れをオフラインで検証しました。実際のAIサービスへの送信や、現実の銀行操作は行っていません。",
-                  "October RCC/REVAS PR #469 tested encrypted custody of scripted local AI responses and offline continuation. It made no real AI-provider requests and no real bank changes."
+                  "10月19日にマージされたRCC/REVAS PR #469では、AI用SDKが作った要求に対し、ローカルの模擬応答を受け取る前に一回限りの権限を消費し、応答原文を暗号化して保存する流れを検証しました。応答はすべて台本どおりの模擬データで、実際のAIサービスへの送信・現実の銀行操作は0件です。実モデルの有用性評価と本番送信の許可は未達です。",
+                  "Merged October 19 RCC/REVAS PR #469 tested an offline SDK transport boundary: one-time local authorization consumption before accepting scripted mock responses, encrypted original-response custody, and Native continuation. All responses were scripted; real provider posts and real bank effects were zero. Genuine model utility remains unscored and live dispatch remains NO-GO."
                 )}
               </p>
               <a href="https://github.com/veritasfuji-japan/rcc-revas-veritas-benchmark/pull/469" target="_blank" rel="noreferrer noopener">
