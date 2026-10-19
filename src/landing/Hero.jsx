@@ -68,10 +68,10 @@ export default function Hero({ lang }) {
 
   const meta = (
     <>
-      <span className="hero-meta-item">Evidence chain</span>
-      <span className="hero-meta-item">Fail-closed gates</span>
-      <span className="hero-meta-item">Reviewer-facing artifacts</span>
-      <span className="hero-meta-item">Bind-boundary control</span>
+      <span className="hero-meta-item">{t("誰が許可したか", "Who authorized it")}</span>
+      <span className="hero-meta-item">{t("ルールに合うか", "Does it follow the rules")}</span>
+      <span className="hero-meta-item">{t("証拠があるか", "Is the evidence present")}</span>
+      <span className="hero-meta-item">{t("不足なら止める", "Hold when conditions are missing")}</span>
     </>
   );
 
