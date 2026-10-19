@@ -56,6 +56,7 @@ Production URL:
 - `/glossary` — VERITAS OS terminology and plain-language definitions
 - `/faq` — Frequently asked questions and safe evaluation guidance
 - `/reviewers` — External reviewer entrypoint
+- `/benchmark/agentdojo-banking` — Bounded candidate-level benchmark evidence (not production validation)
 - `/contact` — Email inquiry page for PoC evaluation and external review
 
 Social preview image:
