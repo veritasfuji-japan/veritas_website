@@ -5,23 +5,23 @@ export default function EnterpriseStart({ lang }) {
   const isJa = lang === "ja";
   const cards = [
     {
-      title: "Approval is scattered",
+      title: ["承認が見えにくい", "Approvals are scattered"],
       body: t(
-        "承認、証跡、判断理由がツールやログに分散する。",
+        "誰が許可したか、なぜ許したかが、複数のシステムに分かれている。",
         "Approvals, evidence, and rationale scatter across tools and logs."
       ),
     },
     {
-      title: "Logs arrive too late",
+      title: ["後からでは止められない", "Logs arrive too late"],
       body: t(
-        "ログは事後に残るが、実行前に止める境界にはなりにくい。",
+        "操作が終わってから記録を見ても、その操作を止められない。",
         "Logs record what happened, but they rarely create a pre-execution boundary."
       ),
     },
     {
-      title: "Commit needs proof",
+      title: ["操作の前に確認したい", "Check before acting"],
       body: t(
-        "外部システムへcommitする前に、権限・証跡・ポリシーを確認する必要がある。",
+        "大切なシステムを変更する前に、許可・ルール・必要な証拠を確かめたい。",
         "Before committing to external systems, authority, evidence, and policy must be checked."
       ),
     },
@@ -31,20 +31,20 @@ export default function EnterpriseStart({ lang }) {
     <section className="enterprise-start">
       <div className="container">
         <div className="enterprise-start-wrap">
-          <div className="marker">{t("企業が止まる場所", "Where enterprises get stuck")}</div>
+          <div className="marker">{t("AIを仕事で使うときの問題", "The challenge of AI at work")}</div>
           <h2 className="headline enterprise-start-headline">
             {t("企業が止まる場所", "Where enterprises get stuck")}
           </h2>
           <p className={`body enterprise-start-body ${isJa ? "lead-ja" : ""}`}>
             {t(
-              "AIエージェントが判断から実行へ近づくほど、企業の課題は「モデルが賢いか」ではなく、「誰が、何を根拠に、どこまで許可したかを実行前に確認できるか」に移ります。",
+              "AIが実際の業務を動かすとき、大切なのは答えの正しさだけではありません。その操作を本当に許可してよいか、実行する前に確認する必要があります。",
               "As AI agents move closer to execution, the enterprise question shifts from “is the model smart?” to “who authorized what, based on which evidence, before action?”"
             )}
           </p>
           <div className="enterprise-start-grid">
             {cards.map((card) => (
-              <article key={card.title} className="enterprise-start-card">
-                <h3 className="enterprise-start-title">{card.title}</h3>
+              <article key={card.title[1]} className="enterprise-start-card">
+                <h3 className="enterprise-start-title">{t(...card.title)}</h3>
                 <p className={`body ${isJa ? "aud-body-ja" : ""}`}>{card.body}</p>
               </article>
             ))}
