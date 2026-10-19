@@ -15,15 +15,23 @@ const REVIEWER_EVIDENCE_DOCS = [
   },
 ];
 
+const SIMPLE_STEPS = [
+  ["AIが操作を提案", "AI proposes an action"],
+  ["権限・ルール・人の承認を確認", "Check authority, rules, and human approval"],
+  ["実行直前に条件を再確認", "Recheck conditions before execution"],
+  ["許可された操作だけを実行", "Dispatch only when authorized"],
+  ["結果を照合し、証跡を残す", "Reconcile outcomes and retain evidence"],
+];
+
 const FLOW_STEPS = [
-  "Decision Candidate / verified artifact",
-  "Governance / Authority / Human Approval",
-  "Exact Execution Intent / Native v2 Authorization",
-  "Single-use Consumption / Current Rechecks",
-  "Credential Resolution / Durable Dispatch Intent",
-  "Controlled TLS Effect / EFFECT_UNKNOWN",
-  "Read-only Reconciliation / Evidence Archive",
-  "BindReceipt / Outcome / Recovery",
+  ["操作候補と検証済み証跡", "Decision Candidate / verified artifact"],
+  ["ガバナンス・権限・人の承認", "Governance / Authority / Human Approval"],
+  ["実行内容の固定とNative v2認可", "Exact Execution Intent / Native v2 Authorization"],
+  ["一回限りの権限消費と直前再確認", "Single-use Consumption / Current Rechecks"],
+  ["資格情報の解決と永続的な送信意図", "Credential Resolution / Durable Dispatch Intent"],
+  ["限定TLS実行と結果不明の扱い", "Controlled TLS Effect / EFFECT_UNKNOWN"],
+  ["読み取り専用の結果照合と証跡保存", "Read-only Reconciliation / Evidence Archive"],
+  ["実行証明・結果・復旧", "BindReceipt / Outcome / Recovery"],
 ];
 
 export default function ArchitectureOverview({ lang }) {
@@ -59,7 +67,7 @@ export default function ArchitectureOverview({ lang }) {
           <div className="snapshot-copy architecture-copy">
             <p className="marker">{t("アーキテクチャ", "Architecture")}</p>
             <h2 className="headline" id="architecture-overview-title">
-              Architecture at a Glance
+              {t("仕組みの全体像", "Architecture at a Glance")}
             </h2>
             <p className={`body ${isJa ? "lead-ja" : ""}`}>
               {t(
@@ -69,14 +77,34 @@ export default function ArchitectureOverview({ lang }) {
             </p>
           </div>
 
-          <ol className="architecture-flow" aria-label="Architecture control flow">
-            {FLOW_STEPS.map((step, index) => (
-              <li key={step}>
-                <span>{step}</span>
-                {index < FLOW_STEPS.length - 1 && <strong aria-hidden="true">↓</strong>}
-              </li>
-            ))}
-          </ol>
+          <div aria-label={t("実行前の確認から結果照合までの概要", "Simplified pre-execution to reconciliation flow")}>
+            <p className="marker">{t("まずは5段階で理解する", "Start with five steps")}</p>
+            <ol className="architecture-flow" style={{ maxWidth: "100%", padding: "0.75rem" }}>
+              {SIMPLE_STEPS.map((step, index) => (
+                <li key={step[1]}>
+                  <span style={{ overflowWrap: "anywhere" }}>{t(...step)}</span>
+                  {index < SIMPLE_STEPS.length - 1 && <strong aria-hidden="true">↓</strong>}
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <details style={{ marginTop: "1.25rem" }}>
+            <summary style={{ cursor: "pointer", fontWeight: 700, padding: "0.75rem 0" }}>
+              {t("技術者向け：詳細な8段階の実行経路を見る", "Technical detail: show the eight-stage execution path")}
+            </summary>
+            <p className="body">
+              {t("以下は限定sandboxでの実装経路であり、すべての外部システムや本番環境での実証を意味しません。", "This describes a controlled sandbox path, not validation across all external systems or customer production environments.")}
+            </p>
+            <ol className="architecture-flow" aria-label={t("詳細な実行制御の流れ", "Detailed execution control flow")} style={{ maxWidth: "100%", padding: "0.75rem" }}>
+              {FLOW_STEPS.map((step, index) => (
+                <li key={step[1]}>
+                  <span style={{ overflowWrap: "anywhere" }}>{t(...step)}</span>
+                  {index < FLOW_STEPS.length - 1 && <strong aria-hidden="true">↓</strong>}
+                </li>
+              ))}
+            </ol>
+          </details>
 
           <div className="architecture-card-grid">
             {cards.map((card) => (
