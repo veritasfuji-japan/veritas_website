@@ -115,7 +115,7 @@ export default function ArchitectureOverview({ lang }) {
             ))}
           </div>
 
-          <div className="architecture-doc-links" aria-label=t("外部レビュー用の証拠資料リンク", "Reviewer evidence documentation links")>
+          <div className="architecture-doc-links" aria-label={t("外部レビュー用の証拠資料リンク", "Reviewer evidence documentation links")}>
             {REVIEWER_EVIDENCE_DOCS.map((doc) => (
               <a key={doc.href} href={doc.href} target="_blank" rel="noreferrer noopener">
                 {isJa ? t(
