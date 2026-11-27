@@ -16,8 +16,8 @@ export default function SafetyPatternsCard({ lang }) {
       </h2>
       <p style={{ color: "#394850", lineHeight: 1.75 }}>
         {t(
-          "AI Safety PatternsはVERITAS OSの思想に基づく独立したオープンソース教材です。権限の単回消費、実行対象の紐付け、取消し、人間の承認、実行結果の証拠という5つの設計パターンを、ブラウザで比較・体験できます。",
-          "AI Safety Patterns is an independent open-source learning project inspired by VERITAS OS. Compare five safety patterns in your browser: single-use authority, bound authority, revocation, human approval, and outcome evidence."
+          "AI Safety PatternsはVERITAS OSの思想に基づく独立したオープンソース教材です。実行権限、承認、取消し、プロンプトインジェクション、リプレイ攻撃、ポリシー変更、信頼境界、実行結果の証拠と結果不明時の再試行判断など、10の安全設計パターンをブラウザで比較・体験できます。",
+          "AI Safety Patterns is an independent open-source learning project inspired by VERITAS OS. Compare ten safety patterns in your browser, covering execution authority, approval, revocation, prompt injection, replay attacks, policy drift, trust boundaries, outcome evidence, and retry decisions under uncertainty."
         )}
       </p>
       <a href={safetyPatternsUrl(lang)} target="_blank" rel="noopener noreferrer"
@@ -27,7 +27,7 @@ export default function SafetyPatternsCard({ lang }) {
           color: "#FAF6EB", textDecoration: "none", fontWeight: 600,
           boxShadow: "4px 4px 0 #43B3A9", overflowWrap: "anywhere",
         }}>
-        {t("AI Safety Patternsを体験する", "Try AI Safety Patterns")} <span aria-hidden="true">↗</span>
+        {t("10の教材を体験する", "Explore all 10 labs")} <span aria-hidden="true">↗</span>
         <span style={{ display: "block", fontSize: "0.75rem", fontWeight: 400 }}>
           {t("新しいタブで開く", "Opens in a new tab")}
         </span>
