@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { safetyPatternsUrl } from "../src/data/safetyPatterns.js";
 import {
   LANGUAGE_STORAGE_KEY,
   readLanguagePreference,
@@ -34,4 +35,9 @@ test("storage failures never block the language controls", () => {
   };
   assert.equal(readLanguagePreference(blockedStorage), "ja");
   assert.equal(saveLanguagePreference(blockedStorage, "en"), false);
+});
+
+test("AI Safety Patterns opens in the selected language", () => {
+  assert.equal(safetyPatternsUrl("ja"), "https://veritasfuji-japan.github.io/ai-safety-patterns/?lang=ja");
+  assert.equal(safetyPatternsUrl("en"), "https://veritasfuji-japan.github.io/ai-safety-patterns/");
 });

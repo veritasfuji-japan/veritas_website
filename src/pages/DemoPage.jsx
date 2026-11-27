@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageShell from "../components/PageShell.jsx";
+import SafetyPatternsCard from "../components/SafetyPatternsCard.jsx";
 
 const scenarios = [
   {
@@ -1615,6 +1616,7 @@ export default function DemoPage() {
             <h2 style={styles.h2}>{t("このデモで伝えるVERITASの核", "Core point this demo communicates")}</h2>
             <p>{t("VERITASはAIの返答をきれいにするガードレールではなく、AIが実行する直前に、誰が・どの権限で・どのルールに基づき許可したかを証拠化するcontrol planeです。", "VERITAS is not a guardrail for polishing AI responses. It is a control plane that records who authorized an AI action, under what authority, and under which rule before execution.")}</p>
           </section>
+          <SafetyPatternsCard lang={lang} />
         </>
       )}
     </PageShell>

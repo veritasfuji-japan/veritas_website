@@ -1,4 +1,5 @@
 import { makeT } from "./landingText.js";
+import SafetyPatternsCard from "../components/SafetyPatternsCard.jsx";
 
 const cases = [
   {
@@ -78,6 +79,8 @@ export default function PlainLanguageGuide({ lang }) {
             <a href="/contact" className="btn btn-secondary">{t("1つの操作から相談する", "Discuss one action to evaluate")}</a>
           </div>
         </div>
+
+        <SafetyPatternsCard lang={lang} />
 
         <div style={{ ...shell, marginTop: "1.25rem" }}>
           <p className="marker">{t("どこまで確認できたか · 2026年10月19日時点", "What is evidenced · as of October 19, 2026")}</p>
