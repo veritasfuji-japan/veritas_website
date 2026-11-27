@@ -1,5 +1,6 @@
 import { makeT } from "./landingText.js";
 import VeritasLogo from "./VeritasLogo.jsx";
+import { safetyPatternsUrl } from "../data/safetyPatterns.js";
 
 export default function FooterArea({ lang }) {
   const t = makeT(lang);
@@ -9,6 +10,7 @@ export default function FooterArea({ lang }) {
     { h: t("プロダクト", "Product"), links: [
       ["GitHub", "https://github.com/veritasfuji-japan/veritas_os", true],
       ["Demo", "/demo"],
+      [t("AI安全設計教材", "AI Safety Patterns"), safetyPatternsUrl(lang), true],
       ["AML/KYC PoC", "/aml-kyc-poc"],
       [t("レビュアー", "Reviewers"), "/reviewers"],
     ] },
